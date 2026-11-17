@@ -1,0 +1,100 @@
+rules_version = '2';
+// Reglas de la base de datos de Calixto Studio.
+// Pegar completas en Firebase → Firestore Database → Reglas → Publicar.
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // La administradora es la usuaria creada en Firebase → Authentication con este correo.
+    function esAdmin() {
+      return request.auth != null && request.auth.token.email == 'marianacalixtosotocarmona@gmail.com';
+    }
+    function fechaOk(f) { return f is string && f.matches('^[0-9]{4}-[0-9]{2}-[0-9]{2}$'); }
+
+    // Citas: cualquiera puede agendar; solo la administradora las ve, las cancela,
+    // les agrega apuntes, confirma el depósito y sube el comprobante de SINPE.
+    match /citas/{id} {
+      allow create: if request.resource.data.keys().hasOnly(['orden','fecha','ini','dur','servicio','lugar','nombre','tel','nota','creada'])
+        && request.resource.data.orden is string && request.resource.data.orden.size() <= 20
+        && fechaOk(request.resource.data.fecha)
+        && request.resource.data.ini is int && request.resource.data.ini >= 0 && request.resource.data.ini < 1440
+        && request.resource.data.dur in [60, 90, 120, 150]
+        && request.resource.data.lugar == 'estudio'
+        && request.resource.data.servicio is string && request.resource.data.servicio.size() <= 80
+        && request.resource.data.nombre is string && request.resource.data.nombre.size() >= 2 && request.resource.data.nombre.size() <= 50
+        && request.resource.data.tel is string && request.resource.data.tel.size() <= 20
+        && request.resource.data.nota is string && request.resource.data.nota.size() <= 400
+        && request.resource.data.creada == request.time;
+      allow read, delete: if esAdmin();
+      allow update: if esAdmin()
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['apuntes'])
+        && request.resource.data.apuntes is string && request.resource.data.apuntes.size() <= 1000;
+      allow update: if esAdmin()
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['comprobante','compFecha'])
+        && request.resource.data.comprobante is string && request.resource.data.comprobante.size() < 950000
+        && request.resource.data.compFecha is number;
+      allow update: if esAdmin()
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['deposito'])
+        && request.resource.data.deposito is bool;
+    }
+
+    // Espacios ocupados: todos los ven (sin datos personales). Un espacio tomado no se puede volver a tomar.
+    match /ocupados/{id} {
+      allow read: if true;
+      allow create: if request.resource.data.keys().hasOnly(['fecha','cita'])
+        && fechaOk(request.resource.data.fecha)
+        && id.matches('^' + request.resource.data.fecha + '_[0-9]{4}$')
+        && request.resource.data.cita is string
+        && existsAfter(/databases/$(database)/documents/citas/$(request.resource.data.cita));
+      allow delete: if esAdmin();
+    }
+
+    // Cierres y días u horas libres: todos los ven (para saber cuándo no hay atención); solo la administradora los cambia.
+    match /cierres/{id} {
+      allow read: if true;
+      allow create: if esAdmin()
+        && request.resource.data.keys().hasOnly(['desde','hasta','motivo','ini','fin'])
+        && fechaOk(request.resource.data.desde) && fechaOk(request.resource.data.hasta)
+        && request.resource.data.hasta >= request.resource.data.desde
+        && (!('motivo' in request.resource.data) || (request.resource.data.motivo is string && request.resource.data.motivo.size() <= 80))
+        && (!('ini' in request.resource.data) || (request.resource.data.ini is int && request.resource.data.ini >= 0 && request.resource.data.ini < 1440))
+        && (!('fin' in request.resource.data) || (request.resource.data.fin is int && request.resource.data.fin > request.resource.data.get('ini', -1) && request.resource.data.fin <= 1440));
+      allow delete: if esAdmin();
+    }
+
+    // Galería: todos la ven; solo la administradora sube fotos o links de video.
+    match /galeria/{id} {
+      allow read: if true;
+      allow create, update: if esAdmin()
+        && request.resource.data.keys().hasOnly(['tipo','data','url','titulo','orden'])
+        && request.resource.data.tipo in ['foto', 'video']
+        && request.resource.data.data is string && request.resource.data.data.size() < 950000
+        && request.resource.data.url is string && request.resource.data.url.size() <= 300
+        && request.resource.data.titulo is string && request.resource.data.titulo.size() <= 60
+        && request.resource.data.orden is number;
+      allow delete: if esAdmin();
+    }
+
+    // Sugerencias: cualquiera envía; solo la administradora las lee y las borra.
+    match /sugerencias/{id} {
+      allow create: if request.resource.data.keys().hasOnly(['texto','nombre','fecha'])
+        && request.resource.data.texto is string && request.resource.data.texto.size() >= 3 && request.resource.data.texto.size() <= 600
+        && request.resource.data.nombre is string && request.resource.data.nombre.size() <= 40
+        && request.resource.data.fecha == request.time;
+      allow read, delete: if esAdmin();
+    }
+
+    // Encuestas de satisfacción: una por cita (el id es el de la cita); solo la administradora las lee.
+    match /encuestas/{id} {
+      allow create: if exists(/databases/$(database)/documents/citas/$(id))
+        && request.resource.data.keys().hasOnly(['estrellas','calidad','trato','recomendaria','comentario','nombre','fecha'])
+        && request.resource.data.estrellas is int && request.resource.data.estrellas >= 1 && request.resource.data.estrellas <= 5
+        && request.resource.data.calidad is int && request.resource.data.calidad >= 1 && request.resource.data.calidad <= 5
+        && request.resource.data.trato is int && request.resource.data.trato >= 1 && request.resource.data.trato <= 5
+        && request.resource.data.recomendaria in ['si', 'tal vez', 'no']
+        && request.resource.data.comentario is string && request.resource.data.comentario.size() <= 600
+        && request.resource.data.nombre is string && request.resource.data.nombre.size() <= 40
+        && request.resource.data.fecha == request.time;
+      allow read, delete: if esAdmin();
+    }
+  }
+}
