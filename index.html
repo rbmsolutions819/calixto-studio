@@ -1801,13 +1801,20 @@ async function archivoComp(c){ const blob = await (await fetch(c.comprobante)).b
 async function compartirComprobante(c){
   const texto = msgReserva(c);
   try { navigator.clipboard.writeText(texto).catch(() => {}); } catch {}
+  // Se abre la pestaña de una vez (mientras todavía cuenta como clic del usuario); si se puede
+  // compartir con el comprobante adjunto, esta pestaña en blanco se cierra y no se nota.
+  const vent = window.open("", "_blank");
   try {
     const f = ag.compFile || await archivoComp(c);
-    if (navigator.canShare && navigator.canShare({ files: [f], text: texto })) { await navigator.share({ files: [f], text: texto }); return; }
-  } catch (ex) { if (ex.name === "AbortError") return; }
+    if (navigator.canShare && navigator.canShare({ files: [f], text: texto })) {
+      if (vent) vent.close();
+      await navigator.share({ files: [f], text: texto });
+      return;
+    }
+  } catch (ex) { if (ex.name === "AbortError") { if (vent) vent.close(); return; } }
   // Respaldo (computadora o celular sin esa función): abre el chat del estudio con el texto y se descarga la imagen para adjuntarla
   const a = document.createElement("a"); a.href = c.comprobante; a.download = "comprobante-sinpe.jpg"; document.body.appendChild(a); a.click(); a.remove();
-  window.open(waLink(texto), "_blank", "noopener");
+  if (vent) vent.location = waLink(texto); else window.open(waLink(texto), "_blank", "noopener");
   toast("Se descargó el comprobante: adjúntelo en el chat que se abrió.");
 }
 function pintarListo(box, c){
