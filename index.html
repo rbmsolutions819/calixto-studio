@@ -221,6 +221,11 @@ section.panel{padding:0}
 #p-nicole .cal-vistas{background:#ddceab}
 #p-nicole .cal-vistas button.si{background:#f1e7cd}
 #p-nicole .conf-s,#p-nicole .cie,#p-nicole .apuntes,#p-nicole .ing-box,#p-nicole .ing-kpis div{background:#f1e7cd;border-color:#ddceab}
+#p-nicole .tg,#p-nicole .tg-cab{background:#f1e7cd;border-color:#ddceab}
+#p-nicole .tg-horas{border-color:#ddceab}
+#p-nicole .tg-cols{background-image:linear-gradient(#ddceab 1px,transparent 1px)}
+#p-nicole .tg-vacio{border-color:#ddceab}
+#p-nicole .cita-a,#p-nicole .rs,#p-nicole .det .datos div,#p-nicole .opcion{background:#f1e7cd;border-color:#ddceab}
 @media (min-width:860px){
   #p-nicole .in{max-width:920px;padding-left:28px;padding-right:28px}
   #p-nicole .n-tabs{margin-left:-28px;margin-right:-28px;padding:0 28px 2px}
@@ -1818,7 +1823,7 @@ function pintarListo(box, c){
       <div class="dep-p"><i>3</i><div><b>Envía tu reserva al estudio</b><span>Le llega a su WhatsApp con tu número de orden. El comprobante ya queda guardado en su sistema; ella te confirma por WhatsApp.</span></div></div>
     </div>
     <div class="bloque">
-      <a class="btn btn-oro" id="a-enviar" href="${waLink(msgReserva(c))}" target="_blank" rel="noopener"><svg><use href="#wa"/></svg>Enviar reserva por WhatsApp</a>
+      <button class="btn btn-oro" type="button" id="a-enviar"><svg><use href="#wa"/></svg>Enviar reserva por WhatsApp</button>
       <button class="btn btn-osc" id="a-otra">Hacer otra reserva</button>
     </div>
     <p class="prueba">Si necesitas cambiar o cancelar, escríbenos por WhatsApp con anticipación.</p></div>`;
@@ -1839,8 +1844,13 @@ document.addEventListener("submit", e => {
   if (c) verCita(c.id); else toast("No hay ninguna reserva con la orden RE-" + q);
 });
 document.addEventListener("click", e => {
-  if (e.target.closest("#a-comp-share")) return compartirComprobante(ag.hecho);
-  if (e.target.closest("#a-enviar") && !ag.hecho?.comprobante && !confirm("Todavía no ha subido el comprobante. ¿Enviar la reserva de todas formas?")) e.preventDefault();
+  if (!e.target.closest("#a-enviar") || !ag.hecho) return;
+  if (!ag.hecho.comprobante) {
+    if (!confirm("Todavía no ha subido el comprobante. ¿Enviar la reserva de todas formas?")) return;
+    window.open(waLink(msgReserva(ag.hecho)), "_blank", "noopener");
+    return;
+  }
+  compartirComprobante(ag.hecho);
 });
 
 // ================== ACCESO DE NICOLE ==================
