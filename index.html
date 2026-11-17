@@ -1243,6 +1243,8 @@ const ReservasPrueba = (() => {
     prueba: true,
     async entrar(clave){ if (clave !== CLAVE_NICOLE) throw new Error("clave"); this.nicole = true; },
     salir(){ this.nicole = false; },
+    async recuperar(){ throw new Error("prueba"); },
+    async cambiarClave(){ throw new Error("prueba"); },
     nicole: false,
     todas,
     ocupados(){ const s = new Set(); for (const c of todas()) for (let m = c.ini; m < c.ini + c.dur; m += 30) s.add(c.fecha + "_" + hhmm(m)); return s; },
@@ -1323,7 +1325,13 @@ async function crearReservasFirebase(){
     async marcarDeposito(id, v){ await F.updateDoc(F.doc(db, "citas", id), { deposito: v }); const c = citas.find(x => x.id === id); if (c) c.deposito = v; },
     async guardarApuntes(id, txt){ await F.updateDoc(F.doc(db, "citas", id), { apuntes: txt }); const c = citas.find(x => x.id === id); if (c) c.apuntes = txt; },
     async entrar(clave){ await A.signInWithEmailAndPassword(auth, NICOLE_EMAIL, clave); },
-    salir(){ A.signOut(auth); }
+    salir(){ A.signOut(auth); },
+    async recuperar(email){ await A.sendPasswordResetEmail(auth, email); },
+    async cambiarClave(actual, nueva){
+      const u = auth.currentUser; if (!u) throw new Error("sesion");
+      await A.reauthenticateWithCredential(u, A.EmailAuthProvider.credential(NICOLE_EMAIL, actual));
+      await A.updatePassword(u, nueva);
+    }
   };
   F.onSnapshot(F.collection(db, "cierres"), snap => {
     CIERRES = snap.docs.map(d => ({ id:d.id, ...d.data() })).sort((a, b) => a.desde.localeCompare(b.desde));
@@ -1371,7 +1379,8 @@ async function crearReservasFirebase(){
 const ReservasCargando = { prueba:false, nicole:false, ocupados:() => new Set(), todas:() => [], cierres:() => CIERRES, async agregarCierre(){ throw new Error("cargando"); }, async borrarCierre(){}, sugerencias:() => [], galeria:() => null, encuestas:() => [],
   async enviarEncuesta(){ throw new Error("cargando"); },
   async enviarSug(){ throw new Error("cargando"); }, async borrarSug(){},
-  async reservar(){ throw new Error("cargando"); }, async cancelar(){}, async entrar(){ throw new Error("cargando"); }, salir(){} };
+  async reservar(){ throw new Error("cargando"); }, async cancelar(){}, async entrar(){ throw new Error("cargando"); }, salir(){},
+  async recuperar(){ throw new Error("cargando"); }, async cambiarClave(){ throw new Error("cargando"); } };
 let Reservas = FIREBASE ? ReservasCargando : ReservasPrueba;
 
 // ===== Encuesta de satisfacción =====
@@ -2061,6 +2070,11 @@ function pintarConfig(){
       <button class="btn btn-linea conf-b" style="color:#a3443a;border-color:#e3cdb0" id="c-cero">Borrar todo y empezar de cero</button></section>
     <section class="conf-s"><h4>Cuenta</h4>
       <p class="conf-p">Sesión iniciada como <b>${esc(NICOLE_EMAIL)}</b>${Reservas.prueba ? " (modo de prueba)" : ""}.</p>
+      ${!Reservas.prueba ? `<div class="campo"><label for="c-clave-actual">Contraseña actual</label><input id="c-clave-actual" type="password" autocomplete="current-password" placeholder="Contraseña actual"></div>
+      <div class="campo"><label for="c-clave-nueva">Contraseña nueva</label><input id="c-clave-nueva" type="password" autocomplete="new-password" placeholder="Mínimo 6 caracteres"></div>
+      <p class="error" id="c-clave-err"></p>
+      <button class="btn btn-linea conf-b" id="c-clave-ok">Cambiar contraseña</button>`
+      : `<p class="conf-nota">La contraseña solo se puede cambiar cuando la página esté conectada a Firebase (no en modo de prueba).</p>`}
       <button class="btn btn-linea conf-b" style="color:#a3443a;border-color:#e3cdb0" id="n-salir2">Cerrar sesión</button></section>
   </div>`;
 }
@@ -2075,6 +2089,7 @@ function pintarNicole(){
       <div class="campo"><input id="n-clave" type="password" autocomplete="current-password" placeholder="Contraseña" style="text-align:center"></div>
       <p class="error" id="n-err"></p>
       <button class="btn btn-oro" style="width:100%" id="n-ok">Entrar</button>
+      ${!Reservas.prueba ? `<button class="chip" style="margin-top:14px" id="n-olvido">¿Olvidó su contraseña?</button>` : ""}
       </div>`;
     return;
   }
@@ -2154,6 +2169,23 @@ $("#nicole").addEventListener("click", async e => {
     b.disabled = true;
     try { await Reservas.entrar($("#n-clave").value); pintarNicole(); }
     catch { $("#n-err").textContent = "Contraseña incorrecta."; b.disabled = false; }
+  }
+  if (b.id === "n-olvido") {
+    if (!confirm(`¿Enviar un correo para restablecer la contraseña a ${NICOLE_EMAIL}?`)) return;
+    b.disabled = true;
+    try { await Reservas.recuperar(NICOLE_EMAIL); toast("Revisa el correo " + NICOLE_EMAIL); }
+    catch { toast("No se pudo enviar. Revisa tu conexión."); }
+    b.disabled = false; return;
+  }
+  if (b.id === "c-clave-ok") {
+    const actual = $("#c-clave-actual").value, nueva = $("#c-clave-nueva").value;
+    const err = t => $("#c-clave-err").textContent = t;
+    if (!actual) return err("Escribe tu contraseña actual.");
+    if (nueva.length < 6) return err("La contraseña nueva debe tener al menos 6 caracteres.");
+    err(""); b.disabled = true;
+    try { await Reservas.cambiarClave(actual, nueva); $("#c-clave-actual").value = ""; $("#c-clave-nueva").value = ""; toast("Contraseña actualizada ✓"); }
+    catch (ex) { err(/wrong-password|invalid-credential/.test(ex?.code || "") ? "La contraseña actual no es correcta." : "No se pudo cambiar. Revisa tu conexión."); }
+    b.disabled = false; return;
   }
   if (b.id === "n-ics-nuevas" || b.id === "n-ics-todas") {
     const hoy = iso(crAhora());
@@ -2247,7 +2279,7 @@ $("#nicole").addEventListener("input", e => {
   if (["cie-desde", "cie-hasta"].includes(e.target.id) && nCie.rap) { nCie.rap = null; $("#nicole").querySelectorAll("[data-cie-rap]").forEach(b => { b.classList.remove("si"); b.textContent = b.textContent.replace("✓ ", ""); }); }
   setTimeout(() => { const r = $("#cie-res"); if (r) r.innerHTML = resumenCierre(); }, 0);
   if (e.target.id === "cie-desde") { nCie.desde = e.target.value; const h = $("#cie-hasta"); if (h && h.value < e.target.value) h.value = e.target.value; nCie.hasta = h?.value; } if (e.target.id === "cie-hasta") nCie.hasta = e.target.value; if (e.target.id === "cie-motivo") nCie.motivo = e.target.value; if (e.target.id === "cie-hini") nCie.hini = e.target.value; if (e.target.id === "cie-hfin") nCie.hfin = e.target.value; });
-$("#nicole").addEventListener("keydown", e => { if (e.key === "Enter" && e.target.id === "n-clave") $("#n-ok").click(); });
+$("#nicole").addEventListener("keydown", e => { if (e.key === "Enter" && e.target.id === "n-clave") $("#n-ok").click(); if (e.key === "Enter" && (e.target.id === "c-clave-actual" || e.target.id === "c-clave-nueva")) $("#c-clave-ok").click(); });
 
 
 
