@@ -6,7 +6,7 @@ service cloud.firestore {
 
     // La administradora es la usuaria creada en Firebase → Authentication con este correo.
     function esAdmin() {
-      return request.auth != null && request.auth.token.email == 'marianacalixtosotocarmona@gmail.com';
+      return request.auth != null && request.auth.token.email == 'admin@calixtostudio.com';
     }
     function fechaOk(f) { return f is string && f.matches('^[0-9]{4}-[0-9]{2}-[0-9]{2}$'); }
 
