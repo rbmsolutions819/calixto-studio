@@ -1321,9 +1321,9 @@ async function crearReservasFirebase(){
       b.set(ref, { orden:c.orden, fecha:c.fecha, ini:c.ini, dur:c.dur, servicio:c.servicio, lugar:c.lugar, nombre:c.nombre, tel:c.tel, nota:c.nota, creada:F.serverTimestamp() });
       for (let m = c.ini; m < c.ini + c.dur; m += 30) b.set(F.doc(db, "ocupados", c.fecha + "_" + hhmm(m)), { fecha:c.fecha, cita:ref.id });
       try { await b.commit(); } catch (e) {
-        console.warn(e);
+        console.warn("reservar", e);
         let tomado = false; for (let m = c.ini; m < c.ini + c.dur; m += 30) if (oc.has(c.fecha + "_" + hhmm(m))) tomado = true;
-        throw new Error(tomado ? "ocupado" : "error");
+        const err = new Error(tomado ? "ocupado" : "error"); err.detalle = e?.code || e?.message || String(e); throw err;
       }
       return { ...c, id: ref.id };
     },
@@ -1747,7 +1747,7 @@ $("#agenda").addEventListener("click", async e => {
       pintarAgenda(); $("#p-agenda .cuerpo").scrollTop = 0;
     } catch (ex) {
       if (ex.message === "cargando") { b.disabled = false; b.textContent = txtOk; return toast("Conectando… intenta de nuevo en unos segundos."); }
-      if (ex.message === "error") { b.disabled = false; b.textContent = txtOk; return toast("No se pudo guardar la reserva. Intenta de nuevo o escríbenos por WhatsApp."); }
+      if (ex.message === "error") { b.disabled = false; b.textContent = txtOk; return toast("No se pudo guardar la reserva" + (ex.detalle ? " (" + ex.detalle + ")" : "") + ". Intenta de nuevo o escríbenos por WhatsApp."); }
       ag.ini = null; irPaso(4); toast("Esa hora se acaba de ocupar. Elige otra.");
     }
   }
@@ -1839,7 +1839,12 @@ document.addEventListener("change", async e => {
   if (e.target.id !== "a-comp" || !e.target.files[0] || !ag.hecho) return;
   try {
     const data = await reducir(e.target.files[0], 1100, 0.75);
-    try { await Reservas.guardarComprobante(ag.hecho.id, data); } catch {}
+    try {
+      await Reservas.guardarComprobante(ag.hecho.id, data);
+    } catch (ex) {
+      console.warn("guardarComprobante", ex);
+      return toast("No se pudo guardar el comprobante (" + (ex?.code || ex?.message || "error") + "). Intente de nuevo.");
+    }
     ag.hecho.comprobante = data; try { ag.compFile = await archivoComp(ag.hecho); } catch {} pintarListo($("#agenda"), ag.hecho); toast("Comprobante cargado");
   } catch { toast("No se pudo leer la imagen. Intente con otra."); }
 });
