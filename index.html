@@ -1071,6 +1071,8 @@ body>footer{border-top-color:#e8dfc9;color:#8a7d66}body>footer .n{color:var(--ti
 .v7-ph{display:grid;place-items:center;width:100%;height:100%;background:radial-gradient(70% 60% at 50% 35%,rgba(201,162,74,.35),transparent 70%),linear-gradient(160deg,#2a2218,#0d0b08);color:var(--oro2)}
 .v7-ph svg{width:46%;height:46%;max-width:90px;margin-bottom:30%}
 div.det-foto.v7-ph{aspect-ratio:16/9;border-radius:16px}div.det-foto.v7-ph svg{margin:0;width:70px;height:70px}
+[data-nusu].si{background:#1b1610!important;color:#fff!important;border-color:#1b1610!important}
+.uso-l{display:grid;gap:6px}.uso-f{display:flex;justify-content:space-between;gap:12px;align-items:center;background:#fff;border:1px solid #e8dfc9;border-radius:12px;padding:11px 14px;font-size:14px;color:#4a4337}.uso-f b{font-weight:600;color:#1b1610;text-align:right}
 </style>
 </head>
 <body>
@@ -1408,6 +1410,9 @@ const FIREBASE = {         // proyecto de Firebase: calixto-reservas
   appId: "1:625326064174:web:fcea3c82da13d4633715bf"
 };
 const NICOLE_EMAIL = "admin@calixtostudio.com";        // usuario de administración en Firebase → Authentication
+const RBM_EMAIL = "rbmsolutions819@gmail.com";          // usuario de RBM Solutions: además ve la pestaña "Uso"
+const ADMINS = [NICOLE_EMAIL, RBM_EMAIL];
+let sesionEmail = NICOLE_EMAIL, nUsuario = NICOLE_EMAIL;
 const NTFY_TEMA = "";  // avisos por la app ntfy desactivados: solo notificaciones del navegador      // canal privado de avisos en la app ntfy ("" = sin avisos)
 const TRABAJOS = ["img/trabajos/5d-3.jpg","img/trabajos/2d-1.jpg","img/trabajos/clasicas-1.jpg","img/trabajos/rimel-1.jpg","img/trabajos/3d-1.jpg","img/trabajos/5d-1.jpg","img/trabajos/5d-2.jpg"];
 const FOTOS = ["img/servicio-1.jpg","img/servicio-2.jpg","img/servicio-3.jpg","img/servicio-4.jpg","img/servicio-5.jpg","img/servicio-6.jpg","img/servicio-7.jpg","img/marca.jpg"];
@@ -1578,12 +1583,12 @@ async function crearReservasFirebase(){
     async guardarComprobante(id, data){ await F.updateDoc(F.doc(db, "citas", id), { comprobante: data, compFecha: Date.now() }); },
     async marcarDeposito(id, v){ await F.updateDoc(F.doc(db, "citas", id), { deposito: v }); const c = citas.find(x => x.id === id); if (c) c.deposito = v; },
     async guardarApuntes(id, txt){ await F.updateDoc(F.doc(db, "citas", id), { apuntes: txt }); const c = citas.find(x => x.id === id); if (c) c.apuntes = txt; },
-    async entrar(clave){ await A.signInWithEmailAndPassword(auth, NICOLE_EMAIL, clave); },
+    async entrar(clave, email = NICOLE_EMAIL){ await A.signInWithEmailAndPassword(auth, email, clave); },
     salir(){ A.signOut(auth); },
     async recuperar(email){ await A.sendPasswordResetEmail(auth, email); },
     async cambiarClave(actual, nueva){
       const u = auth.currentUser; if (!u) throw new Error("sesion");
-      await A.reauthenticateWithCredential(u, A.EmailAuthProvider.credential(NICOLE_EMAIL, actual));
+      await A.reauthenticateWithCredential(u, A.EmailAuthProvider.credential(u.email, actual));
       await A.updatePassword(u, nueva);
     }
   };
@@ -1602,7 +1607,7 @@ async function crearReservasFirebase(){
   }, e => console.warn("ocupados", e));
   SellosFB.conectar(F, db); ServiciosFB.conectar(F, db);
   A.onAuthStateChanged(auth, u => {
-    R.nicole = !!u && u.email === NICOLE_EMAIL;
+    R.nicole = !!u && ADMINS.includes(u.email); sesionEmail = u && u.email || NICOLE_EMAIL;
     SellosFB.admin(R.nicole); ServiciosFB.admin = R.nicole;
     if (quitarCitas) { quitarCitas(); quitarCitas = null; citas = []; }
     if (quitarSugs) { quitarSugs(); quitarSugs = null; sugs = []; }
@@ -2352,7 +2357,7 @@ function pintarConfig(){
       <label class="cie-mot" style="display:grid;gap:4px;font-size:13px;color:#4a4337">Para confirmar, escribe <b>BORRAR</b><input id="c-cero-txt" autocomplete="off" style="border:1px solid #e8dfc9;border-radius:10px;padding:10px;font:400 15px var(--sans)"></label>
       <button class="btn btn-linea conf-b" style="color:#a3443a;border-color:#e3cdb0" id="c-cero">Borrar todo y empezar de cero</button></section>
     <section class="conf-s"><h4>Cuenta</h4>
-      <p class="conf-p">Sesión iniciada como <b>${esc(NICOLE_EMAIL)}</b>${Reservas.prueba ? " (modo de prueba)" : ""}.</p>
+      <p class="conf-p">Sesión iniciada como <b>${esc(sesionEmail)}</b>${Reservas.prueba ? " (modo de prueba)" : ""}.</p>
       ${!Reservas.prueba ? `<div class="campo"><label for="c-clave-actual">Contraseña actual</label><input id="c-clave-actual" type="password" autocomplete="current-password" placeholder="Contraseña actual"></div>
       <div class="campo"><label for="c-clave-nueva">Contraseña nueva</label><input id="c-clave-nueva" type="password" autocomplete="new-password" placeholder="Mínimo 6 caracteres"></div>
       <p class="error" id="c-clave-err"></p>
@@ -2369,6 +2374,7 @@ function pintarNicole(){
       <img src="${document.querySelector('.cajon .cab img').src}" style="width:84px;margin:0 auto 14px;border-radius:50%;box-shadow:0 0 0 1px var(--oro)" alt="">
       <h2 style="font-family:var(--serif);font-size:28px;font-weight:600">Administración</h2>
       <p style="color:#6b6358;margin:4px 0 18px">Citas, depósitos, días libres y más.${Reservas.prueba ? "<br><small>Demostración: contraseña demo1234</small>" : ""}</p>
+      ${!Reservas.prueba ? `<div class="seg2" style="justify-content:center;margin-bottom:12px"><button class="chip${nUsuario === NICOLE_EMAIL ? " si" : ""}" data-nusu="${NICOLE_EMAIL}">Calixto Studio</button><button class="chip${nUsuario === RBM_EMAIL ? " si" : ""}" data-nusu="${RBM_EMAIL}">RBM Solutions</button></div>` : ""}
       <div class="campo"><input id="n-clave" type="password" autocomplete="current-password" placeholder="Contraseña" style="text-align:center"></div>
       <p class="error" id="n-err"></p>
       <button class="btn btn-oro" style="width:100%" id="n-ok">Entrar</button>
@@ -2381,7 +2387,8 @@ function pintarNicole(){
   const pest = `<div class="n-fila"><span>Hola</span><button class="chip${nVista === "conf" ? " si" : ""}" data-nv="conf">Configuración</button><button class="chip" id="n-salir">Salir</button></div>`
     + (sinAvisos && nVista !== "conf" ? `<button class="aviso-mini" data-nv="conf">Activa las notificaciones de citas nuevas ›</button>` : "")
     + `<form class="orden-b" id="n-orden-f"><input id="n-orden" placeholder="Buscar número de orden (ej.: RE-1A2B)" autocomplete="off" autocapitalize="characters"><button class="btn btn-oro" type="submit">Buscar</button></form>`
-    + `<div class="seg2 n-tabs"><button class="chip${nVista === "citas" ? " si" : ""}" data-nv="citas">Citas</button><button class="chip${nVista === "sel" ? " si" : ""}" data-nv="sel">Sellos</button><button class="chip${nVista === "serv" ? " si" : ""}" data-nv="serv">Servicios y precios</button><button class="chip${nVista === "ing" ? " si" : ""}" data-nv="ing">Ganancias</button><button class="chip${nVista === "sug" ? " si" : ""}" data-nv="sug">Opiniones${sugs.length + Reservas.encuestas().length ? ` (${sugs.length + Reservas.encuestas().length})` : ""}</button><button class="chip${nVista === "gal" ? " si" : ""}" data-nv="gal">Trabajos (galería)</button><button class="chip${nVista === "env" ? " si" : ""}" data-nv="env">Enviar encuesta${pendEnc() ? ` (${pendEnc()})` : ""}</button></div>`;
+    + `<div class="seg2 n-tabs"><button class="chip${nVista === "citas" ? " si" : ""}" data-nv="citas">Citas</button><button class="chip${nVista === "sel" ? " si" : ""}" data-nv="sel">Sellos</button><button class="chip${nVista === "serv" ? " si" : ""}" data-nv="serv">Servicios y precios</button><button class="chip${nVista === "ing" ? " si" : ""}" data-nv="ing">Ganancias</button><button class="chip${nVista === "sug" ? " si" : ""}" data-nv="sug">Opiniones${sugs.length + Reservas.encuestas().length ? ` (${sugs.length + Reservas.encuestas().length})` : ""}</button><button class="chip${nVista === "gal" ? " si" : ""}" data-nv="gal">Trabajos (galería)</button><button class="chip${nVista === "env" ? " si" : ""}" data-nv="env">Enviar encuesta${pendEnc() ? ` (${pendEnc()})` : ""}</button>${sesionEmail === RBM_EMAIL ? `<button class="chip${nVista === "uso" ? " si" : ""}" data-nv="uso">Uso (RBM)</button>` : ""}</div>`;
+  if (nVista === "uso" && sesionEmail === RBM_EMAIL) { box.innerHTML = pest + pintarUso(); cargarUsoJson(); return; }
   if (nVista === "conf") { box.innerHTML = pest + pintarConfig(); return; }
   if (nVista === "env") { box.innerHTML = pest + pintarEnvioEncuestas(); return; }
   if (nVista === "ing") { box.innerHTML = pest + `` + pintarIngresos(); return; }
@@ -2450,13 +2457,14 @@ $("#nicole").addEventListener("click", async e => {
   if (b.dataset.dep) { b.disabled = true; try { await Reservas.marcarDeposito(b.dataset.dep, true); toast("Depósito confirmado. Ya puede enviarle la confirmación a la clienta."); pintarNicole(); } catch (ex) { b.disabled = false; toast(ex.message === "ejemplo" ? "Las citas de ejemplo no se pueden editar." : "No se pudo guardar. Revisa tu conexión."); } return; }
   if (b.id === "n-ok") {
     b.disabled = true;
-    try { await Reservas.entrar($("#n-clave").value); pintarNicole(); }
+    try { await Reservas.entrar($("#n-clave").value, nUsuario); pintarNicole(); }
     catch { $("#n-err").textContent = "Contraseña incorrecta."; b.disabled = false; }
   }
+  if (b.dataset.nusu) { nUsuario = b.dataset.nusu; pintarNicole(); return; }
   if (b.id === "n-olvido") {
-    if (!confirm(`¿Enviar un correo para restablecer la contraseña a ${NICOLE_EMAIL}?`)) return;
+    if (!confirm(`¿Enviar un correo para restablecer la contraseña a ${nUsuario}?`)) return;
     b.disabled = true;
-    try { await Reservas.recuperar(NICOLE_EMAIL); toast("Revisa el correo " + NICOLE_EMAIL); }
+    try { await Reservas.recuperar(nUsuario); toast("Revisa el correo " + nUsuario); }
     catch { toast("No se pudo enviar. Revisa tu conexión."); }
     b.disabled = false; return;
   }
@@ -2944,6 +2952,40 @@ function miniVideo(x){
   return `${v.yt ? `<img src="https://i.ytimg.com/vi/${v.yt}/hqdefault.jpg" alt="" loading="lazy">` : ""}<span class="play">▶</span><span class="red">${esc(x.titulo || v.red)}</span>`;
 }
 let itemsGal = [];
+// ---- Pestaña "Uso" (solo RBM Solutions): cuánto pesan las fotos guardadas en Firebase ----
+const mb = n => (n / 1048576).toFixed(n < 10485760 ? 2 : 1) + " MB";
+const pesoB64 = s => typeof s === "string" && s.startsWith("data:") ? Math.round((s.length - s.indexOf(",") - 1) * 0.75) : 0;
+let usoJson = null, usoCargando = false;
+async function cargarUsoJson(){
+  if (usoJson || usoCargando) return; usoCargando = true;
+  try { const r = await fetch("uso.json?" + Date.now()); if (r.ok) { usoJson = await r.json(); if (pila.includes("p-nicole") && nVista === "uso") pintarNicole(); } } catch {}
+  usoCargando = false;
+}
+function pintarUso(){
+  const gal = (Reservas.galeria() || []).filter(x => x.tipo === "foto");
+  const galFb = gal.filter(x => pesoB64(x.data)), galGh = gal.length - galFb.length;
+  const sFotos = SERVICIOS.flatMap(s => s.fotos || []), sFb = sFotos.filter(f => pesoB64(f));
+  const pesoGal = galFb.reduce((a, x) => a + pesoB64(x.data), 0), pesoServ = sFb.reduce((a, f) => a + pesoB64(f), 0);
+  const visita = pesoGal + pesoServ + 60 * 1024;            // fotos + textos de servicios, cierres y horas ocupadas
+  const capacidad = Math.floor(10 * 1073741824 / visita);  // 10 GB al mes de descarga gratis
+  const total = pesoGal + pesoServ, pct = total / 1073741824 * 100;
+  const fila = (k, v) => `<div class="uso-f"><span>${k}</span><b>${v}</b></div>`;
+  const u = usoJson;
+  return `<p class="conf-p" style="margin-bottom:12px">Solo usted (RBM Solutions) ve esta pestaña. Las fotos que la administradora sube se guardan en Firebase; el día 1 y el 16 de cada mes se pasan solas a GitHub y dejan de gastar descarga de Firebase.</p>
+    <div class="uso-l">
+      ${fila("Fotos de galería en Firebase", `${galFb.length} · ${mb(pesoGal)}`)}
+      ${fila("Fotos de galería ya en GitHub", String(galGh))}
+      ${fila("Fotos de servicios en Firebase", `${sFb.length} · ${mb(pesoServ)}`)}
+      ${fila("Espacio usado en Firebase (fotos)", `${mb(total)} de 1 GB · ${pct < 0.1 ? "menos de 0,1" : pct.toFixed(1)} %`)}
+      ${fila("Descarga por cada visita", `≈ ${mb(visita)}`)}
+      ${fila("Visitas al mes que alcanzan gratis", `≈ ${capacidad.toLocaleString("es-CR")}`)}
+      ${fila("Tarjetas de sellos", String(Sellos.todas().length))}
+    </div>
+    <div class="paso" style="margin-top:14px"><span class="lbl">Último informe automático</span>
+      ${u ? `<p class="conf-p">${esc(new Date(u.fecha).toLocaleString("es-CR", { dateStyle: "long", timeStyle: "short" }))}: ${u.movidas ? `se pasaron <b>${u.movidas}</b> fotos a GitHub.` : "no había fotos nuevas para pasar."}<br>Citas guardadas: <b>${u.citas ?? "—"}</b> · Clientas con tarjeta: <b>${u.clientas ?? "—"}</b> · Opiniones: <b>${u.encuestas ?? "—"}</b></p>`
+           : `<p class="conf-p">Todavía no se ha hecho el primer informe automático.</p>`}
+    </div>`;
+}
 function pintarGaleria(){
   const l = Reservas.galeria();
   itemsGal = l && l.length ? l : TRABAJOS.map(f => ({ tipo:"foto", data:f }));

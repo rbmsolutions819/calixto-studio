@@ -1,0 +1,46 @@
+# El día 1 y el 16 de cada mes pasa a GitHub las fotos que la administradora subió a Firebase
+# (así no gastan la descarga gratis de Firebase) y deja un informe de uso en uso.json.
+# También se puede correr a mano: Actions → "Fotos a GitHub e informe" → Run workflow.
+name: Fotos a GitHub e informe
+
+on:
+  schedule:
+    - cron: "17 9 1,16 * *"     # 3:17 a. m. en Costa Rica
+  workflow_dispatch:
+    inputs:
+      modo:
+        description: "mover = pasar fotos a GitHub · informe = solo contar"
+        default: mover
+        type: choice
+        options: [mover, informe]
+
+permissions:
+  contents: write
+  pages: read
+
+concurrency: fotos-a-github
+
+jobs:
+  fotos:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Revisar que exista la llave
+        env:
+          LLAVE: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+        run: |
+          if [ -z "$LLAVE" ]; then echo "::error::Falta el secreto FIREBASE_SERVICE_ACCOUNT"; exit 1; fi
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Preparar
+        run: npm install --no-save --no-package-lock firebase-admin@12
+      - name: Pasar fotos y hacer el informe
+        env:
+          LLAVE: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+          MODO: ${{ inputs.modo || 'mover' }}
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          export PAGINA_URL=$(curl -s -H "Authorization: Bearer $GH_TOKEN" "https://api.github.com/repos/$GITHUB_REPOSITORY/pages" | jq -r '.html_url // empty')
+          echo "Página: $PAGINA_URL"
+          node .github/scripts/fotos.mjs
