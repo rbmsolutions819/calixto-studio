@@ -17,7 +17,7 @@ service cloud.firestore {
         && request.resource.data.orden is string && request.resource.data.orden.size() <= 20
         && fechaOk(request.resource.data.fecha)
         && request.resource.data.ini is int && request.resource.data.ini >= 0 && request.resource.data.ini < 1440
-        && request.resource.data.dur in [60, 90, 120, 150]
+        && request.resource.data.dur in [30, 60, 90, 120, 150, 180]
         && request.resource.data.lugar == 'estudio'
         && request.resource.data.servicio is string && request.resource.data.servicio.size() <= 80
         && request.resource.data.nombre is string && request.resource.data.nombre.size() >= 2 && request.resource.data.nombre.size() <= 50
@@ -86,15 +86,56 @@ service cloud.firestore {
     // Encuestas de satisfacción: una por cita (el id es el de la cita); solo la administradora las lee.
     match /encuestas/{id} {
       allow create: if exists(/databases/$(database)/documents/citas/$(id))
-        && request.resource.data.keys().hasOnly(['estrellas','calidad','trato','recomendaria','comentario','nombre','fecha'])
+        && request.resource.data.keys().hasOnly(['estrellas','atencion','ambiente','recomendaria','comentario','nombre','fecha'])
         && request.resource.data.estrellas is int && request.resource.data.estrellas >= 1 && request.resource.data.estrellas <= 5
-        && request.resource.data.calidad is int && request.resource.data.calidad >= 1 && request.resource.data.calidad <= 5
-        && request.resource.data.trato is int && request.resource.data.trato >= 1 && request.resource.data.trato <= 5
+        && request.resource.data.atencion is int && request.resource.data.atencion >= 1 && request.resource.data.atencion <= 5
+        && request.resource.data.ambiente is int && request.resource.data.ambiente >= 1 && request.resource.data.ambiente <= 5
         && request.resource.data.recomendaria in ['si', 'tal vez', 'no']
         && request.resource.data.comentario is string && request.resource.data.comentario.size() <= 600
         && request.resource.data.nombre is string && request.resource.data.nombre.size() <= 40
         && request.resource.data.fecha == request.time;
       allow read, delete: if esAdmin();
+    }
+
+    // Servicios, precios y fotos de cada servicio: todos los ven; solo la administradora los cambia.
+    match /servicios/{id} {
+      allow read: if true;
+      allow create, update: if esAdmin() && request.resource.data.id == id
+        && request.resource.data.nombre is string && request.resource.data.nombre.size() <= 80
+        && request.resource.data.orden is int;
+      allow delete: if esAdmin();
+    }
+
+    // Tarjetas de cliente frecuente. El nombre de cada documento es una huella del celular + contraseña:
+    // cualquiera puede abrir SU tarjeta si conoce la contraseña, pero nadie puede listar las demás.
+    function clientaOk(d) {
+      return d.keys().hasOnly(['tel','nombre','sellos','p5','canjes','hist','creada'])
+        && d.tel is string && d.tel.matches('^[0-9]{8}$')
+        && d.nombre is string && d.nombre.size() >= 2 && d.nombre.size() <= 50
+        && d.sellos is int && d.sellos >= 0 && d.sellos <= 10
+        && d.p5 is bool && d.canjes is int && d.canjes >= 0
+        && d.hist is list && d.hist.size() <= 10;
+    }
+    match /clientas/{id} {
+      allow get: if true;
+      allow list: if esAdmin();
+      allow create: if id.matches('^[0-9a-f]{64}$') && clientaOk(request.resource.data)
+        && request.resource.data.creada == request.time
+        && getAfter(/databases/$(database)/documents/telefonos/$(request.resource.data.tel)).data.id == id
+        && (esAdmin() || (request.resource.data.sellos == 0 && request.resource.data.canjes == 0
+                          && request.resource.data.p5 == false && request.resource.data.hist.size() == 0));
+      allow update: if esAdmin() && clientaOk(request.resource.data)
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['sellos','p5','canjes','hist']);
+      allow delete: if esAdmin();
+    }
+    // Un celular = una tarjeta. Este documento evita que se creen dos tarjetas con el mismo número.
+    match /telefonos/{tel} {
+      allow read: if esAdmin();
+      allow create: if tel.matches('^[0-9]{8}$') && request.resource.data.keys().hasOnly(['id'])
+        && getAfter(/databases/$(database)/documents/clientas/$(request.resource.data.id)).data.tel == tel;
+      allow update: if esAdmin() && request.resource.data.keys().hasOnly(['id'])
+        && getAfter(/databases/$(database)/documents/clientas/$(request.resource.data.id)).data.tel == tel;
+      allow delete: if esAdmin();
     }
   }
 }

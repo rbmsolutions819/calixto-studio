@@ -764,7 +764,7 @@ html{overflow-x:hidden}
 .tsel-top img{width:48px;height:48px;border-radius:50%}
 .tsel-top small{display:block;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--oro3)}
 .tsel-top b{font-family:var(--serif);font-size:24px;font-weight:600;line-height:1.1}
-.tsel-g{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.tsel-g{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
 .ts{aspect-ratio:1;border-radius:50%;display:grid;place-items:center;border:1.5px dashed rgba(163,64,95,.45);background:rgba(255,255,255,.7);color:var(--oro3)}
 .ts em{font-style:normal;font-size:13px;color:#8f8470}
 .ts.premio{border-style:solid;border-color:var(--oro)}.ts.premio em{font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--oro3)}
@@ -805,7 +805,7 @@ html{overflow-x:hidden}
 .sa-h{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
 .sa-h>div{display:grid}.sa-h b{font-size:16px;font-weight:500}.sa-h span{font-size:13px;color:#6b6358}
 .sa-h em{font-style:normal;font-family:var(--serif);font-size:22px;font-weight:600;color:var(--oro3)}
-.sa-p{display:grid;grid-template-columns:repeat(8,1fr);gap:5px;margin:10px 0 12px}
+.sa-p{display:grid;grid-template-columns:repeat(10,1fr);gap:4px;margin:10px 0 12px}
 .sa-p i{height:7px;border-radius:4px;background:#f3ede1}.sa-p i.on{background:linear-gradient(90deg,#c9a24a,#9c7a2e)}
 .sa-acc{display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:6px}
 .sa-acc .btn{padding:10px 6px;font-size:12px;color:var(--tinta);border-color:#e8dfc9}
@@ -859,6 +859,132 @@ html{overflow-x:hidden}
 .hist-m i{grid-area:i;height:7px;background:#f5f0e4;border-radius:9px;overflow:hidden}.hist-m i b{display:block;height:100%;background:linear-gradient(90deg,var(--oro3),var(--oro2));border-radius:9px}
 .hist-m small{grid-area:s;font-size:12px;color:#8a7d66}.hist-m.si{background:#fdf0f4;border-radius:12px}
 .dep-adm .btn-linea{color:var(--tinta);border-color:#e8dfc9}
+
+.mini-cat{grid-column:1/-1;font-family:var(--serif);font-size:22px;font-weight:600;color:var(--oro3);margin:14px 0 2px;letter-spacing:.02em}
+.mini-cat:first-child{margin-top:0}
+.mini-fotos{font-style:normal;font-size:12px;color:var(--oro3);margin-top:2px}
+.tr-tit{font-family:var(--serif);font-size:24px;margin:22px 0 10px}
+.tr-fotos{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:18px}
+.tr-fotos button{border:0;padding:0;border-radius:12px;overflow:hidden;aspect-ratio:1;cursor:pointer;background:#eee}
+.tr-fotos img{width:100%;height:100%;object-fit:cover;display:block}
+.sv-fotos{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.sv-fotos>div{position:relative;aspect-ratio:1;border-radius:10px;overflow:hidden}
+.sv-fotos img{width:100%;height:100%;object-fit:cover}
+.sv-fotos>div button{position:absolute;top:4px;right:4px;width:24px;height:24px;border-radius:50%;border:0;background:rgba(0,0,0,.65);color:#fff;font-size:16px;line-height:1;cursor:pointer}
+.sv-subir{aspect-ratio:1;border:2px dashed var(--oro2);border-radius:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:26px;color:var(--oro3);cursor:pointer;text-align:center}
+.sv-subir span{font-size:11px;font-weight:600}
+/* ===== Versión 7: perfil de reservas en una columna ===== */
+body{background:#f6f1e8;color:var(--tinta)}
+.progreso{display:none}
+.v7{padding-bottom:30px}
+.v7-banner{background:#0d0b08;height:150px;display:grid;place-items:center;border-bottom:2px solid var(--oro)}
+.v7-banner img{width:92px;height:92px;border-radius:50%}
+.v7-col{max-width:600px;margin:0 auto;padding:0 18px}
+.v7-perfil{display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:start;margin-top:-34px}
+.v7-avatar{width:96px;height:96px;border-radius:50%;object-fit:cover;object-position:50% 20%;border:4px solid #f6f1e8;box-shadow:0 0 0 1px var(--oro),0 8px 20px -10px rgba(0,0,0,.5);background:#ddd}
+.v7-pdatos{padding-top:40px;min-width:0}
+.v7-pdatos h1{font-family:var(--serif);font-weight:600;font-size:32px;line-height:1.05;color:var(--tinta)}
+.v7-sub{font-size:14px;color:#6b6358;margin-top:2px}
+.v7-estrellas{font-size:14px;margin-top:6px;color:#4a4337}.v7-estrellas span{color:var(--oro);letter-spacing:1px}
+.v7-estrellas a{text-decoration:underline;text-underline-offset:2px}
+.v7-ubi{display:flex;align-items:center;flex-wrap:wrap;gap:4px;font-size:14px;color:#4a4337;margin-top:4px}
+.v7-ubi svg{width:16px;height:16px;color:var(--oro3)}
+.v7-ubi a{color:var(--oro3);font-weight:500;text-decoration:underline;text-underline-offset:2px}
+.v7 .estado{display:inline-flex;align-items:center;gap:8px;margin-top:8px;font-size:12.5px;color:#6b6358;background:#fff;border:1px solid #e8dfc9;border-radius:999px;padding:5px 12px;letter-spacing:.02em}
+.v7 .estado i{width:8px;height:8px;border-radius:50%;background:#b9ad98}.v7 .estado.abierto i{background:#3c9a5f;box-shadow:0 0 0 3px rgba(60,154,95,.2)}
+.v7-redes{grid-column:1/-1;display:flex;gap:10px}
+.v7-redes a{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,var(--oro2),var(--oro3));color:#fff;box-shadow:0 6px 14px -8px rgba(156,122,46,.9)}
+.v7-redes svg{width:21px;height:21px}
+.v7-bienv{margin-top:20px;border-left:3px solid var(--oro);background:#fffdf8;border-radius:0 14px 14px 0;padding:14px 18px}
+.v7-bienv p{font-family:var(--serif);font-style:italic;font-size:18.5px;line-height:1.45;color:#3b342b}
+.v7-pol{margin-top:16px;background:#fff;border:1px solid #e8dfc9;border-radius:14px}
+.v7-pol summary{list-style:none;display:flex;align-items:center;justify-content:space-between;padding:15px 18px;cursor:pointer;font-weight:500;font-size:15.5px}
+.v7-pol summary::-webkit-details-marker{display:none}
+.v7-pol summary svg{width:20px;height:20px;color:var(--oro3);transition:transform .25s}
+.v7-pol[open] summary svg{transform:rotate(180deg)}
+.v7-pol-in{padding:0 18px 16px;display:grid;gap:12px;font-size:14.5px;color:#4a4337}
+.v7-pol-in>div{border-top:1px solid #f1e9d6;padding-top:12px}
+.v7-pol-in>div>b{color:var(--tinta);font-weight:500}
+.v7-pago{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:6px}
+.v7-pago b{font-weight:500;color:var(--tinta);margin-left:4px}
+.v7 .pago-copiar{border:1px solid var(--oro);background:none;color:var(--oro3);border-radius:999px;padding:6px 14px;font:500 12.5px var(--sans);cursor:pointer}
+.v7-h{font-family:var(--serif);font-weight:600;font-size:26px;color:var(--tinta);margin:30px 0 12px}
+.v7-acc,.v7-contacto{display:grid;gap:10px}
+.v7-card{display:flex;align-items:center;gap:14px;width:100%;text-align:left;background:#fff;border:1px solid #e8dfc9;border-radius:16px;padding:14px 16px;font:inherit;color:var(--tinta);cursor:pointer;box-shadow:0 8px 20px -18px rgba(60,45,20,.6);transition:transform .15s,border-color .2s}
+.v7-card:active{transform:scale(.98)}.v7-card:hover{border-color:var(--oro)}
+.v7-ic{flex:none;width:44px;height:44px;border-radius:12px;display:grid;place-items:center;background:#f6efdf;color:var(--oro3)}
+.v7-ic svg{width:22px;height:22px}
+.v7-ct{flex:1;display:grid;min-width:0}.v7-ct b{font-weight:500;font-size:16px}.v7-ct small{font-size:13.5px;color:#6b6358}
+.v7-card i{font-style:normal;font-size:24px;color:var(--oro3)}
+.v7-acc .v7-card:first-child{background:linear-gradient(120deg,#1a1510,#2a2218);color:#fff;border-color:#2a2218}
+.v7-acc .v7-card:first-child small{color:#d9c9a3}.v7-acc .v7-card:first-child .v7-ic{background:linear-gradient(135deg,var(--oro2),var(--oro3));color:#fff}
+.v7-carru{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;padding:2px max(18px,calc((100vw - 600px)/2 + 18px)) 8px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.v7-carru::-webkit-scrollbar{display:none}
+.v7-carru button{flex:none;width:150px;aspect-ratio:3/4;border-radius:16px;overflow:hidden;position:relative;border:0;padding:0;cursor:pointer;scroll-snap-align:start;background:#ddd}
+.v7-carru img{width:100%;height:100%;object-fit:cover}
+.v7-carru span{position:absolute;inset:auto 0 0 0;padding:34px 10px 10px;background:linear-gradient(transparent,rgba(10,8,5,.82));color:#fff;text-align:left;font:500 14px/1.2 var(--sans)}
+.v7-carru em{display:block;font-style:normal;font-size:12.5px;color:var(--oro2);margin-top:2px}
+.v7 .mini{grid-template-columns:1fr;gap:8px}
+.v7 .mini-cat{font-size:19px;margin:16px 0 0;color:var(--oro3)}
+.v7 .mini button{display:grid;grid-template-columns:1fr auto;grid-template-areas:"n p" "d d" "f f";gap:2px 10px;background:#fff;border:1px solid #e8dfc9;border-radius:14px;padding:12px 16px;min-height:0;box-shadow:none}
+.v7 .mini button::before,.v7 .mini button::after,.v7 .mini button>svg{display:none}
+.v7 .mini b{grid-area:n;font-family:var(--sans);font-size:15.5px;font-weight:500}
+.v7 .mini em{grid-area:p;font-size:17px!important;align-self:start}
+.v7 .mini span{grid-area:d;font-size:13px;letter-spacing:0;margin:0}
+.v7 .mini .mini-fotos{grid-area:f}
+.js2 .v7 .mini button{opacity:1;translate:none}
+.v7-fid-in{background:#fff;border:1px solid #e8dfc9;border-radius:16px;padding:16px 18px;display:grid;gap:10px}
+.v7-fid-in>p{font-size:14.5px;color:#4a4337}
+.v7-niv{display:flex;align-items:center;gap:12px}
+.v7-niv span{flex:none;width:42px;height:42px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,var(--oro2),var(--oro3));color:#fff;font:600 18px var(--serif)}
+.v7-niv div{display:grid}.v7-niv b{font-weight:500}.v7-niv small{font-size:13.5px;color:#6b6358}
+.v7-fid-in .btn{justify-self:start;margin-top:4px}
+.v7-ej{font-size:12.5px;color:#8a7d66;margin:-6px 0 10px}
+.v7-res{display:grid;gap:10px}
+.v7-res article{background:#fff;border:1px solid #e8dfc9;border-radius:14px;padding:14px 16px}
+.v7-rs{color:var(--oro);letter-spacing:2px;font-size:14px}
+.v7-res p{font-size:14.5px;color:#3b342b;margin:4px 0 6px}
+.v7-res b{font-size:13px;font-weight:500;color:#6b6358}
+.v7 .horario{max-width:none}.js2 .v7 .horario>*{opacity:1;translate:none}
+.v7 .dia{background:#fff;border-color:#e8dfc9;padding:12px 16px}
+.v7 .dia b{font-size:16px}
+.v7 .nota{color:#6b6358}
+.v7-contacto{margin-top:30px}
+.v7-pro{display:block;margin:30px auto 0;background:none;border:0;color:#6b6358;font:500 14px var(--sans);text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+body>footer{border-top-color:#e8dfc9;color:#8a7d66}body>footer .n{color:var(--tinta)}
+@media (min-width:700px){.v7-banner{height:190px}.v7-banner img{width:110px;height:110px}.v7-avatar{width:120px;height:120px}.v7-pdatos{padding-top:46px}.v7-pdatos h1{font-size:38px}.v7-carru button{width:180px}}
+.ts.premio em{font-size:9.5px;letter-spacing:.02em}
+.sa-p i.hito{box-shadow:0 0 0 1.5px var(--oro)}
+.sa-canje{width:100%;margin-bottom:8px}
+.sa-pend{font-size:13px;color:var(--oro3);font-weight:500;margin:-4px 0 10px}
+.tsel-niveles{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
+.tsel-niveles div{background:#fff;border:1px solid #e8dfc9;border-radius:14px;padding:10px 12px;display:grid}
+.tsel-niveles b{font-family:var(--serif);font-size:18px;font-weight:600;color:var(--oro3)}
+.tsel-niveles span{font-size:13px;color:#4a4337}
+.tsel-niveles .ok{border-color:var(--oro);box-shadow:0 0 0 1px var(--oro)}
+.v7 section{padding:0}
+.v7-ph{display:grid;place-items:center;width:100%;height:100%;background:radial-gradient(70% 60% at 50% 35%,rgba(201,162,74,.35),transparent 70%),linear-gradient(160deg,#2a2218,#0d0b08);color:var(--oro2)}
+.v7-ph svg{width:46%;height:46%;max-width:90px;margin-bottom:30%}
+div.det-foto.v7-ph{aspect-ratio:16/9;border-radius:16px}div.det-foto.v7-ph svg{margin:0;width:70px;height:70px}
+.v8-hero{position:relative;isolation:isolate;overflow:hidden;text-align:center;padding:26px 20px 34px;background:radial-gradient(70% 45% at 50% 42%,rgba(201,162,74,.20),transparent 70%),linear-gradient(180deg,#0d0b08,#17130d 70%,#0d0b08);color:#f3ead7;border-bottom:1px solid rgba(201,162,74,.55)}
+.v8-hero::before{content:"";position:absolute;inset:0;background:url(img/marmol.jpg) center/cover;opacity:.05;z-index:-1}
+.v8-logo{width:78px;height:78px;border-radius:50%;margin:0 auto 26px}
+.v8-foto{position:relative;width:min(270px,68vw);margin:0 auto 26px}
+.v8-foto img{width:100%;aspect-ratio:4/5;object-fit:cover;object-position:50% 25%;border-radius:50% 50% 14px 14px / 40% 40% 14px 14px;box-shadow:0 30px 60px -28px rgba(0,0,0,.9)}
+.v8-foto::after{content:"";position:absolute;inset:-9px;border:1px solid rgba(201,162,74,.75);border-radius:50% 50% 20px 20px / 40% 40% 20px 20px;pointer-events:none}
+.v8-hero h1{font-family:var(--serif);font-weight:500;font-size:40px;line-height:1;letter-spacing:.04em;background:linear-gradient(100deg,var(--oro3),var(--oro2) 45%,var(--oro) 70%,var(--oro3));-webkit-background-clip:text;background-clip:text;color:transparent}
+.v8-sub{margin-top:10px;font-size:11.5px;letter-spacing:.32em;text-transform:uppercase;color:#cfc2a6}
+.v8-linea{display:flex;align-items:center;justify-content:center;gap:12px;margin:16px auto 12px;color:var(--oro)}
+.v8-linea i{width:54px;height:1px;background:linear-gradient(90deg,transparent,var(--oro))}.v8-linea i:last-child{transform:scaleX(-1)}
+.v8-linea svg{width:22px;height:22px}
+.v8-est{font-size:13.5px;color:#d9cdb3;letter-spacing:.04em}.v8-est span{color:var(--oro);letter-spacing:2px}.v8-est b{color:#fff;font-weight:500}
+.v8-est a{text-decoration:underline;text-underline-offset:3px;color:#d9cdb3}
+.v8-info{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding-top:20px}
+.v8-datos{display:grid;gap:2px;min-width:0}
+.v8-info .v7-ubi{margin:0}.v8-info .estado{margin-top:6px;justify-self:start}
+.v8-info .v7-redes{grid-column:auto}
+.v8-info .v7-redes a{width:40px;height:40px}.v8-info .v7-redes svg{width:19px;height:19px}
+@media (min-width:700px){.v8-hero{padding:34px 20px 42px}.v8-logo{width:90px;height:90px}.v8-foto{width:300px}.v8-hero h1{font-size:50px}}
 </style>
 </head>
 <body>
@@ -873,140 +999,106 @@ html{overflow-x:hidden}
   <symbol id="pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12Z"/><circle cx="12" cy="10" r="2.6"/></symbol>
   <symbol id="sol" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8"/></symbol>
   <symbol id="brillo" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c.6 4.6 2.4 6.4 7 7-4.6.6-6.4 2.4-7 7-.6-4.6-2.4-6.4-7-7 4.6-.6 6.4-2.4 7-7Z"/><path d="M19 14c.3 2 1 2.7 3 3-2 .3-2.7 1-3 3-.3-2-1-2.7-3-3 2-.3 2.7-1 3-3Z" opacity=".7"/></symbol>
+  <symbol id="tk" viewBox="0 0 24 24" fill="currentColor"><path d="M16.6 3c.3 2.2 1.6 3.6 3.9 3.8v3a7.1 7.1 0 0 1-3.9-1.2v6.3a5.9 5.9 0 1 1-5.9-5.9c.3 0 .6 0 .9.1v3.1a2.8 2.8 0 1 0 2 2.7V3h3Z"/></symbol>
 </svg>
 
 
 
 <div class="progreso" id="progreso" aria-hidden="true"></div>
-<main>
-<nav class="nav" aria-label="Principal">
-  <div class="fila">
-    <button class="menu" data-abrir="cajon" aria-label="Abrir menú"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>Menú</button>
-    <button class="ag" data-reservar>Agendar cita</button>
-    <button data-abrir="p-galeria">Galería</button>
-    <a href="#servicios">Servicios</a>
-    <a href="#horario">Horario</a>
-    <a href="#politicas">Políticas</a>
-  </div>
-</nav>
-  <section class="hero" id="inicio">
-    <canvas id="polvo" aria-hidden="true"></canvas>
-    <div class="ondas" aria-hidden="true"><i></i><i></i><i></i></div>
-    <div class="aro"></div><div class="aro b"></div>
-    <div>
-      <img class="hero-logo" src="img/logo.png" alt="Logo de Calixto Studio">
-      <div class="kicker">Calixto Studio</div>
-      <h1><span class="oro-txt">Pestañas y belleza</span><em class="oro-txt">Realza tu mirada</em></h1>
-      <p class="lema">Extensiones de pestañas, cejas y maquillaje profesional. Reserva tu espacio en línea en menos de un minuto.</p>
-      <div class="acciones">
-        <button class="btn btn-oro" data-reservar><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>Agendar cita</button>
-        <a class="btn btn-linea" href="#servicios">Ver servicios</a>
-      </div>
-      <div class="estado" id="estado"><i></i><span>Solo con cita</span></div>
-    </div>
-    <svg class="bajar" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="m6 9 6 6 6-6"/></svg>
-  </section>
-  <div class="cinta2" aria-hidden="true"><div class="cinta2-in" id="cinta2"></div></div>
+<main class="v7">
+  <header class="v8-hero">
+    <img class="v8-logo" src="img/logo.png" alt="Calixto Studio">
+    <div class="v8-foto"><img src="img/foto.jpg" alt="Foto de la artista de Calixto Studio"></div>
+    <h1>Calixto Studio</h1>
+    <p class="v8-sub">Lash artist · Pestañas y cejas</p>
+    <div class="v8-linea" aria-hidden="true"><i></i><svg><use href="#loto"/></svg><i></i></div>
+  </header>
 
-  <section class="claro" id="nosotros">
-    <div class="wrap bienv">
-      <div class="foto revela"><img src="img/foto.jpg" alt="Foto del estudio"></div>
-      <div class="texto revela">
-        <div class="flor"><svg><use href="#loto"/></svg></div>
-        <div class="titulo" style="margin-bottom:18px"><h2>Belleza en cada detalle</h2></div>
-        <p>Cada set de pestañas se diseña según la forma de tus ojos y el estilo que buscas: natural, definido o con todo el volumen.</p>
-        <p>Trabajamos con materiales de calidad, higiene en cada paso y el tiempo que tu mirada merece.</p>
-        <div class="pilares">
-          <div><svg><use href="#brillo"/></svg>Diseño personalizado</div>
-          <div><svg><use href="#brillo"/></svg>Materiales de calidad</div>
-          <div><svg><use href="#brillo"/></svg>Higiene y cuidado</div>
+  <div class="v7-col">
+    <section class="v8-info">
+      <div class="v8-datos">
+        <p class="v7-ubi"><svg><use href="#pin"/></svg>Moravia, San Vicente · <a data-wa="Hola, ¿me puedes enviar la ubicación del estudio?" href="#">Cómo llegar</a></p>
+        <div class="estado" id="estado"><i></i><span>Solo con cita</span></div>
+      </div>
+      <div class="v7-redes">
+        <a href="https://instagram.com/calixto_studio" target="_blank" rel="noopener" aria-label="Instagram"><svg><use href="#ig"/></svg></a>
+        <a href="https://www.tiktok.com/" target="_blank" rel="noopener" aria-label="TikTok"><svg><use href="#tk"/></svg></a>
+        <a data-wa="Hola, tengo una consulta." href="#" aria-label="WhatsApp"><svg><use href="#wa"/></svg></a>
+      </div>
+    </section>
+
+    <div class="v7-bienv">
+      <p>¡Bienvenida! Gracias por elegir Calixto Studio. Aquí puedes ver los servicios, los precios y agendar tu cita en menos de un minuto. Cada set se diseña según la forma de tus ojos. Te espero ✨</p>
+    </div>
+
+    <details class="v7-pol" id="politicas">
+      <summary><span>Políticas de reserva</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="m6 9 6 6 6-6"/></svg></summary>
+      <div class="v7-pol-in">
+        <div><b>Para reservar</b><p>Se cancelan <b>₡5.000</b> que se descuentan del precio del set. Si no se presenta, <b>no son reembolsables</b>.</p></div>
+        <div><b>Presentarse</b><p>Sin maquillaje en el área de los ojos, para un mejor resultado y mayor duración.</p></div>
+        <div><b>Puntualidad</b><p>Si llega <b>15 minutos tarde</b> la cita se cancela y tendrá que reagendar.</p></div>
+        <div class="pago"><b>Métodos de pago</b>
+          <div class="v7-pago"><span>SINPE Móvil <b>7118 5004</b></span><button class="pago-copiar" data-copiar="71185004" type="button">Copiar</button></div>
+          <div class="v7-pago"><span>En el local <b>Efectivo</b></span></div>
         </div>
-        <div class="firma">Calixto Studio</div>
-        <span class="cita">Especialista en pestaña pelo a pelo y cejas</span>
       </div>
+    </details>
+
+    <h2 class="v7-h">¿Qué desea hacer?</h2>
+    <div class="v7-acc">
+      <button class="v7-card" data-reservar>
+        <span class="v7-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/></svg></span>
+        <span class="v7-ct"><b>Agendar una cita</b><small>Escoja su servicio, día y hora</small></span><i>›</i>
+      </button>
+      <button class="v7-card" data-ir="#servicios">
+        <span class="v7-ic"><svg><use href="#loto"/></svg></span>
+        <span class="v7-ct"><b>Ver servicios y precios</b><small>Pestañas pelo a pelo y cejas</small></span><i>›</i>
+      </button>
+      <button class="v7-card" data-abrir="p-sellos">
+        <span class="v7-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="2.5" y="5" width="19" height="14" rx="2.5"/><circle cx="8" cy="12" r="1.8"/><circle cx="13" cy="12" r="1.8"/><circle cx="18" cy="12" r="1.8"/></svg></span>
+        <span class="v7-ct"><b>Mi tarjeta de cliente frecuente</b><small>Premio a los 5 y a los 10 sellos</small></span><i>›</i>
+      </button>
+      <button class="v7-card" data-abrir="p-galeria">
+        <span class="v7-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="9" cy="9" r="2"/><path d="m21 15-5-5L5 21"/></svg></span>
+        <span class="v7-ct"><b>Ver trabajos anteriores</b><small>Fotos de sets y cejas</small></span><i>›</i>
+      </button>
     </div>
-  </section>
 
-  <section class="servicios" id="servicios">
-    <div class="wrap">
-      <div class="titulo revela">
-        <div class="flor"><svg><use href="#loto"/></svg></div>
-        <h2 class="oro-txt">Nuestros servicios</h2>
-        <p>Toca un servicio para ver todo lo que incluye.</p>
-      </div>
-      <div class="mini revela" id="mini"></div>
-    </div>
-  </section>
+    <h2 class="v7-h">Servicios</h2>
+  </div>
+  <div class="v7-carru" id="carru"></div>
 
+  <div class="v7-col">
+    <section id="servicios">
+      <h2 class="v7-h">Lista de precios</h2>
+      <div class="mini" id="mini"></div>
+    </section>
 
-  <section id="fidelidad" class="fid">
-    <div class="wrap fid-in revela">
-      <div class="fid-txt">
-        <span class="sobre">Programa de fidelidad</span>
-        <h2>Tu tarjeta de sellos</h2>
-        <p>Recibe un sello por cada cita. Al completar 8, tu <b>retoque de pestañas es gratis</b>.</p>
+    <section id="fidelidad" class="v7-fid">
+      <h2 class="v7-h">Cliente frecuente</h2>
+      <div class="v7-fid-in">
+        <p>Por cada cita atendida recibe un sello.</p>
+        <div class="v7-niv"><span>5</span><div><b>A los 5 sellos</b><small>₡2.000 de descuento</small></div></div>
+        <div class="v7-niv"><span>10</span><div><b>A los 10 sellos</b><small>Un premio mayor: descuento especial</small></div></div>
         <button class="btn btn-oro" data-abrir="p-sellos">Ver mi tarjeta</button>
       </div>
-      <div class="fid-demo" aria-hidden="true"><div class="tsel tsel-deco"><div class="tsel-top"><img src="img/logo.png" alt=""><div><small>Tarjeta de fidelidad</small><b>Calixto Studio</b></div></div><div class="tsel-g"><span class="ts on"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M16 9v16"/><path d="M16 14c-2-6-8-9-11-7s-1 9 5 9c-4 1-6 5-3 7s6-2 9-7"/><path d="M16 14c2-6 8-9 11-7s1 9-5 9c4 1 6 5 3 7s-6-2-9-7"/></svg></span><span class="ts on"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M16 9v16"/><path d="M16 14c-2-6-8-9-11-7s-1 9 5 9c-4 1-6 5-3 7s6-2 9-7"/><path d="M16 14c2-6 8-9 11-7s1 9-5 9c4 1 6 5 3 7s-6-2-9-7"/></svg></span><span class="ts on"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M16 9v16"/><path d="M16 14c-2-6-8-9-11-7s-1 9 5 9c-4 1-6 5-3 7s6-2 9-7"/><path d="M16 14c2-6 8-9 11-7s1 9-5 9c4 1 6 5 3 7s-6-2-9-7"/></svg></span><span class="ts on"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M16 9v16"/><path d="M16 14c-2-6-8-9-11-7s-1 9 5 9c-4 1-6 5-3 7s6-2 9-7"/><path d="M16 14c2-6 8-9 11-7s1 9-5 9c4 1 6 5 3 7s-6-2-9-7"/></svg></span><span class="ts on"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M16 9v16"/><path d="M16 14c-2-6-8-9-11-7s-1 9 5 9c-4 1-6 5-3 7s6-2 9-7"/><path d="M16 14c2-6 8-9 11-7s1 9-5 9c4 1 6 5 3 7s-6-2-9-7"/></svg></span><span class="ts"><em>6</em></span><span class="ts"><em>7</em></span><span class="ts premio"><em>Premio</em></span></div><div class="tsel-pie"><span>5 de 8 sellos</span><span>Programa de fidelidad</span></div></div></div>
-    </div>
-  </section>
+    </section>
 
-  <section class="claro marmol" id="politicas">
-    <div class="wrap">
-      <div class="titulo revela">
-        <div class="flor"><svg><use href="#loto"/></svg></div>
-        <span class="sobre">Antes de tu cita</span>
-        <h2>Políticas de reserva</h2>
-        <p>Gracias por respetar nuestro tiempo y trabajo.</p>
-      </div>
-      <div class="pol revela">
-        <article class="pol-it"><span class="pol-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="5" width="19" height="14" rx="2.5"/><path d="M2.5 10h19M6.5 15h4"/></svg></span><div><h3>Para reservar</h3><p>Se cancelan <b>₡5.000</b> que se descuentan del precio del set. Si no se presenta, <b>no son reembolsables</b>.</p></div></article>
-        <article class="pol-it"><span class="pol-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M8.5 11c.7.6 1.6.6 2.3 0M13.2 11c.7.6 1.6.6 2.3 0M9.5 15.2c1.5 1.1 3.5 1.1 5 0"/></svg></span><div><h3>Presentarse</h3><p>Sin maquillaje en el área de los ojos, para un mejor resultado y mayor duración.</p></div></article>
-        <article class="pol-it"><span class="pol-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 7v5l3.2 2"/></svg></span><div><h3>Puntualidad</h3><p>Si llega <b>15 minutos tarde</b> la cita se cancela y tendrá que reagendar.</p></div></article>
-      </div>
-      <div class="pago revela">
-        <h3 class="pago-t">Métodos de pago</h3>
-        <div class="pago-g">
-          <div class="pago-it"><span class="pol-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="6.5" y="2.5" width="11" height="19" rx="2.5"/><path d="M10.5 18.5h3"/></svg></span><div><small>SINPE Móvil</small><b>7118 5004</b></div><button class="pago-copiar" data-copiar="71185004" type="button">Copiar</button></div>
-          <div class="pago-it"><span class="pol-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="6" width="19" height="12" rx="2"/><circle cx="12" cy="12" r="2.6"/><path d="M6 9.5v5M18 9.5v5"/></svg></span><div><small>En el local</small><b>Efectivo</b></div></div>
-        </div>
-      </div>
-    </div>
-  </section>
-  <section id="horario" style="background:var(--negro2)">
-    <div class="wrap">
-      <div class="titulo revela">
-        <div class="flor"><svg><use href="#loto"/></svg></div>
-        <h2 class="oro-txt">Horario</h2>
-        <p style="color:#a89985">Atención solo con cita previa.</p>
-      </div>
+
+    <section id="horario">
+      <h2 class="v7-h">Horario</h2>
       <div id="cierres-aviso" class="cierres-aviso"></div>
-      <div class="horario revela" id="tabla-horario"></div>
-      <p class="nota">¿Necesitas otro horario? Escríbenos por WhatsApp y buscamos un espacio para ti.</p>
-    </div>
-  </section>
+      <div class="horario" id="tabla-horario"></div>
+      <p class="nota">Atención solo con cita previa. ¿Necesita otro horario? Escríbanos por WhatsApp.</p>
+    </section>
 
-  <section class="claro" id="contacto">
-    <div class="wrap">
-      <div class="titulo revela">
-        <div class="flor"><svg><use href="#loto"/></svg></div>
-        <h2>Contacto</h2>
-        <p>Moravia, San Vicente. La ubicación exacta del estudio se envía por WhatsApp al confirmar tu cita.</p>
-      </div>
-      <div class="contactos revela" style="max-width:560px;margin:0 auto">
-        <a class="contacto" data-wa="Hola, tengo una consulta." href="#"><span class="ic"><svg><use href="#wa"/></svg></span><span><small>WhatsApp</small><b>7118 5004</b></span></a>
-        <a class="contacto" href="tel:+50671185004"><span class="ic"><svg><use href="#tel"/></svg></span><span><small>Llamar</small><b>+506 7118 5004</b></span></a>
-        <a class="contacto" href="https://instagram.com/calixto_studio" target="_blank" rel="noopener"><span class="ic"><svg><use href="#ig"/></svg></span><span><small>Instagram</small><b>@calixto_studio</b></span></a>
-      </div>
-    </div>
-  </section>
+    <section id="contacto" class="v7-contacto">
+      <a class="v7-card" data-wa="Hola, tengo una consulta." href="#"><span class="v7-ic"><svg><use href="#wa"/></svg></span><span class="v7-ct"><b>WhatsApp</b><small>7118 5004</small></span><i>›</i></a>
+      <a class="v7-card" href="tel:+50671185004"><span class="v7-ic"><svg><use href="#tel"/></svg></span><span class="v7-ct"><b>Llamar</b><small>+506 7118 5004</small></span><i>›</i></a>
+    </section>
 
-  <section class="cierre">
-    <div class="flor"><svg><use href="#loto"/></svg></div>
-    <h2>Tu mirada,<br><span class="oro-txt">tu mejor versión.</span></h2>
-    <p>Los espacios se llenan rápido. Asegura el tuyo hoy.</p>
-    <button class="btn btn-oro" data-reservar><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>Agendar mi cita</button>
-  </section>
+    <button class="v7-pro" data-abrir="p-nicole">Acceso para la profesional</button>
+  </div>
 </main>
 
 <footer>
@@ -1027,11 +1119,11 @@ html{overflow-x:hidden}
 
 <!-- Menú lateral -->
 <aside class="cajon" id="cajon" aria-label="Menú">
-  <div class="cab"><img src="img/logo.png" alt=""><div><b>NOMBRE</b><small>del estudio</small></div></div>
+  <div class="cab"><img src="img/logo.png" alt=""><div><b>Calixto</b><small>Studio</small></div></div>
   <button class="it" data-reservar style="margin-top:8px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>Agendar cita</button>
   <div id="menu-serv" hidden></div>
   <h4>Más</h4>
-  <button class="it" data-abrir="p-sellos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2.5" y="5" width="19" height="14" rx="2.5"/><circle cx="8" cy="12" r="1.8"/><circle cx="13" cy="12" r="1.8"/><circle cx="18" cy="12" r="1.8"/></svg>Mi tarjeta de sellos</button>
+  <button class="it" data-abrir="p-sellos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2.5" y="5" width="19" height="14" rx="2.5"/><circle cx="8" cy="12" r="1.8"/><circle cx="13" cy="12" r="1.8"/><circle cx="18" cy="12" r="1.8"/></svg>Cliente frecuente</button>
   <button class="it" data-abrir="p-sug"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2.1h5c0-.9.4-1.6 1-2.1A6 6 0 0 0 12 3Z"/></svg>Sugerencias</button>
   <button class="it" data-abrir="p-galeria"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="9" cy="9" r="2"/><path d="m21 15-5-5L5 21"/></svg>Galería</button>
   <button class="it" data-ir="#horario"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Horario</button>
@@ -1048,8 +1140,8 @@ html{overflow-x:hidden}
 
 <!-- Galería -->
 <section class="panel oscuro" id="p-galeria" aria-label="Galería">
-  <div class="cab"><button data-atras aria-label="Volver">‹</button><h3>Galería</h3></div>
-  <div class="cuerpo"><div class="in"><p style="color:#a89985;margin-bottom:16px">Algunos de nuestros trabajos. Toca una foto o un video para verlo en grande.</p><div class="gal" id="gal"></div></div></div>
+  <div class="cab"><button data-atras aria-label="Volver">‹</button><h3>Trabajos anteriores</h3></div>
+  <div class="cuerpo"><div class="in"><p style="color:#a89985;margin-bottom:16px">Algunos de los trabajos de Calixto Studio. Toca una foto o un video para verlo en grande.</p><div class="gal" id="gal"></div></div></div>
 </section>
 
 <!-- Agenda -->
@@ -1105,8 +1197,8 @@ html{overflow-x:hidden}
 </section>
 
 <!-- Tarjeta de sellos -->
-<section class="panel" id="p-sellos" aria-label="Tarjeta de sellos">
-  <div class="cab"><button data-atras aria-label="Volver">‹</button><h3>Mi tarjeta de sellos</h3></div>
+<section class="panel" id="p-sellos" aria-label="Cliente frecuente">
+  <div class="cab"><button data-atras aria-label="Volver">‹</button><h3>Cliente frecuente</h3></div>
   <div class="cuerpo"><div class="in" id="sellos"></div></div>
 </section>
 
@@ -1129,33 +1221,45 @@ html{overflow-x:hidden}
 const WHATSAPP = "50671185004";
 // precio: ej. "₡20.000" ("" muestra "Consultar"). foto: número de la foto de la galería (0 a 5).
 const SERVICIOS = [
-  { id:"clasicas", nombre:"Pestañas clásicas", precio:"", ref:15000, dur:120, foto:0, corto:"Look natural y elegante", duracion:"2 horas aprox.",
+  { id:"clasicas", cat:"Pestañas pelo a pelo · full set", nombre:"Clásicas", precio:"₡18.000", dur:120, foto:0, corto:"Look natural y elegante", fotos:["img/trabajos/clasicas-1.jpg"],
     texto:"Una extensión sobre cada pestaña natural. Alarga y define tu mirada con un acabado natural, ideal para el día a día.",
-    incluye:["Diseño según la forma de tus ojos","Extensiones de seda de alta calidad","Recomendaciones de cuidado para que duren más"] },
-  { id:"rimel", nombre:"Pestañas efecto rímel", precio:"", ref:18000, dur:120, foto:1, corto:"Como recién maquillada", duracion:"2 horas aprox.",
-    texto:"Mezcla de técnica clásica y abanicos ligeros que da el efecto de pestañas con rímel, sin tener que maquillarte.",
-    incluye:["Más densidad que el set clásico","Efecto rímel de larga duración","Diseño personalizado"] },
-  { id:"volumen", nombre:"Volumen ruso", precio:"", ref:22000, dur:150, foto:2, corto:"Máximo volumen", destacado:true, duracion:"2 h 30 min aprox.",
-    texto:"Abanicos de varias extensiones ultrafinas sobre cada pestaña para una mirada intensa, con volumen y muy definida.",
-    incluye:["Abanicos hechos a mano","Volumen y densidad sin peso","El set más llamativo"] },
-  { id:"retoque", nombre:"Retoque de pestañas", precio:"", ref:10000, dur:90, foto:3, corto:"Mantén tu set perfecto", duracion:"1 h 30 min aprox.",
-    texto:"Rellenamos los espacios de las pestañas que se han caído para que tu set se vea como el primer día. Recomendado cada 2 o 3 semanas.",
-    incluye:["Limpieza del set","Relleno de espacios","Válido hasta 3 semanas después del set"] },
-  { id:"lifting", nombre:"Lifting de pestañas", precio:"", ref:13000, dur:60, foto:4, corto:"Curvatura natural", duracion:"1 hora aprox.",
-    texto:"Eleva y curva tus pestañas naturales desde la raíz. Mirada abierta por semanas, sin extensiones.",
-    incluye:["Curvatura de tus pestañas naturales","Tinte opcional","Dura de 6 a 8 semanas"] },
-  { id:"cejas", nombre:"Cejas y laminado", precio:"", ref:12000, dur:60, foto:5, corto:"Cejas definidas y peinadas", duracion:"1 hora aprox.",
-    texto:"Diseño, depilación y laminado de cejas para que se vean más pobladas, ordenadas y con la forma ideal para tu rostro.",
-    incluye:["Diseño según tu rostro","Laminado y fijación","Tinte opcional"] },
-  { id:"maquillaje", nombre:"Maquillaje social", precio:"", ref:20000, dur:90, foto:6, corto:"Para tus eventos", duracion:"1 h 30 min aprox.",
-    texto:"Maquillaje profesional para bodas, quinceaños, graduaciones o cualquier evento especial, adaptado a tu estilo y a tu piel.",
-    incluye:["Preparación de la piel","Maquillaje de larga duración","Pestañas postizas incluidas"] }
+    incluye:["Set completo (full set)","Diseño según la forma de tus ojos","Recomendaciones de cuidado"] },
+  { id:"2d", cat:"Pestañas pelo a pelo · full set", nombre:"Pestañas 2D", precio:"₡18.000", dur:120, foto:1, corto:"Un poquito más de densidad", fotos:["img/trabajos/2d-1.jpg"],
+    texto:"Dos extensiones ultrafinas sobre cada pestaña natural para una mirada con más cuerpo, sin perder naturalidad.",
+    incluye:["Set completo (full set)","Abanicos de 2 extensiones","Acabado ligero"] },
+  { id:"rimel", cat:"Pestañas pelo a pelo · full set", nombre:"Efecto rímel", precio:"₡18.000", dur:120, foto:1, corto:"Como recién maquillada", fotos:["img/trabajos/rimel-1.jpg"],
+    texto:"Da el efecto de pestañas con rímel, sin tener que maquillarte.",
+    incluye:["Set completo (full set)","Efecto rímel de larga duración","Diseño personalizado"] },
+  { id:"3d", cat:"Pestañas pelo a pelo · full set", nombre:"Fibras tecnológicas 3D", precio:"₡18.000", dur:120, foto:2, corto:"Volumen ligero y parejo", fotos:["img/trabajos/3d-1.jpg"],
+    texto:"Fibras tecnológicas prehechas de 3 puntas que dan volumen uniforme y ligero.",
+    incluye:["Set completo (full set)","Fibras tecnológicas 3D","Acabado uniforme"] },
+  { id:"5d", cat:"Pestañas pelo a pelo · full set", nombre:"Fibras tecnológicas 5D", precio:"₡20.000", dur:150, foto:2, corto:"Más volumen", fotos:["img/trabajos/5d-1.jpg","img/trabajos/5d-2.jpg","img/trabajos/5d-3.jpg"],
+    texto:"Fibras tecnológicas de 5 puntas para una mirada más poblada y definida.",
+    incluye:["Set completo (full set)","Fibras tecnológicas 5D","Más densidad"] },
+  { id:"7d", cat:"Pestañas pelo a pelo · full set", nombre:"Fibras tecnológicas 7D", precio:"₡22.000", dur:150, foto:2, corto:"Máxima densidad", fotos:[],
+    texto:"Fibras tecnológicas de 7 puntas: el efecto más tupido de la línea tecnológica.",
+    incluye:["Set completo (full set)","Fibras tecnológicas 7D","Mirada intensa"] },
+  { id:"volmedio", cat:"Pestañas pelo a pelo · full set", nombre:"Volumen artesanal medio", precio:"₡20.000", dur:150, foto:2, corto:"Volumen hecho a mano", destacado:true, fotos:[],
+    texto:"Abanicos hechos a mano, uno por uno, para un volumen suave y personalizado.",
+    incluye:["Set completo (full set)","Abanicos artesanales","Volumen medio"] },
+  { id:"mega", cat:"Pestañas pelo a pelo · full set", nombre:"Mega volumen", precio:"₡22.000", dur:150, foto:2, corto:"El más llamativo", fotos:[],
+    texto:"Abanicos artesanales de muchas extensiones ultrafinas para el máximo volumen y una mirada muy marcada.",
+    incluye:["Set completo (full set)","Abanicos artesanales","Máximo volumen sin peso"] },
+  { id:"henna", cat:"Cejas", nombre:"Henna brows", precio:"₡10.000", dur:60, foto:5, corto:"Diseño, depilación y henna", fotos:[],
+    texto:"Diseño según tu rostro, depilación y henna para cejas definidas y con color por más tiempo.",
+    incluye:["Diseño de cejas","Depilación","Henna"] },
+  { id:"diseno", cat:"Cejas", nombre:"Diseño y depilación", precio:"₡5.000", dur:30, foto:5, corto:"Cejas limpias y con forma", fotos:[],
+    texto:"Diseño según la forma de tu rostro y depilación para cejas ordenadas.",
+    incluye:["Diseño de cejas","Depilación"] },
+  { id:"powder", cat:"Cejas", nombre:"Powder brows", precio:"₡45.000", dur:150, foto:5, corto:"Maquillaje semipermanente", fotos:[],
+    texto:"Técnica semipermanente que deja un efecto de ceja maquillada con polvo, suave y natural.",
+    incluye:["Diseño personalizado","Pigmentación efecto polvo","Indicaciones de cuidado"] }
 ];
 const LUGARES = {
   estudio: { nombre:"Calixto Studio", corto:"Estudio", dir:"Moravia, San Vicente. La dirección exacta se envía por WhatsApp al confirmar la cita." }
 };
 const waze = l => "#";
-const DURACIONES = [60, 90, 120, 150];
+const DURACIONES = [30, 60, 90, 120, 150];
 // Horario: 0 = domingo ... 6 = sábado. Horas en formato 24 h. turnos:[] = cerrado.
 const HORARIO = [
   { dias:[1,2,3,4,5], nombre:"Lun a Vie", turnos:[["09:00","18:00"]] },
@@ -1166,23 +1270,17 @@ const SEMANAS_ADELANTE = 6;   // cuántas semanas se pueden reservar
 const ANTICIPACION_MIN = 120; // minutos mínimos de anticipación
 const DEPOSITO = "₡5.000", SINPE = "7118 5004";
 // Servicios editados desde el panel (demostración: se guardan en este navegador)
-const SERV_KEY = "est_servicios_v1";
-try { const g = JSON.parse(localStorage.getItem(SERV_KEY) || "null"); if (Array.isArray(g) && g.length) SERVICIOS.splice(0, SERVICIOS.length, ...g); } catch {}
+const SERV_KEY = "cs_servicios_v1";
+try { const g = JSON.parse(localStorage.getItem(SERV_KEY) || "null"); if (Array.isArray(g) && g.length) { g.forEach(x => { if (x.id === "2d" && x.nombre === "2D") x.nombre = "Pestañas 2D"; const d0 = SERVICIOS.find(s => s.id === x.id); if (d0 && d0.fotos.length && !(x.fotos || []).length) x.fotos = d0.fotos.slice(); }); SERVICIOS.splice(0, SERVICIOS.length, ...g); } } catch {}
 const servVis = () => SERVICIOS.filter(s => !s.oculto);
 const CLAVE_NICOLE = "demo1234";  // clave de la versión de demostración (sin Firebase)
 
 // ===== CONEXIÓN =====
 // Pegue aquí la configuración de Firebase (entre las llaves). Si queda en null, la página funciona en modo de prueba.
-const FIREBASE = {
-  apiKey: "AIzaSyA6ZfycBH2gtiLM_DPgK_aW679NzzwrPK8",
-  authDomain: "calixto-studio.firebaseapp.com",
-  projectId: "calixto-studio",
-  storageBucket: "calixto-studio.firebasestorage.app",
-  messagingSenderId: "652607136236",
-  appId: "1:652607136236:web:f1f5ed4f5fe3dc555360c9"
-};
+const FIREBASE = null;   // POR CONFIGURAR: pegar aquí el firebaseConfig del proyecto nuevo
 const NICOLE_EMAIL = "admin@calixtostudio.com";        // usuario de administración en Firebase → Authentication
 const NTFY_TEMA = "";  // avisos por la app ntfy desactivados: solo notificaciones del navegador      // canal privado de avisos en la app ntfy ("" = sin avisos)
+const TRABAJOS = ["img/trabajos/5d-3.jpg","img/trabajos/2d-1.jpg","img/trabajos/clasicas-1.jpg","img/trabajos/rimel-1.jpg","img/trabajos/3d-1.jpg","img/trabajos/5d-1.jpg","img/trabajos/5d-2.jpg"];
 const FOTOS = ["img/servicio-1.jpg","img/servicio-2.jpg","img/servicio-3.jpg","img/servicio-4.jpg","img/servicio-5.jpg","img/servicio-6.jpg","img/servicio-7.jpg","img/marca.jpg"];
 
 // ================== UTILIDADES ==================
@@ -1224,7 +1322,7 @@ const precioHTML = s => s.precio ? `${esc(s.precio)}${s.antes ? ` <s style="font
 // ================== RESERVAS (versión de prueba: se guardan en este celular) ==================
 // Para que todas las personas vean lo mismo se conecta a Firebase (gratis). Esta capa es la única que cambia.
 const ReservasPrueba = (() => {
-  const KEY = "est_citas_v1";
+  const KEY = "cs_citas_v1";
   let mem = [], sugMem = [], galMem = null;
   const leer = () => { try { return JSON.parse(localStorage.getItem(KEY) || "[]"); } catch { return mem; } };
   const guardar = l => { mem = l; try { localStorage.setItem(KEY, JSON.stringify(l)); } catch {} };
@@ -1373,8 +1471,10 @@ async function crearReservasFirebase(){
     oc = new Set(snap.docs.map(d => d.id));
     if (pila.includes("p-agenda") && !ag.hecho && (ag.paso === 4 || (ag.ini != null && oc.has(ag.fecha + "_" + hhmm(ag.ini))))) pintarAgenda();
   }, e => console.warn("ocupados", e));
+  SellosFB.conectar(F, db); ServiciosFB.conectar(F, db);
   A.onAuthStateChanged(auth, u => {
     R.nicole = !!u && u.email === NICOLE_EMAIL;
+    SellosFB.admin(R.nicole); ServiciosFB.admin = R.nicole;
     if (quitarCitas) { quitarCitas(); quitarCitas = null; citas = []; }
     if (quitarSugs) { quitarSugs(); quitarSugs = null; sugs = []; }
     citasCargadas = sugsCargadas = encsCargadas = false;
@@ -1418,7 +1518,7 @@ function waEncuesta(c){
   return `https://wa.me/${t506}?text=${encodeURIComponent(`Hola ${nombre} gracias por visitar Calixto Studio. ¿Nos ayudas con una encuesta de 1 minuto sobre tu ${String(c.servicio).toLowerCase()}? Tu opinión es muy importante para mí.\n\n${linkEncuesta(c)}\n\nCon cariño, Nicole`)}`;
 }
 // Registro (en este celular) de encuestas ya enviadas por WhatsApp
-const ENV_KEY = "est_encuestas_enviadas";
+const ENV_KEY = "cs_encuestas_enviadas";
 let envMem = {};
 function envLeer(){ try { return JSON.parse(localStorage.getItem(ENV_KEY) || "{}"); } catch { return envMem; } }
 function envMarcar(id){ const m = envLeer(); m[id] = Date.now(); envMem = m; try { localStorage.setItem(ENV_KEY, JSON.stringify(m)); } catch {} }
@@ -1559,7 +1659,8 @@ const servDe = id => SERVICIOS.find(s => s.id === id);
 const nuevaOrden = () => "RE-" + (Date.now() % 1e6).toString(36).toUpperCase().padStart(4, "0");
 const ordenDe = c => c.orden || ("RE-" + String(c.id).replace(/^ej[bc]?/, "E").toUpperCase().slice(-5));
 function pintarServicios(){
-$("#mini").innerHTML = servVis().map(s => `<button data-serv="${s.id}"><svg><use href="#loto"/></svg><b>${esc(s.nombre)}</b><em style="font-style:normal;font-family:var(--serif);font-size:18px;font-weight:600;color:var(--oro3)">${precioHTML(s)}</em><span>${esc(s.corto)}</span></button>`).join("");
+$("#mini").innerHTML = [...new Set(servVis().map(s => s.cat || "Servicios"))].map(cat => `<h3 class="mini-cat">${esc(cat)}</h3>` + servVis().filter(s => (s.cat || "Servicios") === cat).map(s => `<button data-serv="${s.id}"><svg><use href="#loto"/></svg><b>${esc(s.nombre)}</b><em style="font-style:normal;font-family:var(--serif);font-size:18px;font-weight:600;color:var(--oro3)">${precioHTML(s)}</em><span>${esc(s.corto)}</span>${(s.fotos || []).length ? `<i class="mini-fotos">📷 ${s.fotos.length} foto${s.fotos.length > 1 ? "s" : ""}</i>` : ""}</button>`).join("")).join("");
+$("#carru") && ($("#carru").innerHTML = servVis().map(s => `<button data-serv="${s.id}">${(s.fotos || [])[0] ? `<img src="${s.fotos[0]}" alt="" loading="lazy">` : `<i class="v7-ph"><svg><use href="#loto"/></svg></i>`}<span>${esc(s.nombre)}<em>${precioHTML(s)}</em></span></button>`).join(""));
 $("#menu-serv").innerHTML = servVis().map(s => `<button class="it" data-serv="${s.id}"><svg><use href="#loto"/></svg>${esc(s.nombre)}</button>`).join("");
 }
 pintarServicios();
@@ -1568,13 +1669,14 @@ function verServicio(id){
   const s = servDe(id); if (!s) return;
   $("#ps-titulo").textContent = s.nombre;
   $("#ps-cuerpo").innerHTML = `
-    <img class="det-foto" src="${FOTOS[s.foto]}" alt="">
+    ${(s.fotos || [])[0] ? `<img class="det-foto" src="${s.fotos[0]}" alt="">` : `<div class="det-foto v7-ph"><svg><use href="#loto"/></svg></div>`}
     ${s.destacado ? '<span class="etiqueta" style="margin-top:16px">El más pedido</span>' : ""}
     <h2>${esc(s.nombre)}</h2>
     <p>${esc(s.texto)}</p>
     <div class="datos"><div><small>${s.antes ? "Precio especial" : "Precio"}</small><b>${precioHTML(s)}</b></div><div><small>Duración</small><b>${s.duracion || durTxt(s.dur)}</b></div></div>
     <p class="dep-mini">Para reservar se paga un depósito de ${DEPOSITO} que se descuenta del precio.</p>
     <ul class="incl">${s.incluye.map(i => `<li><svg><use href="#brillo"/></svg>${esc(i)}</li>`).join("")}</ul>
+    ${(s.fotos || []).length ? `<h3 class="tr-tit">Trabajos de ${esc(s.nombre)}</h3><div class="tr-fotos">${s.fotos.map((f, i) => `<button data-trfoto="${s.id}:${i}"><img src="${f}" alt="Trabajo ${i + 1}" loading="lazy"></button>`).join("")}</div>` : ""}
     <div class="bloque">
       <button class="btn btn-oro" data-reservar="${s.id}">${CAL}Reservar este servicio</button>
       <a class="btn btn-linea" style="color:var(--tinta);border-color:var(--oro)" data-wa="Hola, tengo una consulta sobre ${esc(s.nombre.toLowerCase())}." href="#"><svg><use href="#wa"/></svg>Preguntar por WhatsApp</a>
@@ -1759,7 +1861,7 @@ function gcal(c, paraNicole){
   return "https://calendar.google.com/calendar/render?action=TEMPLATE&text=" + encodeURIComponent(paraNicole ? `${c.nombre} · ${c.servicio} · ${LUGARES[c.lugar]?.corto || ""}` : `Cita en Calixto Studio ${LUGARES[c.lugar]?.nombre || "Estudio"} · ${c.servicio}`) + (paraNicole ? "&details=" + encodeURIComponent(`Cel: ${c.tel}${c.nota ? "\nNota: " + c.nota : ""}`) : "") + "&dates=" + t(c.ini) + "/" + t(c.ini + c.dur) + "&location=" + encodeURIComponent(LUGARES[c.lugar] ? `${LUGARES[c.lugar].lat},${LUGARES[c.lugar].lng}` : "");
 }
 // Archivo de calendario (.ics) con varias citas: el celular las agrega todas de una vez
-const CAL_KEY = "est_calendario_v1";
+const CAL_KEY = "cs_calendario_v1";
 const firmaCita = c => [c.fecha, c.ini, c.dur, c.lugar, c.servicio].join("|");
 function calLeer(){ try { return JSON.parse(localStorage.getItem(CAL_KEY) || "{}"); } catch { return calMem; } }
 let calMem = {};
@@ -2142,7 +2244,7 @@ function pintarNicole(){
   const pest = `<div class="n-fila"><span>Hola</span><button class="chip${nVista === "conf" ? " si" : ""}" data-nv="conf">Configuración</button><button class="chip" id="n-salir">Salir</button></div>`
     + (sinAvisos && nVista !== "conf" ? `<button class="aviso-mini" data-nv="conf">Activa las notificaciones de citas nuevas ›</button>` : "")
     + `<form class="orden-b" id="n-orden-f"><input id="n-orden" placeholder="Buscar número de orden (ej.: RE-1A2B)" autocomplete="off" autocapitalize="characters"><button class="btn btn-oro" type="submit">Buscar</button></form>`
-    + `<div class="seg2 n-tabs"><button class="chip${nVista === "citas" ? " si" : ""}" data-nv="citas">Citas</button><button class="chip${nVista === "sel" ? " si" : ""}" data-nv="sel">Sellos</button><button class="chip${nVista === "serv" ? " si" : ""}" data-nv="serv">Servicios y precios</button><button class="chip${nVista === "ing" ? " si" : ""}" data-nv="ing">Ganancias</button><button class="chip${nVista === "sug" ? " si" : ""}" data-nv="sug">Opiniones${sugs.length + Reservas.encuestas().length ? ` (${sugs.length + Reservas.encuestas().length})` : ""}</button><button class="chip${nVista === "gal" ? " si" : ""}" data-nv="gal">Galería</button><button class="chip${nVista === "env" ? " si" : ""}" data-nv="env">Enviar encuesta${pendEnc() ? ` (${pendEnc()})` : ""}</button></div>`;
+    + `<div class="seg2 n-tabs"><button class="chip${nVista === "citas" ? " si" : ""}" data-nv="citas">Citas</button><button class="chip${nVista === "sel" ? " si" : ""}" data-nv="sel">Sellos</button><button class="chip${nVista === "serv" ? " si" : ""}" data-nv="serv">Servicios y precios</button><button class="chip${nVista === "ing" ? " si" : ""}" data-nv="ing">Ganancias</button><button class="chip${nVista === "sug" ? " si" : ""}" data-nv="sug">Opiniones${sugs.length + Reservas.encuestas().length ? ` (${sugs.length + Reservas.encuestas().length})` : ""}</button><button class="chip${nVista === "gal" ? " si" : ""}" data-nv="gal">Trabajos (galería)</button><button class="chip${nVista === "env" ? " si" : ""}" data-nv="env">Enviar encuesta${pendEnc() ? ` (${pendEnc()})` : ""}</button></div>`;
   if (nVista === "conf") { box.innerHTML = pest + pintarConfig(); return; }
   if (nVista === "env") { box.innerHTML = pest + pintarEnvioEncuestas(); return; }
   if (nVista === "ing") { box.innerHTML = pest + `` + pintarIngresos(); return; }
@@ -2393,8 +2495,33 @@ document.addEventListener("click", e => { if (e.target.closest("#ing-pdf")) expo
 let svEdit = null;   // id del servicio abierto, o "nuevo"
 const numCol = t => +String(t || "").replace(/[^\d]/g, "") || 0;
 const fmtCol = n => n ? "₡" + n.toLocaleString("es-CR").replace(/\s|,/g, ".") : "";
-function guardarServicios(){ try { localStorage.setItem(SERV_KEY, JSON.stringify(SERVICIOS)); } catch {} pintarServicios(); const c = document.querySelector("#cinta2"); if (c) { c.innerHTML = servVis().map(x => `<span>${esc(x.nombre)}</span>`).join(""); c.innerHTML += c.innerHTML; } }
+// Versión real: los servicios, precios y fotos se guardan en Firebase (colección "servicios").
+const ServiciosFB = (() => {
+  let F = null, db = null, ids = new Set();
+  return {
+    admin: false,
+    conectar(f, d){ F = f; db = d;
+      F.onSnapshot(F.collection(db, "servicios"), snap => {
+        if (snap.empty) return;   // todavía no se ha guardado nada: se usan los servicios de este archivo
+        const l = snap.docs.map(x => ({ ...x.data(), id: x.id })).sort((a, b) => (a.orden ?? 0) - (b.orden ?? 0));
+        ids = new Set(l.map(x => x.id)); l.forEach(x => delete x.orden);
+        SERVICIOS.splice(0, SERVICIOS.length, ...l); pintarServicios(); if (pila.includes("p-nicole")) pintarNicole();
+      }, e => console.warn("servicios", e)); },
+    async guardar(){
+      const grande = SERVICIOS.find(s => JSON.stringify(s).length > 900000);
+      if (grande) throw new Error("grande:" + grande.nombre);
+      const b = F.writeBatch(db);
+      SERVICIOS.forEach((s, i) => b.set(F.doc(db, "servicios", s.id), { ...JSON.parse(JSON.stringify(s)), orden: i }));
+      [...ids].filter(id => !SERVICIOS.some(s => s.id === id)).forEach(id => b.delete(F.doc(db, "servicios", id)));
+      await b.commit(); ids = new Set(SERVICIOS.map(s => s.id));
+    }
+  };
+})();
+function guardarServicios(){ if (FIREBASE && ServiciosFB.admin) ServiciosFB.guardar().catch(e => { console.warn(e); toast(String(e.message).startsWith("grande:") ? `“${e.message.slice(7)}” tiene demasiadas fotos: quite alguna.` : "No se pudo guardar en internet. Revise la conexión."); });
+  else try { localStorage.setItem(SERV_KEY, JSON.stringify(SERVICIOS)); } catch { toast("No cabe más en la memoria de este navegador: borre alguna foto."); } pintarServicios(); const c = document.querySelector("#cinta2"); if (c) { c.innerHTML = servVis().map(x => `<span>${esc(x.nombre)}</span>`).join(""); c.innerHTML += c.innerHTML; } }
+let svFotos = [];
 function formServicio(x){
+  svFotos = [...(x.fotos || [])];
   const durs = [30, 45, 60, 90, 120, 150, 180, 210, 240];
   return `<div class="sv-form">
     <div class="campo"><label>Nombre</label><input id="sv-nom" maxlength="40" value="${esc(x.nombre || "")}"></div>
@@ -2404,6 +2531,9 @@ function formServicio(x){
     <div class="campo"><label>Frase corta (en la tarjeta)</label><input id="sv-corto" maxlength="40" value="${esc(x.corto || "")}"></div>
     <div class="campo"><label>Descripción</label><textarea id="sv-texto" rows="3" maxlength="400">${esc(x.texto || "")}</textarea></div>
     <div class="campo"><label>Qué incluye (uno por línea)</label><textarea id="sv-incl" rows="3" maxlength="400">${esc((x.incluye || []).join("\n"))}</textarea></div>
+    <div class="campo"><label>Fotos de este trabajo (las clientas las ven al abrir el servicio)</label>
+      <div class="sv-fotos" id="sv-fotos">${(x.fotos || []).map((f, i) => `<div><img src="${f}" alt=""><button data-sv-quitarfoto="${i}" aria-label="Quitar foto">×</button></div>`).join("")}
+        <label class="sv-subir">＋<span>Subir fotos</span><input type="file" accept="image/*" multiple id="sv-subir" hidden></label></div></div>
     <p class="error" id="sv-err"></p>
     <div class="sv-acc"><button class="btn btn-oro" data-sv-guardar="${x.id || "nuevo"}">Guardar</button><button class="btn btn-linea" data-sv-cerrar>Cancelar</button></div>
   </div>`;
@@ -2429,8 +2559,8 @@ document.addEventListener("click", e => {
     if (nombre.length < 3) return err("Escriba el nombre del servicio.");
     if (!precio) return err("Escriba el precio.");
     if (antes && antes <= precio) return err("El precio de antes debe ser mayor que el actual.");
-    const datos = { nombre, precio: fmtCol(precio), antes: antes ? fmtCol(antes) : "", dur: +v("sv-dur"), corto: v("sv-corto"), texto: v("sv-texto"), incluye: v("sv-incl").split("\n").map(t => t.trim()).filter(Boolean) };
-    if (b.dataset.svGuardar === "nuevo") SERVICIOS.push({ id: "s" + Date.now().toString(36), foto: 7, nuevo: true, ...datos });
+    const datos = { nombre, fotos: [...svFotos], precio: fmtCol(precio), antes: antes ? fmtCol(antes) : "", dur: +v("sv-dur"), corto: v("sv-corto"), texto: v("sv-texto"), incluye: v("sv-incl").split("\n").map(t => t.trim()).filter(Boolean) };
+    if (b.dataset.svGuardar === "nuevo") SERVICIOS.push({ id: "s" + Date.now().toString(36), cat: "Servicios", foto: 7, nuevo: true, ...datos });
     else Object.assign(servDe(b.dataset.svGuardar), datos);
     svEdit = null; guardarServicios(); toast("Guardado. La página ya muestra el cambio."); pintarNicole();
   }
@@ -2438,15 +2568,18 @@ document.addEventListener("click", e => {
 
 // ================== TARJETA DE SELLOS ==================
 // Versión de demostración: las clientas y sus sellos se guardan en este navegador.
-const META_SELLOS = 8;
-const PREMIO = "Retoque de pestañas gratis";
-const Sellos = (() => {
-  const K = "est_sellos_v1", KS = "est_sellos_sesion";
+const META_SELLOS = 10, MEDIO_SELLOS = 5;
+const PREMIO5 = "₡2.000 de descuento";
+const PREMIO10 = "Descuento especial en su servicio"; // porcentaje por confirmar
+const premio5Listo = c => c.sellos >= MEDIO_SELLOS && !c.p5;
+const premio10Listo = c => c.sellos >= META_SELLOS;
+const SellosDemo = (() => {
+  const K = "cs_sellos_v1", KS = "cs_sellos_sesion";
   const ahora = Date.now(), d = n => ahora - n * 864e5;
   const PRUEBA = [
     { tel:"88111111", nombre:"María Fernández", clave:"1234", sellos:3, canjes:0, hist:[d(40), d(26), d(9)] },
-    { tel:"88222222", nombre:"Daniela Rojas",   clave:"1234", sellos:7, canjes:0, hist:[d(120), d(100), d(80), d(60), d(42), d(21), d(4)] },
-    { tel:"88333333", nombre:"Sofía Vargas",    clave:"1234", sellos:8, canjes:1, hist:[d(200), d(180), d(150), d(120), d(90), d(60), d(30), d(2)] },
+    { tel:"88222222", nombre:"Daniela Rojas",   clave:"1234", sellos:7, canjes:1, p5:true, hist:[d(120), d(100), d(80), d(60), d(42), d(21), d(4)] },
+    { tel:"88333333", nombre:"Sofía Vargas",    clave:"1234", sellos:5, canjes:1, hist:[d(150), d(120), d(90), d(60), d(2)] },
     { tel:"88444444", nombre:"Andrea Mora",     clave:"1234", sellos:0, canjes:0, hist:[] }
   ];
   let mem = null;
@@ -2466,23 +2599,96 @@ const Sellos = (() => {
       const c = { tel, nombre: String(nombre).trim(), clave: String(clave), sellos:0, canjes:0, hist:[], creada: Date.now() };
       leer().push(c); guardar(); if (entrar) { sesion = tel; try { localStorage.setItem(KS, tel); } catch {} } return c;
     },
-    sumar(tel, n){ const c = this.de(tel); if (!c) return; if (n > 0 && c.sellos < META_SELLOS) { c.sellos++; c.hist.push(Date.now()); } if (n < 0 && c.sellos > 0) { c.sellos--; c.hist.pop(); } guardar(); return c; },
-    canjear(tel){ const c = this.de(tel); if (!c || c.sellos < META_SELLOS) return; c.sellos = 0; c.canjes++; c.hist = []; guardar(); return c; },
+    sumar(tel, n){ const c = this.de(tel); if (!c) return; if (n > 0 && c.sellos < META_SELLOS) { c.sellos++; c.hist.push(Date.now()); } if (n < 0 && c.sellos > 0) { c.sellos--; c.hist.pop(); if (c.sellos < MEDIO_SELLOS) c.p5 = false; } guardar(); return c; },
+    canjear(tel, nivel){ const c = this.de(tel); if (!c) return;
+      if (nivel === 5) { if (!premio5Listo(c)) return; c.p5 = true; }
+      else { if (c.sellos < META_SELLOS) return; c.sellos = 0; c.hist = []; c.p5 = false; }
+      c.canjes++; guardar(); return c; },
     borrar(tel){ mem = leer().filter(c => c.tel !== limpio(tel)); guardar(); }
   };
 })();
+// Versión real: las tarjetas se guardan en Firebase (colección "clientas").
+// El documento de cada clienta se llama con una huella de su celular + contraseña,
+// así nadie puede ver una tarjeta ajena sin saber la contraseña.
+const SellosFB = (() => {
+  const KS = "cs_sellos_sesion";
+  let F = null, db = null, lista = [], yo = null, quitar = null, sesion = null;
+  try { sesion = localStorage.getItem(KS); } catch {}
+  const limpio = t => String(t || "").replace(/\D/g, "").slice(-8);
+  const huella = async (tel, clave) => { const b = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(limpio(tel) + ":" + String(clave) + ":calixto")); return [...new Uint8Array(b)].map(x => x.toString(16).padStart(2, "0")).join(""); };
+  const norm = (id, v) => ({ id, tel: v.tel, nombre: v.nombre, sellos: v.sellos || 0, p5: !!v.p5, canjes: v.canjes || 0, hist: (v.hist || []).slice() });
+  const recordar = id => { sesion = id; try { id ? localStorage.setItem(KS, id) : localStorage.removeItem(KS); } catch {} };
+  const listo = () => { if (!F) throw new Error("cargando"); };
+  const repintar = () => { if (pila.includes("p-sellos")) pintarSellos(); if (pila.includes("p-nicole")) pintarNicole(); };
+  return {
+    conectar(f, d){ F = f; db = d; if (sesion) this.refrescar(); },
+    async refrescar(){
+      try { const s = await F.getDoc(F.doc(db, "clientas", sesion)); yo = s.exists() ? norm(s.id, s.data()) : null; if (!yo) recordar(null); repintar(); }
+      catch (e) { console.warn("tarjeta", e); }
+    },
+    admin(on){
+      if (quitar) { quitar(); quitar = null; lista = []; }
+      if (on && F) quitar = F.onSnapshot(F.collection(db, "clientas"), snap => { lista = snap.docs.map(d => norm(d.id, d.data())); repintar(); }, e => console.warn("clientas", e));
+    },
+    todas: () => lista,
+    de: tel => lista.find(c => c.tel === limpio(tel)) || (yo && yo.tel === limpio(tel) ? yo : null),
+    yo: () => yo,
+    async entrar(tel, clave){
+      listo(); if (limpio(tel).length !== 8) throw new Error("tel");
+      const id = await huella(tel, clave), s = await F.getDoc(F.doc(db, "clientas", id));
+      if (!s.exists()) throw new Error("datos");
+      yo = norm(id, s.data()); recordar(id); return yo;
+    },
+    salir(){ yo = null; recordar(null); },
+    async crear(nombre, tel, clave, entrar = true){
+      listo(); tel = limpio(tel); if (tel.length !== 8) throw new Error("tel");
+      const id = await huella(tel, clave), c = { tel, nombre: String(nombre).trim().slice(0, 50), sellos: 0, p5: false, canjes: 0, hist: [] };
+      const b = F.writeBatch(db);
+      b.set(F.doc(db, "clientas", id), { ...c, creada: F.serverTimestamp() });
+      b.set(F.doc(db, "telefonos", tel), { id });
+      try { await b.commit(); } catch (e) { if (e.code === "permission-denied") throw new Error("existe"); throw e; }
+      const n = { id, ...c }; if (entrar) { yo = n; recordar(id); } return n;
+    },
+    async cambio(c, f){
+      const x = { ...c, hist: c.hist.slice() }; f(x);
+      await F.updateDoc(F.doc(db, "clientas", c.id), { sellos: x.sellos, p5: x.p5, canjes: x.canjes, hist: x.hist });
+      Object.assign(c, x); return c;
+    },
+    async sumar(tel, n){ const c = this.de(tel); if (!c) return;
+      return this.cambio(c, x => { if (n > 0 && x.sellos < META_SELLOS) { x.sellos++; x.hist.push(Date.now()); } if (n < 0 && x.sellos > 0) { x.sellos--; x.hist.pop(); if (x.sellos < MEDIO_SELLOS) x.p5 = false; } }); },
+    async canjear(tel, nivel){ const c = this.de(tel); if (!c) return;
+      if (nivel === 5 ? !premio5Listo(c) : c.sellos < META_SELLOS) return;
+      return this.cambio(c, x => { if (nivel === 5) x.p5 = true; else { x.sellos = 0; x.hist = []; x.p5 = false; } x.canjes++; }); },
+    async nuevaClave(tel, clave){
+      const c = this.de(tel); if (!c) return; const id = await huella(c.tel, clave); if (id === c.id) return c;
+      const b = F.writeBatch(db);
+      b.set(F.doc(db, "clientas", id), { tel: c.tel, nombre: c.nombre, sellos: c.sellos, p5: c.p5, canjes: c.canjes, hist: c.hist, creada: F.serverTimestamp() });
+      b.set(F.doc(db, "telefonos", c.tel), { id });
+      b.delete(F.doc(db, "clientas", c.id));
+      await b.commit(); return c;
+    }
+  };
+})();
+const Sellos = FIREBASE ? SellosFB : SellosDemo;
 const telFmt = t => String(t).replace(/(\d{4})(\d{4})/, "$1 $2");
 const fechaHist = ms => { const f = new Date(ms - 6 * 3600e3); return `${f.getUTCDate()} ${MES_C[f.getUTCMonth()]} ${f.getUTCFullYear()}`; };
 const MARIPOSA = '<svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M16 9v16"/><path d="M16 14c-2-6-8-9-11-7s-1 9 5 9c-4 1-6 5-3 7s6-2 9-7"/><path d="M16 14c2-6 8-9 11-7s1 9-5 9c4 1 6 5 3 7s-6-2-9-7"/><path d="M15 8.5 13 5M17 8.5 19 5"/></svg>';
 function tarjetaHTML(c){
-  const n = c.sellos, falta = META_SELLOS - n;
+  const n = c.sellos, p5 = premio5Listo(c), p10 = premio10Listo(c);
+  const casilla = i => { const k = i + 1, pr = k === MEDIO_SELLOS || k === META_SELLOS;
+    return `<span class="ts${i < n ? " on" : ""}${pr ? " premio" : ""}">${i < n ? MARIPOSA : pr ? `<em>${k === MEDIO_SELLOS ? "₡2.000" : "Premio"}</em>` : `<em>${k}</em>`}</span>`; };
+  let msg;
+  if (p10) msg = `<div class="tsel-msg listo"><b>¡Completó su tarjeta!</b><span>${PREMIO10}${p5 ? ` y además sus ${PREMIO5.toLowerCase()} pendientes` : ""}. Muestre esta tarjeta en su próxima cita.</span></div>`;
+  else if (p5) msg = `<div class="tsel-msg listo"><b>Premio disponible: ${PREMIO5}</b><span>Úselo en su próxima cita. Al llegar a ${META_SELLOS} sellos: ${PREMIO10.toLowerCase()}.</span></div>`;
+  else { const meta = n < MEDIO_SELLOS ? MEDIO_SELLOS : META_SELLOS, falta = meta - n, prem = meta === MEDIO_SELLOS ? PREMIO5 : PREMIO10;
+    msg = `<div class="tsel-msg"><b>Le ${falta === 1 ? "falta 1 sello" : `faltan ${falta} sellos`}</b><span>Al llegar a ${meta}: ${prem.toLowerCase()}. Recibe un sello por cada cita atendida.</span></div>`; }
   return `<div class="tsel">
-    <div class="tsel-top"><img src="img/logo.png" alt=""><div><small>Tarjeta de fidelidad</small><b>${esc(c.nombre)}</b></div></div>
-    <div class="tsel-g">${Array.from({ length: META_SELLOS }, (_, i) => `<span class="ts${i < n ? " on" : ""}${i === META_SELLOS - 1 ? " premio" : ""}">${i < n ? MARIPOSA : i === META_SELLOS - 1 ? "<em>Premio</em>" : `<em>${i + 1}</em>`}</span>`).join("")}</div>
+    <div class="tsel-top"><img src="img/logo.png" alt=""><div><small>Cliente frecuente</small><b>${esc(c.nombre)}</b></div></div>
+    <div class="tsel-g">${Array.from({ length: META_SELLOS }, (_, i) => casilla(i)).join("")}</div>
     <div class="tsel-pie"><span>${n} de ${META_SELLOS} sellos</span><span>${telFmt(c.tel)}</span></div>
   </div>
-  <div class="tsel-msg${falta === 0 ? " listo" : ""}">${falta === 0 ? `<b>Premio disponible</b><span>${PREMIO}. Muestra esta tarjeta en tu próxima cita.</span>`
-    : `<b>Te ${falta === 1 ? "falta 1 sello" : `faltan ${falta} sellos`}</b><span>Al completar los ${META_SELLOS}: ${PREMIO.toLowerCase()}. Recibes un sello por cada cita atendida.</span>`}</div>`;
+  <div class="tsel-niveles"><div class="${n >= MEDIO_SELLOS ? "ok" : ""}"><b>5 sellos</b><span>${PREMIO5}${c.p5 ? " · canjeado" : ""}</span></div><div class="${p10 ? "ok" : ""}"><b>10 sellos</b><span>${PREMIO10}</span></div></div>
+  ${msg}`;
 }
 let selModo = "entrar";
 function pintarSellos(){
@@ -2495,7 +2701,7 @@ function pintarSellos(){
     return;
   }
   const crear = selModo === "crear";
-  box.innerHTML = `<div class="sel-intro"><div class="sel-ic">${MARIPOSA}</div><h2>Tarjeta de sellos</h2><p>Por cada cita recibes un sello. Al completar ${META_SELLOS}: <b>${PREMIO.toLowerCase()}</b>.</p></div>
+  box.innerHTML = `<div class="sel-intro"><div class="sel-ic">${MARIPOSA}</div><h2>Cliente frecuente</h2><p>Por cada cita recibe un sello. A los ${MEDIO_SELLOS}: <b>${PREMIO5.toLowerCase()}</b>. A los ${META_SELLOS}: <b>${PREMIO10.toLowerCase()}</b>.</p></div>
     <div class="seg2" style="margin:18px 0 14px"><button class="chip${!crear ? " si" : ""}" data-sel-modo="entrar">Ya tengo cuenta</button><button class="chip${crear ? " si" : ""}" data-sel-modo="crear">Crear cuenta</button></div>
     <form id="sel-form" novalidate>
       ${crear ? `<div class="campo"><label for="sel-nom">Nombre completo</label><input id="sel-nom" maxlength="50" autocomplete="name" placeholder="Tu nombre"></div>` : ""}
@@ -2504,7 +2710,7 @@ function pintarSellos(){
       <p class="error" id="sel-err"></p>
       <button class="btn btn-oro" style="width:100%;padding:16px" type="submit">${crear ? "Crear mi tarjeta" : "Ver mi tarjeta"}</button>
     </form>
-    ${!crear ? `<p class="prueba" style="margin-top:14px">Demostración: entra con <b>8811 1111</b> y la contraseña <b>1234</b>.</p>` : ""}`;
+    ${!crear && !FIREBASE ? `<p class="prueba" style="margin-top:14px">Demostración: entra con <b>8811 1111</b> y la contraseña <b>1234</b>.</p>` : ""}`;
 }
 $("#sellos").addEventListener("click", e => {
   const b = e.target.closest("button"); if (!b) return;
@@ -2512,7 +2718,7 @@ $("#sellos").addEventListener("click", e => {
   if (b.id === "sel-agendar") { ag = { serv:"", dur:60, semana:0, fecha:null, ini:null, hecho:null, paso:1, lugar:"estudio", ...datosSesion() }; abrir("p-agenda"); $("#p-agenda .cuerpo").scrollTop = 0; return; }
   if (b.id === "sel-salir") { Sellos.salir(); selModo = "entrar"; pintarSellos(); toast("Sesión cerrada"); }
 });
-$("#sellos").addEventListener("submit", e => {
+$("#sellos").addEventListener("submit", async e => {
   e.preventDefault();
   const err = t => $("#sel-err").textContent = t;
   const tel = $("#sel-tel").value, clave = $("#sel-clave").value;
@@ -2521,11 +2727,11 @@ $("#sellos").addEventListener("submit", e => {
       const nom = $("#sel-nom").value.trim();
       if (nom.length < 3) return err("Escribe tu nombre completo.");
       if (String(clave).length < 4) return err("La contraseña debe tener al menos 4 caracteres.");
-      Sellos.crear(nom, tel, clave); toast("Tu tarjeta de sellos está lista");
-    } else Sellos.entrar(tel, clave);
+      err("Un momento…"); await Sellos.crear(nom, tel, clave); toast("Tu tarjeta de sellos está lista");
+    } else { err("Un momento…"); await Sellos.entrar(tel, clave); }
     pintarSellos();
   } catch (ex) {
-    err(ex.message === "tel" ? "Escribe un celular de 8 dígitos." : ex.message === "existe" ? "Ese celular ya tiene cuenta. Entra con tu contraseña." : "Celular o contraseña incorrectos.");
+    err(ex.message === "tel" ? "Escribe un celular de 8 dígitos." : ex.message === "existe" ? "Ese celular ya tiene cuenta. Entra con tu contraseña." : ex.message === "datos" ? "Celular o contraseña incorrectos." : "No hay conexión. Intenta de nuevo en un momento.");
   }
 });
 // ----- Panel de administración: sellos -----
@@ -2534,29 +2740,34 @@ function pintarSellosAdmin(){
   const q = selBusca.toLowerCase().replace(/\s/g, "");
   const l = Sellos.todas().filter(c => !q || c.nombre.toLowerCase().replace(/\s/g, "").includes(q) || c.tel.includes(q))
     .sort((a, b) => b.sellos - a.sellos || a.nombre.localeCompare(b.nombre, "es"));
-  const listas = Sellos.todas().filter(c => c.sellos >= META_SELLOS).length;
-  return `<div class="sa-res"><div><b>${Sellos.todas().length}</b><small>Clientas</small></div><div><b>${listas}</b><small>Con premio</small></div><div><b>${META_SELLOS}</b><small>Sellos por premio</small></div></div>
+  const listas = Sellos.todas().filter(c => premio5Listo(c) || premio10Listo(c)).length;
+  return `<div class="sa-res"><div><b>${Sellos.todas().length}</b><small>Clientas</small></div><div><b>${listas}</b><small>Con premio</small></div><div><b>5 / 10</b><small>Sellos por premio</small></div></div>
     <div class="sa-bar"><input id="sa-buscar" type="search" placeholder="Buscar por nombre o celular" value="${esc(selBusca)}"><button class="chip${selNueva ? " si" : ""}" data-sa-nueva>${selNueva ? "Cancelar" : "+ Nueva"}</button></div>
     ${selNueva ? `<div class="sa-nueva"><div class="campo"><label>Nombre</label><input id="sa-nom" maxlength="50"></div><div class="campo"><label>Celular</label><input id="sa-tel" inputmode="tel" maxlength="12"></div><div class="campo"><label>Contraseña temporal</label><input id="sa-clave" value="1234" maxlength="30"></div><p class="error" id="sa-err"></p><button class="btn btn-oro" style="width:100%" data-sa-crear>Crear clienta</button></div>` : ""}
-    ${l.length ? l.map(c => `<div class="sa-it${c.sellos >= META_SELLOS ? " premio" : ""}">
+    ${l.length ? l.map(c => `<div class="sa-it${premio5Listo(c) || premio10Listo(c) ? " premio" : ""}">
       <div class="sa-h"><div><b>${esc(c.nombre)}</b><span>${telFmt(c.tel)}${c.canjes ? ` · ${c.canjes} premio${c.canjes === 1 ? "" : "s"} canjeado${c.canjes === 1 ? "" : "s"}` : ""}</span></div><em>${c.sellos}/${META_SELLOS}</em></div>
-      <div class="sa-p">${Array.from({ length: META_SELLOS }, (_, i) => `<i class="${i < c.sellos ? "on" : ""}"></i>`).join("")}</div>
-      <div class="sa-acc">${c.sellos >= META_SELLOS ? `<button class="btn btn-oro" data-sa-canje="${c.tel}">Canjear premio</button>` : `<button class="btn btn-oro" data-sa-mas="${c.tel}">Poner sello</button>`}<button class="btn btn-linea" data-sa-menos="${c.tel}" ${c.sellos ? "" : "disabled"}>Quitar sello</button><a class="btn btn-linea" href="https://wa.me/506${c.tel}" target="_blank" rel="noopener">WhatsApp</a></div>
+      <div class="sa-p">${Array.from({ length: META_SELLOS }, (_, i) => `<i class="${i < c.sellos ? "on" : ""}${i === MEDIO_SELLOS - 1 || i === META_SELLOS - 1 ? " hito" : ""}"></i>`).join("")}</div>${premio5Listo(c) || premio10Listo(c) ? `<p class="sa-pend">Premio pendiente: ${[premio5Listo(c) && PREMIO5, premio10Listo(c) && PREMIO10].filter(Boolean).join(" + ")}</p>` : ""}
+      ${premio5Listo(c) ? `<button class="btn btn-oro sa-canje" data-sa-canje="${c.tel}" data-nivel="5">Canjear ₡2.000 de descuento</button>` : ""}${premio10Listo(c) ? `<button class="btn btn-oro sa-canje" data-sa-canje="${c.tel}" data-nivel="10">Canjear premio de 10 sellos</button>` : ""}<div class="sa-acc"><button class="btn btn-oro" data-sa-mas="${c.tel}" ${c.sellos >= META_SELLOS ? "disabled" : ""}>Poner sello</button><button class="btn btn-linea" data-sa-menos="${c.tel}" ${c.sellos ? "" : "disabled"}>Quitar sello</button><a class="btn btn-linea" href="https://wa.me/506${c.tel}" target="_blank" rel="noopener">WhatsApp</a>${FIREBASE ? `<button class="btn btn-linea" data-sa-clave="${c.tel}">Nueva contraseña</button>` : ""}</div>
     </div>`).join("") : `<div class="vacio">No hay clientas con ese nombre o número.</div>`}
-    <p class="prueba">Usuarias de prueba: 8811 1111, 8822 2222, 8833 3333 y 8844 4444, todas con contraseña 1234.</p>`;
+    ${FIREBASE ? "" : `<p class="prueba">Usuarias de prueba: 8811 1111, 8822 2222, 8833 3333 y 8844 4444, todas con contraseña 1234.</p>`}`;
 }
-document.addEventListener("click", e => {
-  const b = e.target.closest("#nicole [data-sa-nueva], #nicole [data-sa-crear], #nicole [data-sa-mas], #nicole [data-sa-menos], #nicole [data-sa-canje]"); if (!b) return;
+document.addEventListener("click", async e => {
+  const b = e.target.closest("#nicole [data-sa-nueva], #nicole [data-sa-crear], #nicole [data-sa-mas], #nicole [data-sa-menos], #nicole [data-sa-canje], #nicole [data-sa-clave]"); if (!b) return;
+  if (b.disabled) return; b.disabled = true;
+  try {
   if (b.hasAttribute("data-sa-nueva")) { selNueva = !selNueva; return pintarNicole(); }
   if (b.hasAttribute("data-sa-crear")) {
     try { const nom = $("#sa-nom").value.trim(); if (nom.length < 3) throw new Error("nom");
-      const c = Sellos.crear(nom, $("#sa-tel").value, $("#sa-clave").value || "1234", false); selNueva = false; toast(`Cuenta creada para ${c.nombre}`); pintarNicole(); }
+      const c = await Sellos.crear(nom, $("#sa-tel").value, $("#sa-clave").value || "1234", false); selNueva = false; toast(`Cuenta creada para ${c.nombre}`); pintarNicole(); }
     catch (ex) { $("#sa-err").textContent = ex.message === "nom" ? "Escribe el nombre." : ex.message === "tel" ? "Celular de 8 dígitos." : ex.message === "existe" ? "Ese celular ya tiene cuenta." : "No se pudo crear."; }
     return;
   }
-  if (b.dataset.saMas) { const c = Sellos.sumar(b.dataset.saMas, 1); toast(c.sellos >= META_SELLOS ? `${c.nombre} completó su tarjeta` : `Sello puesto a ${c.nombre} (${c.sellos}/${META_SELLOS})`); }
-  if (b.dataset.saMenos) { const c = Sellos.sumar(b.dataset.saMenos, -1); toast(`Sello quitado (${c.sellos}/${META_SELLOS})`); }
-  if (b.dataset.saCanje) { const c = Sellos.canjear(b.dataset.saCanje); toast(`Premio canjeado. La tarjeta de ${c.nombre} empieza de nuevo.`); }
+  if (b.dataset.saMas) { const c = await Sellos.sumar(b.dataset.saMas, 1); toast(c.sellos === META_SELLOS ? `${c.nombre} completó su tarjeta: ${PREMIO10.toLowerCase()}` : c.sellos === MEDIO_SELLOS ? `${c.nombre} llegó a 5 sellos: ${PREMIO5}` : `Sello puesto a ${c.nombre} (${c.sellos}/${META_SELLOS})`); }
+  if (b.dataset.saMenos) { const c = await Sellos.sumar(b.dataset.saMenos, -1); toast(`Sello quitado (${c.sellos}/${META_SELLOS})`); }
+  if (b.dataset.saCanje) { const niv = +b.dataset.nivel, c = await Sellos.canjear(b.dataset.saCanje, niv); if (c) toast(niv === 5 ? `${PREMIO5} canjeados para ${c.nombre}` : `Premio de 10 canjeado. La tarjeta de ${c.nombre} empieza de nuevo.`); }
+  if (b.dataset.saClave) { const nueva = prompt("Nueva contraseña para esta clienta (mínimo 4 caracteres):", ""); if (nueva && nueva.length >= 4) { await Sellos.nuevaClave(b.dataset.saClave, nueva); toast("Contraseña cambiada. Désela a la clienta."); } }
+  } catch (ex) { console.warn(ex); toast("No se pudo guardar. Revise la conexión."); }
+  finally { b.disabled = false; }
   pintarNicole(); if (pila.includes("p-sellos")) pintarSellos();
 });
 document.addEventListener("input", e => { if (e.target.id === "sa-buscar") { selBusca = e.target.value; const pos = e.target.selectionStart; pintarNicole(); const i = $("#sa-buscar"); if (i) { i.focus(); i.setSelectionRange(pos, pos); } } });
@@ -2598,7 +2809,7 @@ function miniVideo(x){
 let itemsGal = [];
 function pintarGaleria(){
   const l = Reservas.galeria();
-  itemsGal = l && l.length ? l : FOTOS.map(f => ({ tipo:"foto", data:f }));
+  itemsGal = l && l.length ? l : TRABAJOS.map(f => ({ tipo:"foto", data:f }));
   $("#gal").innerHTML = itemsGal.map((x, i) => x.tipo === "foto"
     ? `<button data-i="${i}" class="${i === 0 ? "ancha" : ""}" aria-label="Ver foto ${i + 1}"><img src="${x.data}" alt="" loading="lazy"></button>`
     : `<button data-i="${i}" class="vid${i === 0 ? " ancha" : ""}" aria-label="Ver video ${esc(x.titulo || "")}">${miniVideo(x)}</button>`).join("");
@@ -2683,7 +2894,7 @@ if ("serviceWorker" in navigator && location.protocol === "https:") navigator.se
 (() => {
   const instalada = matchMedia("(display-mode: standalone)").matches || navigator.standalone;
   if (instalada) return;
-  const KEY = "est_instalar_oculto";
+  const KEY = "cs_instalar_oculto";
   let oculto = 0; try { oculto = +localStorage.getItem(KEY) || 0; } catch {}
   if (Date.now() - oculto < 3 * 864e5) return;   // si la cerró, no molestar por 3 días
   const ios = /iPhone|iPad|iPod/i.test(navigator.userAgent) && !/CriOS|FxiOS/i.test(navigator.userAgent);
@@ -2808,6 +3019,21 @@ window.__dbg = { get ag(){ return ag; }, get pila(){ return pila; }, pintarAgend
   if ("IntersectionObserver" in window) new IntersectionObserver(([e]) => on = e.isIntersecting).observe(cv);
   paso();
 })();
+
+// ===== Fotos de cada servicio (subir / quitar desde el panel, ver en el detalle) =====
+function pintarSvFotos(){ const c = $("#sv-fotos"); if (!c) return; c.querySelectorAll(":scope > div").forEach(d => d.remove());
+  c.insertAdjacentHTML("afterbegin", svFotos.map((f, i) => `<div><img src="${f}" alt=""><button data-sv-quitarfoto="${i}" aria-label="Quitar foto">×</button></div>`).join("")); }
+document.addEventListener("change", async e => {
+  if (e.target.id !== "sv-subir") return;
+  const fs = [...e.target.files].slice(0, 12); if (!fs.length) return; toast("Subiendo fotos…");
+  for (const f of fs) { try { svFotos.push(await reducir(f, 900, 0.72)); } catch {} }
+  e.target.value = ""; pintarSvFotos(); toast("Fotos listas. Toque Guardar para que se vean en la página.");
+});
+document.addEventListener("click", e => {
+  const q = e.target.closest("[data-sv-quitarfoto]"); if (q) { svFotos.splice(+q.dataset.svQuitarfoto, 1); pintarSvFotos(); return; }
+  const t = e.target.closest("[data-trfoto]"); if (t) { const [id, i] = t.dataset.trfoto.split(":"); const s = servDe(id); if (!s) return;
+    $("#lb-vid").hidden = true; $("#lb-vid").innerHTML = ""; $("#lb img").hidden = false; $("#lb img").src = s.fotos[+i]; $("#lb").classList.add("on"); }
+});
 </script>
 </body>
 </html>
