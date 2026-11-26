@@ -873,6 +873,112 @@ html{overflow-x:hidden}
 .sv-fotos>div button{position:absolute;top:4px;right:4px;width:24px;height:24px;border-radius:50%;border:0;background:rgba(0,0,0,.65);color:#fff;font-size:16px;line-height:1;cursor:pointer}
 .sv-subir{aspect-ratio:1;border:2px dashed var(--oro2);border-radius:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:26px;color:var(--oro3);cursor:pointer;text-align:center}
 .sv-subir span{font-size:11px;font-weight:600}
+.ts.premio em{font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--oro3)}
+.ts.on{border:0;background:linear-gradient(145deg,#c9a24a,#9c7a2e);color:#fff;box-shadow:0 6px 14px -6px rgba(156,122,46,.8)}
+.ts svg{width:62%;height:62%}
+.tsel-pie{display:flex;justify-content:space-between;margin-top:14px;font-size:12.5px;letter-spacing:.06em;color:#6b6358}
+.tsel-msg{margin-top:14px;border-radius:16px;padding:14px 16px;background:#fff;border:1px solid #e8dfc9;display:grid;gap:2px}
+.tsel-msg b{font-family:var(--serif);font-size:20px;font-weight:600}
+.tsel-msg span{font-size:14.5px;color:#4a4337}
+.tsel-msg.listo{background:linear-gradient(145deg,#c9a24a,#9c7a2e);border:0;color:#fff}.tsel-msg.listo span{color:#f7ecd2}
+.tsel-hist{margin-top:16px;background:#fff;border:1px solid #e8dfc9;border-radius:16px;padding:12px 16px}
+.tsel-hist h4{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#8a7d66;font-weight:500;margin-bottom:4px}
+.tsel-hist div{display:flex;justify-content:space-between;padding:7px 0;border-top:1px solid #f3ecda;font-size:14.5px}
+.tsel-hist div:first-of-type{border-top:0}
+.sel-intro{text-align:center;margin-top:6px}
+.sel-ic{width:64px;height:64px;margin:0 auto 10px;border-radius:50%;display:grid;place-items:center;background:#fdf0f4;color:var(--oro3);box-shadow:inset 0 0 0 1px rgba(201,162,74,.4)}
+.sel-ic svg{width:34px;height:34px}
+.sel-intro h2{font-family:var(--serif);font-size:30px;font-weight:600}
+.sel-intro p{color:#4a4337;margin-top:4px}
+.fid{background:radial-gradient(70% 70% at 80% 30%,rgba(201,162,74,.25),transparent 70%),var(--negro2);color:var(--marfil)}
+.fid-in{display:grid;gap:30px;align-items:center}
+@media (min-width:800px){.fid-in{grid-template-columns:1fr 1fr}}
+.fid-txt .sobre{display:block;font-size:12px;letter-spacing:.32em;text-transform:uppercase;color:var(--oro2);margin-bottom:8px}
+.fid-txt h2{font-family:var(--serif);font-weight:500;font-size:clamp(34px,8vw,48px);line-height:1.05;margin-bottom:12px}
+.fid-txt p{color:#d9cfb9;margin-bottom:22px;max-width:420px}
+.fid-txt b{color:var(--oro2);font-weight:500}
+.tsel-deco{max-width:400px;margin:0 auto;transform:rotate(-2deg)}
+/* panel: sellos */
+.sa-res{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:12px}
+.sa-res div{background:#fff;border:1px solid #e8dfc9;border-radius:14px;padding:10px;text-align:center;display:grid}
+.sa-res b{font-family:var(--serif);font-size:26px;color:var(--oro3);line-height:1}
+.sa-res small{font-size:11.5px;color:#6b6358}
+.sa-bar{display:flex;gap:8px;margin-bottom:12px}
+.sa-bar .chip{white-space:nowrap}.sa-bar input{flex:1;min-width:0;border:1px solid #e8dfc9;border-radius:999px;padding:10px 16px;font:400 15px var(--sans);background:#fff;color:var(--tinta)}
+.sa-nueva{background:#fff;border:1px solid #e8dfc9;border-radius:16px;padding:14px;margin-bottom:12px}
+.sa-it{background:#fff;border:1px solid #e8dfc9;border-radius:16px;padding:14px;margin-bottom:10px}
+.sa-it.premio{border-color:var(--oro);box-shadow:0 0 0 1px var(--oro)}
+.sa-h{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+.sa-h>div{display:grid}.sa-h b{font-size:16px;font-weight:500}.sa-h span{font-size:13px;color:#6b6358}
+.sa-h em{font-style:normal;font-family:var(--serif);font-size:22px;font-weight:600;color:var(--oro3)}
+.sa-p{display:grid;grid-template-columns:repeat(10,1fr);gap:4px;margin:10px 0 12px}
+.sa-p i{height:7px;border-radius:4px;background:#f3ede1}.sa-p i.on{background:linear-gradient(90deg,#c9a24a,#9c7a2e)}
+.sa-acc{display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:6px}
+.sa-acc .btn{padding:10px 6px;font-size:12px;color:var(--tinta);border-color:#e8dfc9}
+.sa-acc .btn-oro{color:var(--tinta)}
+.sa-acc .btn:disabled{opacity:.4}
+
+.sv-it{background:#fff;border:1px solid #e8dfc9;border-radius:16px;padding:14px;margin-bottom:10px}
+.sv-it.oculto{opacity:.6;border-style:dashed}
+.sv-h{display:flex;justify-content:space-between;gap:10px;align-items:flex-start;margin-bottom:10px}
+.sv-h>div{display:grid}.sv-h b{font-size:16px;font-weight:500}.sv-h span{font-size:13px;color:#6b6358}
+.sv-h em{font-style:normal;font-family:var(--serif);font-size:20px;font-weight:600;color:var(--oro3);white-space:nowrap}
+.sv-acc{display:flex;gap:6px}.sv-acc .btn{flex:1;padding:10px 6px;font-size:12px;color:var(--tinta);border-color:#e8dfc9}
+.sv-acc .rojo{color:#a3443a!important}
+.sv-2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.sv-form select{width:100%;border:1px solid #e8dfc9;border-radius:12px;padding:12px;font:400 16px var(--sans);background:#fff;color:var(--tinta)}
+
+.comp-subir{display:flex;align-items:center;justify-content:center;gap:10px;border:1.5px dashed var(--oro);border-radius:14px;padding:16px;color:var(--oro3);font-weight:500;cursor:pointer;background:#fff}
+.comp-subir svg{width:22px;height:22px}
+.comp-ver{display:flex;gap:12px;align-items:center;background:#fff;border:1px solid rgba(201,162,74,.4);border-radius:14px;padding:10px}
+.comp-ver img{width:56px;height:76px;object-fit:cover;border-radius:8px}
+.comp-ver div{display:grid}.comp-ver b{font-size:15px}
+.comp-cambiar{color:var(--oro3);font-size:13.5px;text-decoration:underline;cursor:pointer}
+.comp-adm{display:flex;gap:12px;align-items:center;width:100%;text-align:left;background:#fff;border:1px solid rgba(201,162,74,.4);border-radius:14px;padding:10px;margin-bottom:10px;cursor:pointer;font:inherit;color:inherit}
+.comp-adm img{width:48px;height:64px;object-fit:cover;border-radius:8px}
+.comp-adm span{display:grid}.comp-adm small{color:#6b6358;font-size:12.5px}
+.comp-ayuda{font-size:13px;color:#6b6358;text-align:center;margin:-2px 0 4px}
+.orden-b{display:flex;gap:8px;margin:2px 0 12px}
+.orden-b input{flex:1;min-width:0;border:1px solid #e8dfc9;border-radius:999px;padding:11px 16px;font:400 15px var(--sans);background:#fff;color:var(--tinta);text-transform:uppercase}
+.orden-b input::placeholder{text-transform:none}
+.orden-b .btn{padding:10px 18px;font-size:12px}
+.ev-orden{display:block;font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--oro3);margin-bottom:2px}
+.comp-falta{display:grid;gap:4px;background:#fdf5f3;border:1px dashed #e3cdb0;border-radius:14px;padding:12px 14px;margin-bottom:10px}
+.comp-falta b{color:#a3443a;font-weight:500}.comp-falta span{font-size:13px;color:#6b6358}
+.comp-falta .btn{margin-top:6px;color:var(--tinta);border-color:#e8dfc9;font-size:12px;padding:10px}
+.ing-rap{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-bottom:10px}
+.ing-rap div{background:linear-gradient(150deg,#221b11,#0d0b08);color:#fdfcfa;border-radius:16px;padding:12px;display:grid;gap:1px;min-width:0}
+.ing-rap small{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--oro2)}
+.ing-rap b{font-family:var(--serif);font-size:clamp(15px,4.6vw,20px);font-weight:600;white-space:nowrap;letter-spacing:-.01em}
+.ing-rap span{font-size:12px;color:#d9cfb9}
+.ing-pdf{width:100%;margin-bottom:14px;gap:8px}.ing-pdf svg{width:18px;height:18px}
+.ing .pos{display:inline-grid;place-items:center;width:22px;height:22px;border-radius:50%;background:#f5f0e4;color:var(--oro3);font-style:normal;font-size:12px;font-weight:600;margin-right:8px}
+.ing .pos.oro{background:var(--oro3);color:#fff}
+.ing-sub{font-size:13px;color:#6b6358;margin:-2px 0 10px}
+.top-c{display:flex;align-items:center;gap:10px;padding:9px 0;border-top:1px solid #f3ecda}.top-c:first-of-type{border-top:0}
+.top-c>div{flex:1;display:grid;min-width:0}.top-c b{font-weight:500}.top-c span{font-size:12.5px;color:#6b6358}
+.top-c strong{font-family:var(--serif);font-size:17px;color:var(--oro3);white-space:nowrap}
+.hist-ir{margin:-2px 0 10px}.hist-ir label{display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:13.5px;color:#6b6358}
+.hist-ir input{border:1px solid #e8dfc9;border-radius:10px;padding:8px 10px;font:400 14px var(--sans);color:var(--tinta);background:#fff}
+.hist-m{display:grid;grid-template-columns:1fr auto;grid-template-areas:"t e" "i i" "s s";gap:3px 10px;width:100%;text-align:left;background:none;border:0;border-top:1px solid #f3ecda;padding:10px 4px;font:inherit;color:inherit;cursor:pointer}
+.hist-m:first-of-type{border-top:0}.hist-m span{grid-area:t;font-weight:500}.hist-m em{grid-area:e;font-style:normal;font-family:var(--serif);font-size:17px;font-weight:600;color:var(--oro3)}
+.hist-m i{grid-area:i;height:7px;background:#f5f0e4;border-radius:9px;overflow:hidden}.hist-m i b{display:block;height:100%;background:linear-gradient(90deg,var(--oro3),var(--oro2));border-radius:9px}
+.hist-m small{grid-area:s;font-size:12px;color:#8a7d66}.hist-m.si{background:#fdf0f4;border-radius:12px}
+.dep-adm .btn-linea{color:var(--tinta);border-color:#e8dfc9}
+
+.mini-cat{grid-column:1/-1;font-family:var(--serif);font-size:22px;font-weight:600;color:var(--oro3);margin:14px 0 2px;letter-spacing:.02em}
+.mini-cat:first-child{margin-top:0}
+.mini-fotos{font-style:normal;font-size:12px;color:var(--oro3);margin-top:2px}
+.tr-tit{font-family:var(--serif);font-size:24px;margin:22px 0 10px}
+.tr-fotos{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:18px}
+.tr-fotos button{border:0;padding:0;border-radius:12px;overflow:hidden;aspect-ratio:1;cursor:pointer;background:#eee}
+.tr-fotos img{width:100%;height:100%;object-fit:cover;display:block}
+.sv-fotos{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.sv-fotos>div{position:relative;aspect-ratio:1;border-radius:10px;overflow:hidden}
+.sv-fotos img{width:100%;height:100%;object-fit:cover}
+.sv-fotos>div button{position:absolute;top:4px;right:4px;width:24px;height:24px;border-radius:50%;border:0;background:rgba(0,0,0,.65);color:#fff;font-size:16px;line-height:1;cursor:pointer}
+.sv-subir{aspect-ratio:1;border:2px dashed var(--oro2);border-radius:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:26px;color:var(--oro3);cursor:pointer;text-align:center}
+.sv-subir span{font-size:11px;font-weight:600}
 /* ===== Versión 7: perfil de reservas en una columna ===== */
 body{background:#f6f1e8;color:var(--tinta)}
 .progreso{display:none}
@@ -962,29 +1068,9 @@ body>footer{border-top-color:#e8dfc9;color:#8a7d66}body>footer .n{color:var(--ti
 .tsel-niveles b{font-family:var(--serif);font-size:18px;font-weight:600;color:var(--oro3)}
 .tsel-niveles span{font-size:13px;color:#4a4337}
 .tsel-niveles .ok{border-color:var(--oro);box-shadow:0 0 0 1px var(--oro)}
-.v7 section{padding:0}
 .v7-ph{display:grid;place-items:center;width:100%;height:100%;background:radial-gradient(70% 60% at 50% 35%,rgba(201,162,74,.35),transparent 70%),linear-gradient(160deg,#2a2218,#0d0b08);color:var(--oro2)}
 .v7-ph svg{width:46%;height:46%;max-width:90px;margin-bottom:30%}
 div.det-foto.v7-ph{aspect-ratio:16/9;border-radius:16px}div.det-foto.v7-ph svg{margin:0;width:70px;height:70px}
-.v8-hero{position:relative;isolation:isolate;overflow:hidden;text-align:center;padding:26px 20px 34px;background:radial-gradient(70% 45% at 50% 42%,rgba(201,162,74,.20),transparent 70%),linear-gradient(180deg,#0d0b08,#17130d 70%,#0d0b08);color:#f3ead7;border-bottom:1px solid rgba(201,162,74,.55)}
-.v8-hero::before{content:"";position:absolute;inset:0;background:url(img/marmol.jpg) center/cover;opacity:.05;z-index:-1}
-.v8-logo{width:78px;height:78px;border-radius:50%;margin:0 auto 26px}
-.v8-foto{position:relative;width:min(270px,68vw);margin:0 auto 26px}
-.v8-foto img{width:100%;aspect-ratio:4/5;object-fit:cover;object-position:50% 25%;border-radius:50% 50% 14px 14px / 40% 40% 14px 14px;box-shadow:0 30px 60px -28px rgba(0,0,0,.9)}
-.v8-foto::after{content:"";position:absolute;inset:-9px;border:1px solid rgba(201,162,74,.75);border-radius:50% 50% 20px 20px / 40% 40% 20px 20px;pointer-events:none}
-.v8-hero h1{font-family:var(--serif);font-weight:500;font-size:40px;line-height:1;letter-spacing:.04em;background:linear-gradient(100deg,var(--oro3),var(--oro2) 45%,var(--oro) 70%,var(--oro3));-webkit-background-clip:text;background-clip:text;color:transparent}
-.v8-sub{margin-top:10px;font-size:11.5px;letter-spacing:.32em;text-transform:uppercase;color:#cfc2a6}
-.v8-linea{display:flex;align-items:center;justify-content:center;gap:12px;margin:16px auto 12px;color:var(--oro)}
-.v8-linea i{width:54px;height:1px;background:linear-gradient(90deg,transparent,var(--oro))}.v8-linea i:last-child{transform:scaleX(-1)}
-.v8-linea svg{width:22px;height:22px}
-.v8-est{font-size:13.5px;color:#d9cdb3;letter-spacing:.04em}.v8-est span{color:var(--oro);letter-spacing:2px}.v8-est b{color:#fff;font-weight:500}
-.v8-est a{text-decoration:underline;text-underline-offset:3px;color:#d9cdb3}
-.v8-info{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding-top:20px}
-.v8-datos{display:grid;gap:2px;min-width:0}
-.v8-info .v7-ubi{margin:0}.v8-info .estado{margin-top:6px;justify-self:start}
-.v8-info .v7-redes{grid-column:auto}
-.v8-info .v7-redes a{width:40px;height:40px}.v8-info .v7-redes svg{width:19px;height:19px}
-@media (min-width:700px){.v8-hero{padding:34px 20px 42px}.v8-logo{width:90px;height:90px}.v8-foto{width:300px}.v8-hero h1{font-size:50px}}
 </style>
 </head>
 <body>
@@ -1005,100 +1091,135 @@ div.det-foto.v7-ph{aspect-ratio:16/9;border-radius:16px}div.det-foto.v7-ph svg{m
 
 
 <div class="progreso" id="progreso" aria-hidden="true"></div>
-<main class="v7">
-  <header class="v8-hero">
-    <img class="v8-logo" src="img/logo.png" alt="Calixto Studio">
-    <div class="v8-foto"><img src="img/foto.jpg" alt="Foto de la artista de Calixto Studio"></div>
-    <h1>Calixto Studio</h1>
-    <p class="v8-sub">Lash artist · Pestañas y cejas</p>
-    <div class="v8-linea" aria-hidden="true"><i></i><svg><use href="#loto"/></svg><i></i></div>
-  </header>
-
-  <div class="v7-col">
-    <section class="v8-info">
-      <div class="v8-datos">
-        <p class="v7-ubi"><svg><use href="#pin"/></svg>Moravia, San Vicente · <a data-wa="Hola, ¿me puedes enviar la ubicación del estudio?" href="#">Cómo llegar</a></p>
-        <div class="estado" id="estado"><i></i><span>Solo con cita</span></div>
-      </div>
-      <div class="v7-redes">
-        <a href="https://instagram.com/calixto_studio" target="_blank" rel="noopener" aria-label="Instagram"><svg><use href="#ig"/></svg></a>
-        <a href="https://www.tiktok.com/" target="_blank" rel="noopener" aria-label="TikTok"><svg><use href="#tk"/></svg></a>
-        <a data-wa="Hola, tengo una consulta." href="#" aria-label="WhatsApp"><svg><use href="#wa"/></svg></a>
-      </div>
-    </section>
-
-    <div class="v7-bienv">
-      <p>¡Bienvenida! Gracias por elegir Calixto Studio. Aquí puedes ver los servicios, los precios y agendar tu cita en menos de un minuto. Cada set se diseña según la forma de tus ojos. Te espero ✨</p>
-    </div>
-
-    <details class="v7-pol" id="politicas">
-      <summary><span>Políticas de reserva</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="m6 9 6 6 6-6"/></svg></summary>
-      <div class="v7-pol-in">
-        <div><b>Para reservar</b><p>Se cancelan <b>₡5.000</b> que se descuentan del precio del set. Si no se presenta, <b>no son reembolsables</b>.</p></div>
-        <div><b>Presentarse</b><p>Sin maquillaje en el área de los ojos, para un mejor resultado y mayor duración.</p></div>
-        <div><b>Puntualidad</b><p>Si llega <b>15 minutos tarde</b> la cita se cancela y tendrá que reagendar.</p></div>
-        <div class="pago"><b>Métodos de pago</b>
-          <div class="v7-pago"><span>SINPE Móvil <b>7118 5004</b></span><button class="pago-copiar" data-copiar="71185004" type="button">Copiar</button></div>
-          <div class="v7-pago"><span>En el local <b>Efectivo</b></span></div>
-        </div>
-      </div>
-    </details>
-
-    <h2 class="v7-h">¿Qué desea hacer?</h2>
-    <div class="v7-acc">
-      <button class="v7-card" data-reservar>
-        <span class="v7-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/></svg></span>
-        <span class="v7-ct"><b>Agendar una cita</b><small>Escoja su servicio, día y hora</small></span><i>›</i>
-      </button>
-      <button class="v7-card" data-ir="#servicios">
-        <span class="v7-ic"><svg><use href="#loto"/></svg></span>
-        <span class="v7-ct"><b>Ver servicios y precios</b><small>Pestañas pelo a pelo y cejas</small></span><i>›</i>
-      </button>
-      <button class="v7-card" data-abrir="p-sellos">
-        <span class="v7-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="2.5" y="5" width="19" height="14" rx="2.5"/><circle cx="8" cy="12" r="1.8"/><circle cx="13" cy="12" r="1.8"/><circle cx="18" cy="12" r="1.8"/></svg></span>
-        <span class="v7-ct"><b>Mi tarjeta de cliente frecuente</b><small>Premio a los 5 y a los 10 sellos</small></span><i>›</i>
-      </button>
-      <button class="v7-card" data-abrir="p-galeria">
-        <span class="v7-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="9" cy="9" r="2"/><path d="m21 15-5-5L5 21"/></svg></span>
-        <span class="v7-ct"><b>Ver trabajos anteriores</b><small>Fotos de sets y cejas</small></span><i>›</i>
-      </button>
-    </div>
-
-    <h2 class="v7-h">Servicios</h2>
+<main>
+<nav class="nav" aria-label="Principal">
+  <div class="fila">
+    <button class="menu" data-abrir="cajon" aria-label="Abrir menú"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>Menú</button>
+    <button class="ag" data-reservar>Agendar cita</button>
+    <button data-abrir="p-galeria">Galería</button>
+    <a href="#servicios">Servicios</a>
+    <a href="#horario">Horario</a>
+    <a href="#politicas">Políticas</a>
   </div>
-  <div class="v7-carru" id="carru"></div>
+</nav>
+  <section class="hero" id="inicio">
+    <canvas id="polvo" aria-hidden="true"></canvas>
+    <div class="ondas" aria-hidden="true"><i></i><i></i><i></i></div>
+    <div class="aro"></div><div class="aro b"></div>
+    <div>
+      <img class="hero-logo" src="img/logo.png" alt="Logo de Calixto Studio">
+      <div class="kicker">Calixto Studio</div>
+      <h1><span class="oro-txt">Pestañas y belleza</span><em class="oro-txt">Realza tu mirada</em></h1>
+      <p class="lema">Extensiones de pestañas, cejas y maquillaje profesional. Reserva tu espacio en línea en menos de un minuto.</p>
+      <div class="acciones">
+        <button class="btn btn-oro" data-reservar><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>Agendar cita</button>
+        <a class="btn btn-linea" href="#servicios">Ver servicios</a>
+      </div>
+      <div class="estado" id="estado"><i></i><span>Solo con cita</span></div>
+    </div>
+    <svg class="bajar" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="m6 9 6 6 6-6"/></svg>
+  </section>
+  <div class="cinta2" aria-hidden="true"><div class="cinta2-in" id="cinta2"></div></div>
 
-  <div class="v7-col">
-    <section id="servicios">
-      <h2 class="v7-h">Lista de precios</h2>
-      <div class="mini" id="mini"></div>
-    </section>
+  <section class="claro" id="nosotros">
+    <div class="wrap bienv">
+      <div class="foto revela"><img src="img/foto.jpg" alt="Foto del estudio"></div>
+      <div class="texto revela">
+        <div class="flor"><svg><use href="#loto"/></svg></div>
+        <div class="titulo" style="margin-bottom:18px"><h2>Belleza en cada detalle</h2></div>
+        <p>Cada set de pestañas se diseña según la forma de tus ojos y el estilo que buscas: natural, definido o con todo el volumen.</p>
+        <p>Trabajamos con materiales de calidad, higiene en cada paso y el tiempo que tu mirada merece.</p>
+        <div class="pilares">
+          <div><svg><use href="#brillo"/></svg>Diseño personalizado</div>
+          <div><svg><use href="#brillo"/></svg>Materiales de calidad</div>
+          <div><svg><use href="#brillo"/></svg>Higiene y cuidado</div>
+        </div>
+        <div class="firma">Calixto Studio</div>
+        <span class="cita">Especialista en pestaña pelo a pelo y cejas</span>
+      </div>
+    </div>
+  </section>
 
-    <section id="fidelidad" class="v7-fid">
-      <h2 class="v7-h">Cliente frecuente</h2>
-      <div class="v7-fid-in">
-        <p>Por cada cita atendida recibe un sello.</p>
-        <div class="v7-niv"><span>5</span><div><b>A los 5 sellos</b><small>₡2.000 de descuento</small></div></div>
-        <div class="v7-niv"><span>10</span><div><b>A los 10 sellos</b><small>Un premio mayor: descuento especial</small></div></div>
+  <section class="servicios" id="servicios">
+    <div class="wrap">
+      <div class="titulo revela">
+        <div class="flor"><svg><use href="#loto"/></svg></div>
+        <h2 class="oro-txt">Nuestros servicios</h2>
+        <p>Toca un servicio para ver todo lo que incluye.</p>
+      </div>
+      <div class="mini revela" id="mini"></div>
+    </div>
+  </section>
+
+
+  <section id="fidelidad" class="fid">
+    <div class="wrap fid-in revela">
+      <div class="fid-txt">
+        <span class="sobre">Programa de fidelidad</span>
+        <h2>Tu tarjeta de sellos</h2>
+        <p>Recibe un sello por cada cita. A los <b>5 sellos</b>: ₡2.000 de descuento. A los <b>10 sellos</b>: un descuento especial en tu servicio.</p>
         <button class="btn btn-oro" data-abrir="p-sellos">Ver mi tarjeta</button>
       </div>
-    </section>
+      <div class="fid-demo" aria-hidden="true"><div class="tsel tsel-deco"><div class="tsel-top"><img src="img/logo.png" alt=""><div><small>Tarjeta de fidelidad</small><b>Calixto Studio</b></div></div><div class="tsel-g"><span class="ts on"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M16 9v16"/><path d="M16 14c-2-6-8-9-11-7s-1 9 5 9c-4 1-6 5-3 7s6-2 9-7"/><path d="M16 14c2-6 8-9 11-7s1 9-5 9c4 1 6 5 3 7s-6-2-9-7"/></svg></span><span class="ts on"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M16 9v16"/><path d="M16 14c-2-6-8-9-11-7s-1 9 5 9c-4 1-6 5-3 7s6-2 9-7"/><path d="M16 14c2-6 8-9 11-7s1 9-5 9c4 1 6 5 3 7s-6-2-9-7"/></svg></span><span class="ts on"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M16 9v16"/><path d="M16 14c-2-6-8-9-11-7s-1 9 5 9c-4 1-6 5-3 7s6-2 9-7"/><path d="M16 14c2-6 8-9 11-7s1 9-5 9c4 1 6 5 3 7s-6-2-9-7"/></svg></span><span class="ts on"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M16 9v16"/><path d="M16 14c-2-6-8-9-11-7s-1 9 5 9c-4 1-6 5-3 7s6-2 9-7"/><path d="M16 14c2-6 8-9 11-7s1 9-5 9c4 1 6 5 3 7s-6-2-9-7"/></svg></span><span class="ts premio"><em>₡2.000</em></span><span class="ts"><em>6</em></span><span class="ts"><em>7</em></span><span class="ts"><em>8</em></span><span class="ts"><em>9</em></span><span class="ts premio"><em>Premio</em></span></div><div class="tsel-pie"><span>4 de 10 sellos</span><span>Programa de fidelidad</span></div></div></div>
+    </div>
+  </section>
 
-
-    <section id="horario">
-      <h2 class="v7-h">Horario</h2>
+  <section class="claro marmol" id="politicas">
+    <div class="wrap">
+      <div class="titulo revela">
+        <div class="flor"><svg><use href="#loto"/></svg></div>
+        <span class="sobre">Antes de tu cita</span>
+        <h2>Políticas de reserva</h2>
+        <p>Gracias por respetar nuestro tiempo y trabajo.</p>
+      </div>
+      <div class="pol revela">
+        <article class="pol-it"><span class="pol-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="5" width="19" height="14" rx="2.5"/><path d="M2.5 10h19M6.5 15h4"/></svg></span><div><h3>Para reservar</h3><p>Se cancelan <b>₡5.000</b> que se descuentan del precio del set. Si no se presenta, <b>no son reembolsables</b>.</p></div></article>
+        <article class="pol-it"><span class="pol-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M8.5 11c.7.6 1.6.6 2.3 0M13.2 11c.7.6 1.6.6 2.3 0M9.5 15.2c1.5 1.1 3.5 1.1 5 0"/></svg></span><div><h3>Presentarse</h3><p>Sin maquillaje en el área de los ojos, para un mejor resultado y mayor duración.</p></div></article>
+        <article class="pol-it"><span class="pol-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 7v5l3.2 2"/></svg></span><div><h3>Puntualidad</h3><p>Si llega <b>15 minutos tarde</b> la cita se cancela y tendrá que reagendar.</p></div></article>
+      </div>
+      <div class="pago revela">
+        <h3 class="pago-t">Métodos de pago</h3>
+        <div class="pago-g">
+          <div class="pago-it"><span class="pol-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="6.5" y="2.5" width="11" height="19" rx="2.5"/><path d="M10.5 18.5h3"/></svg></span><div><small>SINPE Móvil</small><b>7118 5004</b></div><button class="pago-copiar" data-copiar="71185004" type="button">Copiar</button></div>
+          <div class="pago-it"><span class="pol-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="6" width="19" height="12" rx="2"/><circle cx="12" cy="12" r="2.6"/><path d="M6 9.5v5M18 9.5v5"/></svg></span><div><small>En el local</small><b>Efectivo</b></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section id="horario" style="background:var(--negro2)">
+    <div class="wrap">
+      <div class="titulo revela">
+        <div class="flor"><svg><use href="#loto"/></svg></div>
+        <h2 class="oro-txt">Horario</h2>
+        <p style="color:#a89985">Atención solo con cita previa.</p>
+      </div>
       <div id="cierres-aviso" class="cierres-aviso"></div>
-      <div class="horario" id="tabla-horario"></div>
-      <p class="nota">Atención solo con cita previa. ¿Necesita otro horario? Escríbanos por WhatsApp.</p>
-    </section>
+      <div class="horario revela" id="tabla-horario"></div>
+      <p class="nota">¿Necesitas otro horario? Escríbenos por WhatsApp y buscamos un espacio para ti.</p>
+    </div>
+  </section>
 
-    <section id="contacto" class="v7-contacto">
-      <a class="v7-card" data-wa="Hola, tengo una consulta." href="#"><span class="v7-ic"><svg><use href="#wa"/></svg></span><span class="v7-ct"><b>WhatsApp</b><small>7118 5004</small></span><i>›</i></a>
-      <a class="v7-card" href="tel:+50671185004"><span class="v7-ic"><svg><use href="#tel"/></svg></span><span class="v7-ct"><b>Llamar</b><small>+506 7118 5004</small></span><i>›</i></a>
-    </section>
+  <section class="claro" id="contacto">
+    <div class="wrap">
+      <div class="titulo revela">
+        <div class="flor"><svg><use href="#loto"/></svg></div>
+        <h2>Contacto</h2>
+        <p>Moravia, San Vicente. La ubicación exacta del estudio se envía por WhatsApp al confirmar tu cita.</p>
+      </div>
+      <div class="contactos revela" style="max-width:560px;margin:0 auto">
+        <a class="contacto" data-wa="Hola, tengo una consulta." href="#"><span class="ic"><svg><use href="#wa"/></svg></span><span><small>WhatsApp</small><b>7118 5004</b></span></a>
+        <a class="contacto" href="tel:+50671185004"><span class="ic"><svg><use href="#tel"/></svg></span><span><small>Llamar</small><b>+506 7118 5004</b></span></a>
+        <a class="contacto" href="https://instagram.com/calixto_studio" target="_blank" rel="noopener"><span class="ic"><svg><use href="#ig"/></svg></span><span><small>Instagram</small><b>@calixto_studio</b></span></a>
+      </div>
+    </div>
+  </section>
 
-    <button class="v7-pro" data-abrir="p-nicole">Acceso para la profesional</button>
-  </div>
+  <section class="cierre">
+    <div class="flor"><svg><use href="#loto"/></svg></div>
+    <h2>Tu mirada,<br><span class="oro-txt">tu mejor versión.</span></h2>
+    <p>Los espacios se llenan rápido. Asegura el tuyo hoy.</p>
+    <button class="btn btn-oro" data-reservar><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>Agendar mi cita</button>
+  </section>
 </main>
 
 <footer>
