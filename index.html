@@ -3031,25 +3031,31 @@ if ("serviceWorker" in navigator && location.protocol === "https:") navigator.se
 (() => {
   const instalada = matchMedia("(display-mode: standalone)").matches || navigator.standalone;
   if (instalada) return;
-  const KEY = "cs_instalar_oculto";
-  let oculto = 0; try { oculto = +localStorage.getItem(KEY) || 0; } catch {}
-  if (Date.now() - oculto < 3 * 864e5) return;   // si la cerró, no molestar por 3 días
-  const ios = /iPhone|iPad|iPod/i.test(navigator.userAgent) && !/CriOS|FxiOS/i.test(navigator.userAgent);
+  // Se muestra en cada visita mientras la app no esté instalada (al cerrarlo, vuelve en la próxima visita).
+  const KEY = "cs_instalar_cerrado";
+  try { if (sessionStorage.getItem(KEY)) return; } catch {}
+  const ios = /iPhone|iPad|iPod/i.test(navigator.userAgent) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+  const pasos = ios
+    ? 'Toca <b>Compartir</b> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15V3m-4 4 4-4 4 4"/><path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-7"/></svg> abajo en Safari y luego <b>“Agregar a inicio”</b>.'
+    : 'Toca el menú <b>⋮</b> de Chrome (arriba a la derecha) y luego <b>“Instalar app”</b> o <b>“Agregar a pantalla principal”</b>.';
   let evento = null;
   function mostrar(){
-    if (document.getElementById("instalar")) return;
+    if (document.getElementById("instalar") || matchMedia("(display-mode: standalone)").matches) return;
     const el = document.createElement("div"); el.id = "instalar"; el.className = "instalar";
-    el.innerHTML = `<img src="icon-192.png" alt=""><div class="txt"><b>Instala la app de Calixto Studio</b><span>${ios ? 'Toca <b>Compartir</b> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 8l5-5 5 5"/><path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-7"/></svg> y luego <b>Agregar a inicio</b>.' : "Agenda tus citas más rápido desde tu celular."}</span></div>
-      ${ios ? "" : '<button class="si">Instalar</button>'}<button class="no" aria-label="Cerrar">×</button>`;
+    el.innerHTML = `<img src="icon-192.png" alt=""><div class="txt"><b>Instala la app de Calixto Studio</b><span class="paso">Agenda tus citas y mira tu tarjeta de sellos desde tu pantalla de inicio.</span></div>
+      <button class="si">Instalar</button><button class="no" aria-label="Cerrar">×</button>`;
     document.body.appendChild(el); requestAnimationFrame(() => el.classList.add("on"));
-    el.querySelector(".no").onclick = () => { try { localStorage.setItem(KEY, Date.now()); } catch {} cerrar(); };
-    const si = el.querySelector(".si");
-    if (si) si.onclick = async () => { if (!evento) return; evento.prompt(); const r = await evento.userChoice.catch(() => ({})); evento = null; if (r.outcome === "accepted") toast("¡Listo! Busca Calixto Studio en tu pantalla de inicio"); cerrar(); };
+    el.querySelector(".no").onclick = () => { try { sessionStorage.setItem(KEY, "1"); } catch {} cerrar(); };
+    el.querySelector(".si").onclick = async () => {
+      if (evento) { evento.prompt(); const r = await evento.userChoice.catch(() => ({})); evento = null;
+        if (r.outcome === "accepted") { toast("¡Listo! Busca Calixto Studio en tu pantalla de inicio"); cerrar(); } return; }
+      el.querySelector(".paso").innerHTML = pasos; el.querySelector(".si").remove();   // sin el aviso del navegador: se explican los pasos
+    };
   }
   function cerrar(){ const el = document.getElementById("instalar"); if (!el) return; el.classList.remove("on"); setTimeout(() => el.remove(), 350); }
-  addEventListener("beforeinstallprompt", e => { e.preventDefault(); evento = e; setTimeout(mostrar, 1800); });
+  addEventListener("beforeinstallprompt", e => { e.preventDefault(); evento = e; eventoInstalar = e; });
   addEventListener("appinstalled", cerrar);
-  if (ios) setTimeout(mostrar, 2500);
+  setTimeout(mostrar, 2500);
 })();
 
 if (FIREBASE) crearReservasFirebase().then(r => {
