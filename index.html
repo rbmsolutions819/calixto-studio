@@ -1412,7 +1412,13 @@ const FIREBASE = {         // proyecto de Firebase: calixto-reservas
 const NICOLE_EMAIL = "admin@calixtostudio.com";        // usuario de administración en Firebase → Authentication
 const RBM_EMAIL = "rbmsolutions819@gmail.com";          // usuario de RBM Solutions: además ve la pestaña "Uso"
 const ADMINS = [NICOLE_EMAIL, RBM_EMAIL];
-let sesionEmail = NICOLE_EMAIL, nUsuario = NICOLE_EMAIL;
+// El acceso de RBM no se muestra en la página: solo se activa abriendo la dirección con ?rbm (y se quita con ?calixto).
+const RBM_ACCESO = (() => { try {
+  if (/[?&#]rbm\b/.test(location.href)) localStorage.setItem("cs_rbm", "1");
+  if (/[?&#]calixto\b/.test(location.href)) localStorage.removeItem("cs_rbm");
+  return localStorage.getItem("cs_rbm") === "1";
+} catch { return /[?&#]rbm\b/.test(location.href); } })();
+let sesionEmail = NICOLE_EMAIL, nUsuario = RBM_ACCESO ? RBM_EMAIL : NICOLE_EMAIL;
 const NTFY_TEMA = "";  // avisos por la app ntfy desactivados: solo notificaciones del navegador      // canal privado de avisos en la app ntfy ("" = sin avisos)
 const TRABAJOS = ["img/trabajos/5d-3.jpg","img/trabajos/2d-1.jpg","img/trabajos/clasicas-1.jpg","img/trabajos/rimel-1.jpg","img/trabajos/3d-1.jpg","img/trabajos/5d-1.jpg","img/trabajos/5d-2.jpg"];
 const FOTOS = ["img/servicio-1.jpg","img/servicio-2.jpg","img/servicio-3.jpg","img/servicio-4.jpg","img/servicio-5.jpg","img/servicio-6.jpg","img/servicio-7.jpg","img/marca.jpg"];
@@ -2378,7 +2384,7 @@ function pintarNicole(){
       <img src="${document.querySelector('.cajon .cab img').src}" style="width:84px;margin:0 auto 14px;border-radius:50%;box-shadow:0 0 0 1px var(--oro)" alt="">
       <h2 style="font-family:var(--serif);font-size:28px;font-weight:600">Administración</h2>
       <p style="color:#6b6358;margin:4px 0 18px">Citas, depósitos, días libres y más.${Reservas.prueba ? "<br><small>Demostración: contraseña demo1234</small>" : ""}</p>
-      ${!Reservas.prueba ? `<div class="seg2" style="justify-content:center;margin-bottom:12px"><button class="chip${nUsuario === NICOLE_EMAIL ? " si" : ""}" data-nusu="${NICOLE_EMAIL}">Calixto Studio</button><button class="chip${nUsuario === RBM_EMAIL ? " si" : ""}" data-nusu="${RBM_EMAIL}">RBM Solutions</button></div>` : ""}
+      ${!Reservas.prueba && RBM_ACCESO ? `<div class="seg2" style="justify-content:center;margin-bottom:12px"><button class="chip${nUsuario === NICOLE_EMAIL ? " si" : ""}" data-nusu="${NICOLE_EMAIL}">Calixto Studio</button><button class="chip${nUsuario === RBM_EMAIL ? " si" : ""}" data-nusu="${RBM_EMAIL}">RBM Solutions</button></div>` : ""}
       <div class="campo"><input id="n-clave" type="password" autocomplete="current-password" placeholder="Contraseña" style="text-align:center"></div>
       <p class="error" id="n-err"></p>
       <button class="btn btn-oro" style="width:100%" id="n-ok">Entrar</button>
