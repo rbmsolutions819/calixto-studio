@@ -250,6 +250,7 @@ section.panel{padding:0}
 .gal button{border:0;padding:0;border-radius:14px;overflow:hidden;cursor:zoom-in;aspect-ratio:1;background:#222}
 .gal button.ancha{grid-column:span 2;aspect-ratio:16/10}
 .gal img{width:100%;height:100%;object-fit:cover}
+.gal button{position:relative}.gal .g-nom{position:absolute;left:0;right:0;bottom:0;padding:26px 12px 10px;background:linear-gradient(rgba(0,0,0,0),rgba(0,0,0,.72));color:#fff;font:500 13px/1.2 var(--sans);letter-spacing:.03em;text-align:left;pointer-events:none}.gal button.ancha .g-nom{font-size:15px}
 .lb{z-index:70}
 
 /* ventana de opciones */
@@ -2660,7 +2661,7 @@ const ServiciosFB = (() => {
         if (snap.empty) return;   // todavía no se ha guardado nada: se usan los servicios de este archivo
         const l = snap.docs.map(x => ({ ...x.data(), id: x.id })).sort((a, b) => (a.orden ?? 0) - (b.orden ?? 0));
         ids = new Set(l.map(x => x.id)); l.forEach(x => delete x.orden);
-        SERVICIOS.splice(0, SERVICIOS.length, ...l); pintarServicios(); if (pila.includes("p-nicole")) pintarNicole();
+        SERVICIOS.splice(0, SERVICIOS.length, ...l); pintarServicios(); pintarGaleria(); if (pila.includes("p-nicole")) pintarNicole();
       }, e => console.warn("servicios", e)); },
     async guardar(){
       const grande = SERVICIOS.find(s => JSON.stringify(s).length > 900000);
@@ -2996,11 +2997,18 @@ function pintarUso(){
            : `<p class="conf-p">Todavía no se ha hecho el primer informe automático.</p>`}
     </div>`;
 }
+// Nombre del trabajo de cada foto: el título que le puso el estudio, o el servicio al que pertenece la foto.
+function nombreTrabajo(x){
+  if (x.titulo) return x.titulo;
+  const src = x.data || "";
+  const sv = SERVICIOS.find(s => (s.fotos || []).includes(src)) || SERVICIOS.find(s => src.includes("/trabajos/" + s.id + "-"));
+  return sv ? sv.nombre : "";
+}
 function pintarGaleria(){
   const l = Reservas.galeria();
   itemsGal = l && l.length ? l : TRABAJOS.map(f => ({ tipo:"foto", data:f }));
   $("#gal").innerHTML = itemsGal.map((x, i) => x.tipo === "foto"
-    ? `<button data-i="${i}" class="${i === 0 ? "ancha" : ""}" aria-label="Ver foto ${i + 1}"><img src="${x.data}" alt="" loading="lazy"></button>`
+    ? `<button data-i="${i}" class="${i === 0 ? "ancha" : ""}" aria-label="Ver foto ${i + 1}"><img src="${x.data}" alt="" loading="lazy">${nombreTrabajo(x) ? `<span class="g-nom">${esc(nombreTrabajo(x))}</span>` : ""}</button>`
     : `<button data-i="${i}" class="vid${i === 0 ? " ancha" : ""}" aria-label="Ver video ${esc(x.titulo || "")}">${miniVideo(x)}</button>`).join("");
 }
 pintarGaleria();
