@@ -1,10 +1,12 @@
-# Archivos de la carpeta de Drive "Calixto Studio" que ya se revisaron (id de Drive · qué se hizo).
-# La revisión automática diaria solo procesa los que NO estén en esta lista.
-13e_vw97wPkl9LzTAn2axpOOE8IbbHMf6 · Pestañas clásicas → img/trabajos/clasicas-1.jpg
-1ghEDVWYF1Ql8mf3wOcrD375vAjN97wrK · Pestañas 2D → img/trabajos/2d-1.jpg
-19akVAiz16sBla5UF63du_f2ot2NLKUHn · Efecto rímel → img/trabajos/rimel-1.jpg
-1UlxCzar1Dqfn05ngGAGl80YWhN7LzC37 · Fibras tecnológicas 3D → img/trabajos/3d-1.jpg
-1Kj8HF66yHFBCWG3AnC6nyvjv66Q9KVAN · Fibras tecnológicas 5D → img/trabajos/5d-1.jpg
-1E7G__coFnyFhUgoXz_t8u1jn-1ytPJwn · Fibras tecnológicas 5D → img/trabajos/5d-2.jpg
-1R00ZtCQY5bnCO1xVpWEVtjSWe13PhSn7 · Fibras tecnológicas 5D → img/trabajos/5d-3.jpg
-1TJFivJgft8dY2cg4TOuGQymsEO9RQuIV · captura de pantalla de la administración (no es foto de trabajo) → ignorada
+# Archivos de la carpeta de Drive "Calixto Studio" ya revisados.
+# Formato: id de Drive · fecha de modificación en Drive (modifiedTime) · carpeta → qué se hizo
+# La revisión diaria procesa los ids que no estén aquí, y vuelve a publicar los que tengan una fecha de modificación distinta.
+# Si una foto se borra del Drive, NO se quita de la página (solo se quita si Ricardo lo pide).
+13e_vw97wPkl9LzTAn2axpOOE8IbbHMf6 · 2026-11-21T00:10:30.240Z · Pestañas clásicas → img/trabajos/clasicas-1.jpg
+1ghEDVWYF1Ql8mf3wOcrD375vAjN97wrK · 2026-11-21T00:12:17.474Z · Pestañas 2D → img/trabajos/2d-1.jpg
+19akVAiz16sBla5UF63du_f2ot2NLKUHn · 2026-11-21T00:15:45.996Z · Efecto rímel → img/trabajos/rimel-1.jpg
+1UlxCzar1Dqfn05ngGAGl80YWhN7LzC37 · 2026-11-21T00:29:06.323Z · Fibras tecnológicas 3D → img/trabajos/3d-1.jpg
+1Kj8HF66yHFBCWG3AnC6nyvjv66Q9KVAN · 2026-11-21T00:26:18.841Z · Fibras tecnológicas 5D → img/trabajos/5d-1.jpg
+1E7G__coFnyFhUgoXz_t8u1jn-1ytPJwn · 2026-11-21T00:26:23.035Z · Fibras tecnológicas 5D → img/trabajos/5d-2.jpg
+1R00ZtCQY5bnCO1xVpWEVtjSWe13PhSn7 · 2026-11-21T00:26:27.519Z · Fibras tecnológicas 5D → img/trabajos/5d-3.jpg
+1TJFivJgft8dY2cg4TOuGQymsEO9RQuIV · 2026-11-20T21:12:14.597Z · Cejas ejm → ignorada (captura de pantalla de la administración, no es foto de trabajo)
