@@ -1420,7 +1420,7 @@ const RBM_ACCESO = (() => { try {
   return localStorage.getItem("cs_rbm") === "1";
 } catch { return /[?&#]rbm\b/.test(location.href); } })();
 let sesionEmail = NICOLE_EMAIL, nUsuario = RBM_ACCESO ? RBM_EMAIL : NICOLE_EMAIL;
-const NTFY_TEMA = "";  // avisos por la app ntfy desactivados: solo notificaciones del navegador      // canal privado de avisos en la app ntfy ("" = sin avisos)
+const NTFY_TEMA = "calixto-citas-2d342bc6690661e4";  // canal de avisos en la app ntfy: llega aunque la página esté cerrada (el mensaje no lleva nombre ni teléfono de la clienta)
 const TRABAJOS = ["img/trabajos/5d-3.jpg","img/trabajos/2d-1.jpg","img/trabajos/clasicas-1.jpg","img/trabajos/rimel-1.jpg","img/trabajos/3d-1.jpg","img/trabajos/5d-1.jpg","img/trabajos/5d-2.jpg"];
 const FOTOS = ["img/servicio-1.jpg","img/servicio-2.jpg","img/servicio-3.jpg","img/servicio-4.jpg","img/servicio-5.jpg","img/servicio-6.jpg","img/servicio-7.jpg","img/marca.jpg"];
 
@@ -1737,12 +1737,14 @@ function citaDeLink(){
 // Aviso a Nicole por la app ntfy (llega como notificación al celular)
 function avisarNicole(c){
   if (!NTFY_TEMA) return;
-  const tel = String(c.tel).replace(/\D/g, ""); const t506 = tel.length === 8 ? "506" + tel : tel;
-  const cuerpo = { topic: NTFY_TEMA, title: `Nueva cita en ${LUGARES[c.lugar]?.nombre || "Calixto Studio"}: ${c.nombre}`, tags: ["calendar"], priority: 4,
-    message: `${LUGARES[c.lugar]?.nombre || "Sin lugar"}\n${c.servicio}\n${fechaLarga(c.fecha)}\n${h12m(c.ini)} a ${h12m(c.ini + c.dur)} (${durTxt(c.dur)})\nCel: ${c.tel}${c.nota ? "\nNota: " + c.nota : ""}`,
-    click: location.href.split("#")[0],
-    actions: [ { action:"view", label:"Agregar al calendario", url: linkCalendario(c) }, { action:"view", label:"WhatsApp", url:`https://wa.me/${t506}` } ] };
-  try { fetch("https://ntfy.sh/", { method:"POST", body: JSON.stringify(cuerpo) }).catch(() => {}); } catch {}
+  // El canal se puede leer desde el código de la página, así que el aviso NO lleva nombre ni celular: solo servicio, día y hora.
+  const cuerpo = { topic: NTFY_TEMA, title: "📅 Nueva cita en Calixto Studio", tags: ["calendar"], priority: 4,
+    message: `${c.servicio}\n${fechaLarga(c.fecha)}\n${h12m(c.ini)} a ${h12m(c.ini + c.dur)} (${durTxt(c.dur)})\nToca para ver los datos en Mis citas.`,
+    click: location.origin + location.pathname + "#admin" };
+  try { fetch("https://ntfy.sh/", { method:"POST", body: JSON.stringify(cuerpo), keepalive: true }).catch(() => {}); } catch {}
+}
+function avisoNtfyPrueba(){
+  return fetch("https://ntfy.sh/", { method:"POST", body: JSON.stringify({ topic: NTFY_TEMA, title: "✅ Avisos de Calixto Studio activados", message: "Así te va a llegar cada cita nueva, aunque la app esté cerrada.", tags: ["white_check_mark"], priority: 4, click: location.origin + location.pathname + "#admin" }) });
 }
 
 // ================== CAPAS (menú, paneles, ventana) con botón atrás del celular ==================
@@ -2348,6 +2350,15 @@ function pintarConfig(){
   const enCal = Object.keys(cache).length;
   const turnos = HORARIO.map(h => `<li><b>${h.nombre}</b><span>${h.turnos.length ? h.turnos.map(t => `${h12(t[0])} – ${h12(t[1])}`).join(", ") : "Cerrado"}</span></li>`).join("");
   return `<div class="conf">
+    <section class="conf-s"><h4>Avisos de cada cita (siempre)</h4>
+      <p class="conf-p">Para que te llegue un aviso de <b>cada cita nueva aunque la app esté cerrada</b>, usa la app gratuita <b>ntfy</b>:</p>
+      <ol class="conf-p" style="padding-left:20px;margin:6px 0 10px">
+        <li>Instálala: <a href="https://play.google.com/store/apps/details?id=io.heckel.ntfy" target="_blank" rel="noopener"><b>Android</b></a> · <a href="https://apps.apple.com/app/ntfy/id1625396347" target="_blank" rel="noopener"><b>iPhone</b></a></li>
+        <li>Ábrela, toca <b>+</b> y suscríbete a este canal:<br><code id="c-ntfy-tema" style="user-select:all;word-break:break-all;background:#efe5cc;padding:3px 8px;border-radius:8px;display:inline-block;margin-top:4px">${NTFY_TEMA}</code></li>
+        <li>Toca <b>Enviar aviso de prueba</b> para confirmar que te llega.</li>
+      </ol>
+      <div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn btn-linea conf-b" id="c-ntfy-copiar">Copiar canal</button><a class="btn btn-linea conf-b" href="ntfy://ntfy.sh/${NTFY_TEMA}">Suscribirme (Android)</a><button class="btn btn-oro conf-b" id="c-ntfy-prueba">Enviar aviso de prueba</button></div>
+      <p class="conf-nota">Por privacidad, el aviso solo dice el servicio, el día y la hora. Los datos de la clienta los ves aquí en Mis citas.</p></section>
     <section class="conf-s"><h4>Notificaciones en este celular</h4>${tarjetaAvisos() || `<p class="conf-p">Este navegador no permite notificaciones. Abre la página en Chrome (Android) o instala la app (iPhone).</p>`}
       <p class="conf-nota">Los avisos llegan mientras la página o la app esté abierta o minimizada. Si la cierras por completo, revisa tus citas al abrirla.</p>
       ${soportaAvisos && Notification.permission === "granted" ? `<button class="btn btn-linea conf-b" id="c-prueba-local">Enviar notificación de prueba</button>` : ""}</section>
@@ -2538,6 +2549,8 @@ $("#nicole").addEventListener("click", async e => {
     pintarNicole(); return; }
   if (b.dataset.cdia) { nCal.ref = b.dataset.cdia; nCal.vista = "dia"; pintarNicole(); return; }
   if (b.dataset.cev) return verCita(b.dataset.cev);
+  if (b.id === "c-ntfy-copiar") { try { navigator.clipboard.writeText(NTFY_TEMA).then(() => toast("Canal copiado"), () => toast(NTFY_TEMA)); } catch { toast(NTFY_TEMA); } return; }
+  if (b.id === "c-ntfy-prueba") { avisoNtfyPrueba().then(r => toast(r.ok ? "Aviso enviado: revisa la app ntfy" : "No se pudo enviar el aviso"), () => toast("No se pudo enviar: revisa el internet")); return; }
   if (b.id === "n-avisos") {
     try { const r = await Notification.requestPermission(); if (r === "granted") { toast("Notificaciones activadas"); avisoLocal("Calixto Studio", "Así te van a llegar los avisos de citas nuevas.", "prueba"); } }
     catch {}
@@ -3171,6 +3184,7 @@ $("#enc-form").addEventListener("submit", async e => {
   el.querySelector("#hc-no").onclick = cerrar;
 })();
 // Atajo de la app: abrir directo "Agendar cita"
+if (location.hash === "#admin") { history.replaceState(null, "", location.pathname + location.search); setTimeout(() => abrir("p-nicole"), 300); }
 if (location.hash === "#agendar") { history.replaceState(null, "", location.pathname + location.search); setTimeout(() => pedirForma(""), 400); }
 window.__dbg = { get ag(){ return ag; }, get pila(){ return pila; }, pintarAgenda, get R(){ return Reservas; } };
 
