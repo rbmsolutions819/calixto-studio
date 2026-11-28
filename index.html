@@ -1420,7 +1420,8 @@ const RBM_ACCESO = (() => { try {
   return localStorage.getItem("cs_rbm") === "1";
 } catch { return /[?&#]rbm\b/.test(location.href); } })();
 let sesionEmail = NICOLE_EMAIL, nUsuario = RBM_ACCESO ? RBM_EMAIL : NICOLE_EMAIL;
-const NTFY_TEMA = "calixto-citas-2d342bc6690661e4";  // canal de avisos en la app ntfy: llega aunque la página esté cerrada (el mensaje no lleva nombre ni teléfono de la clienta)
+const NTFY_TEMA = "";  // ya no se usa ntfy
+const AVISOS_URL = "https://avisos.calixtostudiocr.com";  // servicio de avisos (Cloudflare Worker, carpeta avisos/): manda la notificación al celular de la administradora aunque la app esté cerrada
 const TRABAJOS = ["img/trabajos/5d-3.jpg","img/trabajos/2d-1.jpg","img/trabajos/clasicas-1.jpg","img/trabajos/rimel-1.jpg","img/trabajos/3d-1.jpg","img/trabajos/5d-1.jpg","img/trabajos/5d-2.jpg"];
 const FOTOS = ["img/servicio-1.jpg","img/servicio-2.jpg","img/servicio-3.jpg","img/servicio-4.jpg","img/servicio-5.jpg","img/servicio-6.jpg","img/servicio-7.jpg","img/marca.jpg"];
 
@@ -1591,6 +1592,7 @@ async function crearReservasFirebase(){
     async marcarDeposito(id, v){ await F.updateDoc(F.doc(db, "citas", id), { deposito: v }); const c = citas.find(x => x.id === id); if (c) c.deposito = v; },
     async guardarApuntes(id, txt){ await F.updateDoc(F.doc(db, "citas", id), { apuntes: txt }); const c = citas.find(x => x.id === id); if (c) c.apuntes = txt; },
     async entrar(clave, email = NICOLE_EMAIL){ await A.signInWithEmailAndPassword(auth, email, clave); },
+    async idToken(){ const u = auth.currentUser; return u ? u.getIdToken() : null; },
     salir(){ A.signOut(auth); },
     async recuperar(email){ await A.sendPasswordResetEmail(auth, email); },
     async cambiarClave(actual, nueva){
@@ -1615,6 +1617,7 @@ async function crearReservasFirebase(){
   SellosFB.conectar(F, db); ServiciosFB.conectar(F, db);
   A.onAuthStateChanged(auth, u => {
     R.nicole = !!u && ADMINS.includes(u.email); sesionEmail = u && u.email || NICOLE_EMAIL;
+    if (R.nicole) setTimeout(() => activarPush(true), 1500);
     SellosFB.admin(R.nicole); ServiciosFB.admin = R.nicole;
     if (quitarCitas) { quitarCitas(); quitarCitas = null; citas = []; }
     if (quitarSugs) { quitarSugs(); quitarSugs = null; sugs = []; }
@@ -1734,17 +1737,43 @@ function citaDeLink(){
     return { id:d.i, fecha:d.f, ini:+d.s, dur:+d.d, nombre:d.n, tel:d.t, servicio:d.v, lugar:d.l, nota:d.o };
   } catch { return null; }
 }
-// Aviso a Nicole por la app ntfy (llega como notificación al celular)
+// Aviso a la administradora: la página le pide al servicio de avisos que mande una notificación (Web Push)
+// a los celulares donde ella activó los avisos. Llega aunque la app esté cerrada. El servicio revisa que la cita exista.
 function avisarNicole(c){
-  if (!NTFY_TEMA) return;
-  // El canal se puede leer desde el código de la página, así que el aviso NO lleva nombre ni celular: solo servicio, día y hora.
-  const cuerpo = { topic: NTFY_TEMA, title: "📅 Nueva cita en Calixto Studio", tags: ["calendar"], priority: 4,
-    message: `${c.servicio}\n${fechaLarga(c.fecha)}\n${h12m(c.ini)} a ${h12m(c.ini + c.dur)} (${durTxt(c.dur)})\nToca para ver los datos en Mis citas.`,
-    click: location.origin + location.pathname + "#admin" };
-  try { fetch("https://ntfy.sh/", { method:"POST", body: JSON.stringify(cuerpo), keepalive: true }).catch(() => {}); } catch {}
+  if (!AVISOS_URL || !c || !c.id) return;
+  const datos = { cita: c.id, fecha: c.fecha, ini: c.ini,
+    titulo: `📅 Nueva cita: ${c.nombre}`,
+    cuerpo: `${c.servicio}\n${fechaLarga(c.fecha)}, ${h12m(c.ini)} a ${h12m(c.ini + c.dur)}\nCel: ${c.tel}${c.nota ? "\nNota: " + c.nota : ""}` };
+  try { fetch(AVISOS_URL + "/aviso", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(datos), keepalive: true }).catch(() => {}); } catch {}
 }
-function avisoNtfyPrueba(){
-  return fetch("https://ntfy.sh/", { method:"POST", body: JSON.stringify({ topic: NTFY_TEMA, title: "✅ Avisos de Calixto Studio activados", message: "Así te va a llegar cada cita nueva, aunque la app esté cerrada.", tags: ["white_check_mark"], priority: 4, click: location.origin + location.pathname + "#admin" }) });
+const soportaPush = () => "serviceWorker" in navigator && "PushManager" in window && "Notification" in window;
+const deB64u = s => { s = s.replace(/-/g, "+").replace(/_/g, "/"); s += "===".slice((s.length + 3) % 4); return Uint8Array.from(atob(s), c => c.charCodeAt(0)); };
+let pushEstado = "";   // "", "ok", "error"
+// Registra este celular para recibir avisos. silencioso = sin mensajes (se llama solo al entrar como administradora).
+async function activarPush(silencioso){
+  if (!soportaPush() || !Reservas.nicole || Notification.permission !== "granted" || !Reservas.idToken) return false;
+  try {
+    const reg = await navigator.serviceWorker.ready;
+    const clave = await fetch(AVISOS_URL + "/clave").then(r => { if (!r.ok) throw new Error("clave"); return r.text(); });
+    const llave = deB64u(clave.trim());
+    let sub = await reg.pushManager.getSubscription();
+    if (sub && sub.options && sub.options.applicationServerKey) {
+      const vieja = new Uint8Array(sub.options.applicationServerKey);
+      if (vieja.length !== llave.length || vieja.some((x, i) => x !== llave[i])) { await sub.unsubscribe(); sub = null; }
+    }
+    if (!sub) sub = await reg.pushManager.subscribe({ userVisibleOnly: true, applicationServerKey: llave });
+    const token = await Reservas.idToken();
+    const r = await fetch(AVISOS_URL + "/suscribir", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ token, sub: sub.toJSON() }) });
+    if (!r.ok) throw new Error("suscribir " + r.status);
+    pushEstado = "ok"; if (!silencioso) toast("Avisos activados en este celular"); return true;
+  } catch (e) { console.warn("avisos", e); pushEstado = "error"; if (!silencioso) toast("No se pudieron activar los avisos. Revisa el internet e intenta otra vez."); return false; }
+}
+async function pruebaPush(){
+  try {
+    const token = await Reservas.idToken();
+    const r = await fetch(AVISOS_URL + "/prueba", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ token }) }).then(x => x.json());
+    toast(r.enviados ? "Aviso enviado: debería llegarte en unos segundos" : "No hay celulares con avisos activados");
+  } catch { toast("No se pudo enviar el aviso de prueba"); }
 }
 
 // ================== CAPAS (menú, paneles, ventana) con botón atrás del celular ==================
@@ -2351,16 +2380,13 @@ function pintarConfig(){
   const turnos = HORARIO.map(h => `<li><b>${h.nombre}</b><span>${h.turnos.length ? h.turnos.map(t => `${h12(t[0])} – ${h12(t[1])}`).join(", ") : "Cerrado"}</span></li>`).join("");
   return `<div class="conf">
     <section class="conf-s"><h4>Avisos de cada cita (siempre)</h4>
-      <p class="conf-p">Para que te llegue un aviso de <b>cada cita nueva aunque la app esté cerrada</b>, usa la app gratuita <b>ntfy</b>:</p>
-      <ol class="conf-p" style="padding-left:20px;margin:6px 0 10px">
-        <li>Instálala: <a href="https://play.google.com/store/apps/details?id=io.heckel.ntfy" target="_blank" rel="noopener"><b>Android</b></a> · <a href="https://apps.apple.com/app/ntfy/id1625396347" target="_blank" rel="noopener"><b>iPhone</b></a></li>
-        <li>Ábrela, toca <b>+</b> y suscríbete a este canal:<br><code id="c-ntfy-tema" style="user-select:all;word-break:break-all;background:#efe5cc;padding:3px 8px;border-radius:8px;display:inline-block;margin-top:4px">${NTFY_TEMA}</code></li>
-        <li>Toca <b>Enviar aviso de prueba</b> para confirmar que te llega.</li>
-      </ol>
-      <div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn btn-linea conf-b" id="c-ntfy-copiar">Copiar canal</button><a class="btn btn-linea conf-b" href="ntfy://ntfy.sh/${NTFY_TEMA}">Suscribirme (Android)</a><button class="btn btn-oro conf-b" id="c-ntfy-prueba">Enviar aviso de prueba</button></div>
-      <p class="conf-nota">Por privacidad, el aviso solo dice el servicio, el día y la hora. Los datos de la clienta los ves aquí en Mis citas.</p></section>
+      ${!soportaPush() ? `<p class="conf-p">Este navegador no puede recibir avisos con la app cerrada. ${esIOS ? "En iPhone instala la app (Safari → Compartir → Agregar a inicio) y ábrela desde el ícono." : "Abre la página en Google Chrome."}</p>${avisoIphone()}`
+        : Notification.permission !== "granted" ? `<p class="conf-p">Activa las notificaciones de este celular (abajo) y te va a llegar un aviso de <b>cada cita nueva aunque la app esté cerrada</b>, con el nombre, servicio, día, hora y celular de la clienta.</p>`
+        : `<p class="conf-p">${pushEstado === "error" ? "⚠️ No se pudo registrar este celular. Toca <b>Activar avisos</b> otra vez." : "Este celular recibe un aviso de <b>cada cita nueva, aunque la app esté cerrada</b>."}</p>
+      <div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn btn-linea conf-b" id="c-push-activar">Activar avisos</button><button class="btn btn-oro conf-b" id="c-push-prueba">Enviar aviso de prueba</button></div>`}
+      <p class="conf-nota">Actívalo en cada celular donde quieras recibir los avisos. Sin apps extra.</p></section>
     <section class="conf-s"><h4>Notificaciones en este celular</h4>${tarjetaAvisos() || `<p class="conf-p">Este navegador no permite notificaciones. Abre la página en Chrome (Android) o instala la app (iPhone).</p>`}
-      <p class="conf-nota">Los avisos llegan mientras la página o la app esté abierta o minimizada. Si la cierras por completo, revisa tus citas al abrirla.</p>
+      <p class="conf-nota">Además de los avisos de citas, aquí te llegan sugerencias nuevas mientras la página esté abierta o minimizada. Si la cierras por completo, revisa tus citas al abrirla.</p>
       ${soportaAvisos && Notification.permission === "granted" ? `<button class="btn btn-linea conf-b" id="c-prueba-local">Enviar notificación de prueba</button>` : ""}</section>
     <section class="conf-s"><h4>Calendario del celular</h4>
       <p class="conf-p">${enCal} cita${enCal === 1 ? "" : "s"} marcada${enCal === 1 ? "" : "s"} como pasada${enCal === 1 ? "" : "s"} a tu calendario en este celular.</p>
@@ -2549,10 +2575,10 @@ $("#nicole").addEventListener("click", async e => {
     pintarNicole(); return; }
   if (b.dataset.cdia) { nCal.ref = b.dataset.cdia; nCal.vista = "dia"; pintarNicole(); return; }
   if (b.dataset.cev) return verCita(b.dataset.cev);
-  if (b.id === "c-ntfy-copiar") { try { navigator.clipboard.writeText(NTFY_TEMA).then(() => toast("Canal copiado"), () => toast(NTFY_TEMA)); } catch { toast(NTFY_TEMA); } return; }
-  if (b.id === "c-ntfy-prueba") { avisoNtfyPrueba().then(r => toast(r.ok ? "Aviso enviado: revisa la app ntfy" : "No se pudo enviar el aviso"), () => toast("No se pudo enviar: revisa el internet")); return; }
+  if (b.id === "c-push-activar") { b.disabled = true; await activarPush(false); pintarNicole(); return; }
+  if (b.id === "c-push-prueba") { b.disabled = true; await pruebaPush(); b.disabled = false; return; }
   if (b.id === "n-avisos") {
-    try { const r = await Notification.requestPermission(); if (r === "granted") { toast("Notificaciones activadas"); avisoLocal("Calixto Studio", "Así te van a llegar los avisos de citas nuevas.", "prueba"); } }
+    try { const r = await Notification.requestPermission(); if (r === "granted") { toast("Notificaciones activadas"); await activarPush(true); } }
     catch {}
     pintarNicole(); return;
   }
@@ -3184,6 +3210,7 @@ $("#enc-form").addEventListener("submit", async e => {
   el.querySelector("#hc-no").onclick = cerrar;
 })();
 // Atajo de la app: abrir directo "Agendar cita"
+addEventListener("hashchange", () => { if (location.hash === "#admin") { history.replaceState(null, "", location.pathname + location.search); abrir("p-nicole"); } });
 if (location.hash === "#admin") { history.replaceState(null, "", location.pathname + location.search); setTimeout(() => abrir("p-nicole"), 300); }
 if (location.hash === "#agendar") { history.replaceState(null, "", location.pathname + location.search); setTimeout(() => pedirForma(""), 400); }
 window.__dbg = { get ag(){ return ag; }, get pila(){ return pila; }, pintarAgenda, get R(){ return Reservas; } };

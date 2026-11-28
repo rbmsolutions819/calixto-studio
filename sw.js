@@ -1,4 +1,4 @@
-const CACHE = "cs-v15";
+const CACHE = "cs-v16";
 const SHELL = ["./", "./index.html", "./manifest.webmanifest", "./icon-192.png", "./icon-512.png", "./icon-maskable-192.png", "./icon-maskable-512.png", "./apple-touch-icon.png", "./img/logo.png", "./img/marmol.jpg"];
 self.addEventListener("install", e => { e.waitUntil(caches.open(CACHE).then(c => c.addAll(SHELL)).then(() => self.skipWaiting())); });
 self.addEventListener("activate", e => { e.waitUntil(caches.keys().then(k => Promise.all(k.filter(x => x !== CACHE).map(x => caches.delete(x)))).then(() => self.clients.claim())); });
@@ -7,12 +7,19 @@ self.addEventListener("fetch", e => {
   if (e.request.method !== "GET" || url.origin !== location.origin) return;
   e.respondWith(fetch(e.request).then(r => { const c = r.clone(); caches.open(CACHE).then(x => x.put(e.request, c)); return r; }).catch(() => caches.match(e.request).then(r => r || caches.match("./index.html"))));
 });
-// Al tocar un aviso, abrir la app
+// Aviso que manda el servicio de avisos (Web Push): llega aunque la app esté cerrada
+self.addEventListener("push", e => {
+  let d = {}; try { d = e.data ? e.data.json() : {}; } catch { d = { body: e.data && e.data.text() }; }
+  e.waitUntil(self.registration.showNotification(d.title || "Calixto Studio", {
+    body: d.body || "", icon: "icon-192.png", badge: "icon-192.png", tag: d.tag || "aviso", renotify: true,
+    vibrate: [200, 100, 200], data: { url: d.url || "./#admin" } }));
+});
+// Al tocar un aviso, abrir la app (en Mis citas si el aviso lo pide)
 self.addEventListener("notificationclick", e => {
   e.notification.close();
   const url = (e.notification.data && e.notification.data.url) || "./";
   e.waitUntil(self.clients.matchAll({ type: "window", includeUncontrolled: true }).then(list => {
-    for (const c of list) if ("focus" in c) return c.focus();
+    for (const c of list) if ("focus" in c) { if ("navigate" in c && url.includes("#admin")) c.navigate(url).catch(() => {}); return c.focus(); }
     return self.clients.openWindow(url);
   }));
 });
