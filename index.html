@@ -1176,7 +1176,7 @@ div.det-foto.v7-ph{aspect-ratio:16/9;border-radius:16px}div.det-foto.v7-ph svg{m
         <p>Gracias por respetar nuestro tiempo y trabajo.</p>
       </div>
       <div class="pol revela">
-        <article class="pol-it"><span class="pol-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="5" width="19" height="14" rx="2.5"/><path d="M2.5 10h19M6.5 15h4"/></svg></span><div><h3>Para reservar</h3><p>Se cancelan <b>₡5.000</b> que se descuentan del precio del set. Si no se presenta, <b>no son reembolsables</b>.</p></div></article>
+        <article class="pol-it"><span class="pol-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="5" width="19" height="14" rx="2.5"/><path d="M2.5 10h19M6.5 15h4"/></svg></span><div><h3>Para reservar</h3><p>Se cancelan <b>₡3.000</b> que se descuentan del precio del set. Si no se presenta, <b>no son reembolsables</b>.</p></div></article>
         <article class="pol-it"><span class="pol-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M8.5 11c.7.6 1.6.6 2.3 0M13.2 11c.7.6 1.6.6 2.3 0M9.5 15.2c1.5 1.1 3.5 1.1 5 0"/></svg></span><div><h3>Presentarse</h3><p>Sin maquillaje en el área de los ojos, para un mejor resultado y mayor duración.</p></div></article>
         <article class="pol-it"><span class="pol-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 7v5l3.2 2"/></svg></span><div><h3>Puntualidad</h3><p>Si llega <b>15 minutos tarde</b> la cita se cancela y tendrá que reagendar.</p></div></article>
       </div>
@@ -1393,7 +1393,7 @@ const HORARIO = [
 ];
 const SEMANAS_ADELANTE = 6;   // cuántas semanas se pueden reservar
 const ANTICIPACION_MIN = 120; // minutos mínimos de anticipación
-const DEPOSITO = "₡5.000", SINPE = "7118 5004";
+const DEPOSITO = "₡3.000", SINPE = "7118 5004";
 // Servicios editados desde el panel (demostración: se guardan en este navegador)
 const SERV_KEY = "cs_servicios_v1";
 try { const g = JSON.parse(localStorage.getItem(SERV_KEY) || "null"); if (Array.isArray(g) && g.length) { g.forEach(x => { if (x.id === "2d" && x.nombre === "2D") x.nombre = "Pestañas 2D"; const d0 = SERVICIOS.find(s => s.id === x.id); if (d0 && d0.fotos.length && !(x.fotos || []).length) x.fotos = d0.fotos.slice(); }); SERVICIOS.splice(0, SERVICIOS.length, ...g); } } catch {}
